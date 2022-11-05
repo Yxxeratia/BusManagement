@@ -3,7 +3,7 @@ package com.busmanagement;
 public class Index {
 
 	public static void main(String args[]) {
-		   Driver jerry = new Driver("Jerry", "01231313", "12312313", "1313132", 18147,"Afternoon");
+		   Driver jerry = new Driver("Jerry", "0914025243", "12312313", "VCB", 18147,"Afternoon");
 	        System.out.println(jerry.getName());
 	        jerry.offDuty();
 	        jerry.checkOut();
@@ -13,7 +13,7 @@ public class Index {
 	        A1.getInfo();
 	        A1.Idle();
 	        
-	        Driver tom = new Driver("Tom", "01231313", "12312313", "1313132",18148,"Day");
+	        Driver tom = new Driver("Tom", "0918025543", "12312313", "VCB",18148,"Day");
 	        System.out.println(tom.getName());
 	        tom.onDuty();
 	        tom.communicate("Clear");
