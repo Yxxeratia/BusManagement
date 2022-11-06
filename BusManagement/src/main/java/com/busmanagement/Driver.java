@@ -20,11 +20,9 @@ abstract class Person {
  
     // abstract method
     abstract String getName();
-    
+    abstract String getTel();
     // there can also be regularly defined methods in an abstract class
-    String getTel() {
-        return (tel);
-    }
+    
     String getBankNumber() {
         return (bankNumber);
     }
@@ -35,14 +33,20 @@ abstract class Person {
 
 // class Driver inherit abstract class Person
 class Driver extends Person{
-    int id;
+    String id;
     String shift;
     
-    Driver(String name, String tel, String bankNumber, String bankName, int id, String shift) {
+    Driver(String name, String tel, String bankNumber, String bankName, String id, String shift) {
         this.name = name;
         this.tel = tel;
         this.bankNumber = bankNumber;
         this.bankName = bankName;
+        this.id = id;
+        this.shift = shift;
+    }	
+    Driver(String name, String tel, String id, String shift) {
+        this.name = name;
+        this.tel = tel;
         this.id = id;
         this.shift = shift;
     }
@@ -51,13 +55,15 @@ class Driver extends Person{
     String getName() {
         return (name);
     }
-    void onDuty() {
+    String getTel() {
+    	return (tel);
+}
+    void duty(boolean i) {
+    	if (i == true) {
         System.out.print(name+" is on duty\n");
+    	}
+    	else System.out.print(name+" is off duty\n");
     }
-    void offDuty() {
-        System.out.print(name+" is off duty\n");
-    }
-
     String communicate(String msg) {
         return msg;
     }
@@ -72,7 +78,7 @@ class Driver extends Person{
     	return (formatter.format(date));
     }
 }
-
+//add getID and getShift if needed
 class Manager extends Person {
 	Manager(String name, String tel, String bankNumber, String bankName) {
         this.name = name;
@@ -83,7 +89,9 @@ class Manager extends Person {
     String getName() {
         return (name);
     }
+    String getTel() {
+    	return (tel);
+}
     void paySalary(String id) {
-    	
     }
 }

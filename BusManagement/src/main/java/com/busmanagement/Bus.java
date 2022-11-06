@@ -14,11 +14,11 @@ public class Bus {
     double Fuel_Capacity;
     int Seat;
     double Ticket_Price;
-    int Number_of_Tickets_sold;
+    int Tickets;
     Driver driver;
     Route route;
     
-    public Bus (Driver driver, Route route, String Plate_Numbers, String Location, double Fuel_Capacity, int Seat,double Ticket_Price, int Number_of_Tickets_sold) {
+    public Bus (Driver driver, Route route, String Plate_Numbers, String Location, double Fuel_Capacity, int Seat,double Ticket_Price, int Tickets) {
         this.driver = driver;
         this.route = route;
         this.Plate_Numbers = Plate_Numbers;
@@ -26,7 +26,7 @@ public class Bus {
         this.Fuel_Capacity = Fuel_Capacity;
         this.Seat = Seat;
         this.Ticket_Price = Ticket_Price;
-        this.Number_of_Tickets_sold = Number_of_Tickets_sold;
+        this.Tickets = Tickets;
     }
     public void getInfo() {
         //System.out.println("Driver: "+);
@@ -35,12 +35,12 @@ public class Bus {
         System.out.println("Fuel Capacity: " + Fuel_Capacity + "/50liters");
         System.out.println("Seat: " + Seat + "/40");
         System.out.println("Ticket Price: " + Ticket_Price + "vnd");
-        System.out.println("Number of Tickets sold: " + Number_of_Tickets_sold);
+        System.out.println("Number of Tickets sold: " + Tickets);
     }
-    public void Idle() {
-        System.out.println(Plate_Numbers + " is idling\n");
-    }
-    public void Run() {
+    public void run(boolean i) {
+    	if (i == true) {
         System.out.println(Plate_Numbers + " is running\n");
+    	}
+    	else System.out.println(Plate_Numbers + " is idling\n");
     }
 }
