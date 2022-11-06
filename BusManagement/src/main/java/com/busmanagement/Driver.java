@@ -29,6 +29,14 @@ abstract class Person {
     String getBankName() {
         return bankName;
     }
+    //get info
+    public void getInfo() {
+    	System.out.println("Name: " + name);
+    	System.out.println("Telephone Number: " + tel);
+    	System.out.println("Bank Number: " + bankNumber);
+    	System.out.println("Bank Name: " + bankName);
+    }
+
 }
 
 // class Driver inherit abstract class Person
@@ -96,6 +104,17 @@ class Driver extends Person{
     //update shift
     public void update(String shift) {
     	this.shift = shift;
+    }
+    
+  //override view info from Person
+    @Override
+    public void getInfo() {
+    	System.out.println("Id: " + id);
+    	System.out.println("Driver: " + name);
+    	System.out.println("Telephone Number: " + tel);
+    	System.out.println("Bank Number: " + bankNumber);
+    	System.out.println("Bank Name: " + bankName);
+    	System.out.println("Shift: " + shift);
     }
     
 }
