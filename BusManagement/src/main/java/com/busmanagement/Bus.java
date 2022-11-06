@@ -9,38 +9,38 @@ package com.busmanagement;
  * @author DELL
  */
 public class Bus {
-    String Plate_Numbers;
-    String Location;
-    double Fuel_Capacity;
-    int Seat;
-    double Ticket_Price;
-    int Tickets;
+    String plateNumber;
+    String location;
+    double fuelCapacity;
+    int seat;
+    double ticketPrice;
+    int tickets;
     Driver driver;
     Route route;
     
-    public Bus (Driver driver, Route route, String Plate_Numbers, String Location, double Fuel_Capacity, int Seat,double Ticket_Price, int Tickets) {
+    public Bus (Driver driver, Route route, String plateNumber, String location, double fuelCapacity, int seat, double ticketPrice, int tickets) {
         this.driver = driver;
         this.route = route;
-        this.Plate_Numbers = Plate_Numbers;
-        this.Location = Location;
-        this.Fuel_Capacity = Fuel_Capacity;
-        this.Seat = Seat;
-        this.Ticket_Price = Ticket_Price;
-        this.Tickets = Tickets;
+        this.plateNumber = plateNumber;
+        this.location = location;
+        this.fuelCapacity = fuelCapacity;
+        this.seat = seat;
+        this.ticketPrice = ticketPrice;
+        this.tickets = tickets;
     }
     public void getInfo() {
         //System.out.println("Driver: "+);
-        System.out.println("Plate Numbers: " + Plate_Numbers); 
-        System.out.println("Current Location: " + Location);
-        System.out.println("Fuel Capacity: " + Fuel_Capacity + "/50liters");
-        System.out.println("Seat: " + Seat + "/40");
-        System.out.println("Ticket Price: " + Ticket_Price + "vnd");
-        System.out.println("Number of Tickets sold: " + Tickets);
+        System.out.println("Plate Numbers: " + plateNumber); 
+        System.out.println("Current Location: " + location);
+        System.out.println("Fuel Capacity: " + fuelCapacity + "/50liters");
+        System.out.println("Seat: " + seat + "/40");
+        System.out.println("Ticket Price: " + ticketPrice + "vnd");
+        System.out.println("Number of Tickets sold: " + tickets);
     }
     public void run(boolean i) {
     	if (i == true) {
-        System.out.println(Plate_Numbers + " is running\n");
+        System.out.println(plateNumber + " is running\n");
     	}
-    	else System.out.println(Plate_Numbers + " is idling\n");
+    	else System.out.println(plateNumber + " is idling\n");
     }
 }

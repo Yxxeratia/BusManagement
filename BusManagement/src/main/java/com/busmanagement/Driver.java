@@ -24,10 +24,10 @@ abstract class Person {
     // there can also be regularly defined methods in an abstract class
     
     String getBankNumber() {
-        return (bankNumber);
+        return bankNumber;
     }
     String getBankName() {
-        return (bankName);
+        return bankName;
     }
 }
 
@@ -35,6 +35,7 @@ abstract class Person {
 class Driver extends Person{
     String id;
     String shift;
+    double salary;
     
     Driver(String name, String tel, String bankNumber, String bankName, String id, String shift) {
         this.name = name;
@@ -51,27 +52,41 @@ class Driver extends Person{
         this.shift = shift;
     }
     
+    //set salary for driver
+    void setSalary(double amount) {
+    	salary = amount;
+    }
+    
+    //get salary
+    double getSalary() {
+    	return salary;
+    }
     // specify abstract method
     String getName() {
-        return (name);
+        return name;
     }
+    
     String getTel() {
-    	return (tel);
-}
+    	return tel;
+    }
+    
     void duty(boolean i) {
     	if (i == true) {
-        System.out.print(name+" is on duty\n");
+    		System.out.print(name+" is on duty\n");
     	}
     	else System.out.print(name+" is off duty\n");
     }
+    
     String communicate(String msg) {
         return msg;
     }
+    
     String checkIn() {
     	SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
     	Date date = new Date();
     	return (formatter.format(date));
     }
+    
     String checkOut() {
     	SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
     	Date date = new Date();
@@ -87,11 +102,19 @@ class Manager extends Person {
         this.bankName = bankName;
     }
     String getName() {
-        return (name);
+        return name;
     }
     String getTel() {
-    	return (tel);
-}
-    void paySalary(String id) {
+    	return tel;
+    }
+    
+    /*overloading*/
+    //pay w/o bonus
+    void paySalary(Driver driver, double amount) {
+    	driver.setSalary(amount);
+    }
+    //pay w/ bonus
+    void paySalary(Driver driver, double amount, double bonus) {
+    	driver.setSalary(amount + bonus);
     }
 }
