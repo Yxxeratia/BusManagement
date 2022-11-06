@@ -4,8 +4,9 @@ public class Index {
 
 	public static void main(String args[]) {
 	        Driver tom = new Driver("Tom", "0914257933", "97146022", "VCB", "18148","Day");
-	        System.out.println("Driver: " + tom.getName());
-	        System.out.println("Telephone Number: " + tom.getTel());
+	        /*System.out.println("Driver: " + tom.getName());
+	        System.out.println("Telephone Number: " + tom.getTel());*/
+	        tom.getInfo();
 	        tom.duty(true);
 	        System.out.println("Message from "+tom.getName()+ ": "+tom.communicate("Clear")+" ");
 	        System.out.println(tom.checkIn());
@@ -15,9 +16,11 @@ public class Index {
 	        A2.getInfo();
 	        A2.run(true);
 	        
-	        Driver jerry = new Driver("Jerry", "0918025543", "17355","Afternoon");
-	        System.out.println("Driver: " + jerry.getName());
-	        System.out.println("Telephone Number: " + jerry.getTel());
+	        //Driver jerry = new Driver("Jerry", "0918025543", "17355","Afternoon");
+	        Driver jerry = new Driver("Jerry", "0918025543", "92831251", "VCB", "17355","Afternoon");
+	        /*System.out.println("Driver: " + jerry.getName());
+	        System.out.println("Telephone Number: " + jerry.getTel());*/
+	        jerry.getInfo();
 	        jerry.duty(false);
 	        jerry.checkOut();
 	        Route A51 = new Route(51,"VGU","Hikari","Thu Vien Tinh Binh Duong","Nga Ba Lo Chen","Ben xe Mien Dong");
