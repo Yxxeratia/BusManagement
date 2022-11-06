@@ -111,7 +111,7 @@ class Manager extends Person {
     /*overloading*/
     //pay w/o bonus
     void paySalary(Driver driver, double amount) {
-    	driver.setSalary(amount);
+    	driver.setSalary(amount*2);
     }
     //pay w/ bonus
     void paySalary(Driver driver, double amount, double bonus) {
