@@ -43,4 +43,23 @@ public class Bus {
     	}
     	else System.out.println(plateNumber + " is idling\n");
     }
+    
+    /*overload*/
+    //update driver for bus
+    public void update(Driver driver) {
+    	this.driver = driver;
+    }
+    //update route
+    public void update(Route route) {
+    	this.route = route;
+    	
+    }
+    //update fuel capacity
+    public void updateFuelCapacity(double fuelCapacity) {
+    	this.fuelCapacity = fuelCapacity;
+    }
+    //update ticket price
+    public void updateTicketPrice(double ticketPrice) {
+    	this.ticketPrice = ticketPrice;
+    }
 }

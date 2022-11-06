@@ -92,6 +92,11 @@ class Driver extends Person{
     	Date date = new Date();
     	return (formatter.format(date));
     }
+    
+    //update shift
+    public void update(String shift) {
+    	this.shift = shift;
+    }
 }
 //add getID and getShift if needed
 class Manager extends Person {
@@ -111,7 +116,7 @@ class Manager extends Person {
     /*overloading*/
     //pay w/o bonus
     void paySalary(Driver driver, double amount) {
-    	driver.setSalary(amount*2);
+    	driver.setSalary(amount);
     }
     //pay w/ bonus
     void paySalary(Driver driver, double amount, double bonus) {
