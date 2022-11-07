@@ -1,13 +1,7 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package com.busmanagement;
 
-/**
- *
- * @author DELL
- */
+
 public class Route {
     int routeNumber;
     String[] stop= new String[5];
