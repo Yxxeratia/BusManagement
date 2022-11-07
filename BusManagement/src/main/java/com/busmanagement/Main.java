@@ -1,6 +1,6 @@
 package com.busmanagement;
 
-public class Index {
+public class Main {
 
 	public static void main(String args[]) {
 	        Driver tom = new Driver("Tom", "0914257933", "97146022", "VCB", "18148","Day");
