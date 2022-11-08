@@ -1,7 +1,19 @@
 
 package com.busmanagement;
 
-public class Bus {
+
+/**
+ *
+ * @author DELL
+ */
+
+interface Vehicle {
+	void run(boolean i);
+	void updateFuelCapacity(double fuelCapacity);
+	void updateTicketPrice(double ticketPrice);
+}
+
+public class Bus implements Vehicle {
     String plateNumber;
     String location;
     double fuelCapacity;
