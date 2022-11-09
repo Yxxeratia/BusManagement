@@ -12,6 +12,8 @@ import javax.swing.JOptionPane;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
@@ -44,6 +46,9 @@ public class Main extends JFrame {
 		});
 	}
 
+	
+	
+	
 	/**
 	 * Create the frame.
 	 */
@@ -90,13 +95,28 @@ public class Main extends JFrame {
                     return;
                 }
                 
-                if (comboBoxRole.getSelectedItem() == "Driver") {
-                	setExtendedState(JFrame.MAXIMIZED_BOTH);
-                	card.show(basePane, "2");
+                //connect to DB
+                DBConnection dbConn = new DBConnection();
+                
+                try(PreparedStatement stmt = dbConn.getConn().prepareStatement("SELECT * FROM dbo.fn_verify_user('" + username + "')");) {
+                    ResultSet rs = stmt.executeQuery();    
+                    while(rs.next()) {
+                        //login successful
+                        if(username.equals(rs.getString("id"))) {
+                        	if (comboBoxRole.getSelectedItem() == "Driver") {
+                            	setExtendedState(JFrame.MAXIMIZED_BOTH);
+                            	card.show(basePane, "2");
+                            }               
+                            return;
+                        }
+                    }
+                    //login failed
+                    JOptionPane.showMessageDialog(loginPane, "Credentials do not match", "Login Error", JOptionPane.ERROR_MESSAGE);               
+                }   
+                catch(Exception ex) {
+                    System.out.println(ex);
                 }
-                else {
-                	System.out.println("AAAA");
-                }
+                
         	}
         });
            

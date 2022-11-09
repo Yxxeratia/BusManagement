@@ -1,12 +1,6 @@
 
 package com.busmanagement;
 
-
-/**
- *
- * @author DELL
- */
-
 interface Vehicle {
 	void run(boolean i);
 	void updateFuelCapacity(double fuelCapacity);
