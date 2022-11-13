@@ -9,8 +9,8 @@ package com.busmanagement;
  * @author DELL
  */
 public class Route {
-    int routeNumber;
-    String[] stop= new String[5];
+    public int routeNumber;
+    public String[] stop= new String[5];
 
     public Route (int routeNumber,String stop1,String stop2,String stop3,String stop4,String stop5) {
         this.routeNumber = routeNumber;

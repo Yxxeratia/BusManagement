@@ -13,10 +13,10 @@ import java.util.Date;
  * @author DELL
  */
 abstract class Person {
-	String name;
-    String tel;
-    String bankNumber;
-    String bankName;
+	protected String name;
+    protected String tel;
+    protected String bankNumber;
+    protected String bankName;
  
     // abstract method
     abstract String getName();
@@ -33,9 +33,9 @@ abstract class Person {
 
 // class Driver inherit abstract class Person
 class Driver extends Person{
-    String id;
-    String shift;
-    double salary;
+    private String id;
+    private String shift;
+    private double salary;
     
     Driver(String name, String tel, String bankNumber, String bankName, String id, String shift) {
         this.name = name;
@@ -53,13 +53,26 @@ class Driver extends Person{
     }
     
     //set salary for driver
-    void setSalary(double amount) {
+    public void setSalary(double amount) {
     	salary = amount;
     }
     
     //get salary
-    double getSalary() {
+    public double getSalary() {
     	return salary;
+    }
+    
+    public String getId() {
+    	return id;
+    }
+    public void setId(String id) {
+    	this.id = id;
+    }
+    public String getShift() {
+    	return shift;
+    }
+    public void setShift(String shift) {
+    	this.shift = shift;
     }
     // specify abstract method
     String getName() {

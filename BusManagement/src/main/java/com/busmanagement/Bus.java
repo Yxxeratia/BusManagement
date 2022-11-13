@@ -16,9 +16,9 @@ interface Vehicle {
 }
 
 public class Bus implements Vehicle {
-    String plateNumber;
-    String location;
-    double fuelCapacity;
+    public String plateNumber;
+    public String location;
+    public double fuelCapacity;
     int seat;
     double ticketPrice;
     int tickets;
