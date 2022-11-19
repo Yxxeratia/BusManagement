@@ -54,7 +54,7 @@ public class Main extends JFrame {
 	 */
 	public Main() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 771, 529);
+		setBounds(100, 100, 737, 509);
 		
 		/*login panel*/
 		Login loginPane = new Login();
@@ -63,6 +63,15 @@ public class Main extends JFrame {
 		JPasswordField passwordField = loginPane.getPasswordField();
 		JComboBox<Object> comboBoxRole = loginPane.getComboBoxRole();
 		
+		
+		/*driver interface panel*/
+		DriverInterface driverInterfacePane = new DriverInterface();
+		JButton btnLogout = driverInterfacePane.getLogoutButton();
+		JButton btnMessage = driverInterfacePane.getMessageButton();
+		JButton btnRequestLeave = driverInterfacePane.getRequestLeaveButton();
+		JButton btnProfile = driverInterfacePane.getProfileButton();
+		JButton btnCheckIn = driverInterfacePane.getCheckInButton();
+		JButton btnCheckOut = driverInterfacePane.getCheckOutButton();
 		
 		/*driver profile panel*/
 		DriverProfile driverProfilePane = new DriverProfile();
@@ -75,6 +84,7 @@ public class Main extends JFrame {
 		JButton btnBankAccount = driverProfilePane.getBankAccountButton();
 		JPanel bankAccountPane = driverProfilePane.getBankAccountPanel();
 		
+		
 		/*base panel*/
 		JPanel basePane = new JPanel();
 		CardLayout card = new CardLayout();
@@ -82,7 +92,8 @@ public class Main extends JFrame {
 		
 		basePane.setLayout(card);
         basePane.add("1", loginPane);
-        basePane.add("2", driverProfilePane);
+        basePane.add("2", driverInterfacePane);
+        basePane.add("3", driverProfilePane);
         card.show(basePane, "1");
         getContentPane().add(basePane);
         
@@ -113,7 +124,8 @@ public class Main extends JFrame {
                         //login successful
                         if(username.equals(rs.getString("id"))) {
                         	if (comboBoxRole.getSelectedItem() == "Driver") {
-                            	//setExtendedState(JFrame.MAXIMIZED_BOTH);
+                            	usernameField.setText("");
+                            	passwordField.setText("");
                             	card.show(basePane, "2");
                             }               
                             return;
@@ -126,6 +138,23 @@ public class Main extends JFrame {
                     System.out.println(ex);
                 }
                 
+        	}
+        });
+        
+        
+      //add action listener for logout button
+        btnLogout.addActionListener(new ActionListener() {
+        	@Override
+        	public void actionPerformed(ActionEvent e) {
+        		card.show(basePane, "1");
+        	}
+        });
+        
+      //add action listener for profile button
+        btnProfile.addActionListener(new ActionListener() {
+        	@Override
+        	public void actionPerformed(ActionEvent e) {
+        		card.show(basePane, "3");
         	}
         });
         

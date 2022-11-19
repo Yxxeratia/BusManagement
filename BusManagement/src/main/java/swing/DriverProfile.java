@@ -14,7 +14,7 @@ public class DriverProfile extends JPanel {
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private JButton bankAccountButton;
+	private JButton btnBankAccount;
 	private JLabel lblName;
 	private JTextField nameField;
 	private JLabel lblID;
@@ -33,7 +33,7 @@ public class DriverProfile extends JPanel {
 	
 	
 	public JButton getBankAccountButton() {
-		return bankAccountButton;
+		return btnBankAccount;
 	}
 	
 	public JTextField getnameField() {
@@ -65,10 +65,10 @@ public class DriverProfile extends JPanel {
 		setLayout(null);
 		
 		//add button
-		bankAccountButton = new JButton("Bank Account");
-		bankAccountButton.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		bankAccountButton.setBounds(68, 296, 176, 33);
-		add(bankAccountButton);
+		btnBankAccount = new JButton("Bank Account");
+		btnBankAccount.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		btnBankAccount.setBounds(68, 296, 176, 33);
+		add(btnBankAccount);
 		
 		lblName = new JLabel("Name:");
 		lblName.setFont(new Font("Tahoma", Font.PLAIN, 14));
