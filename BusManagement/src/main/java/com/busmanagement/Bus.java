@@ -8,15 +8,16 @@ interface Vehicle {
 }
 
 public class Bus implements Vehicle {
-    String plateNumber;
-    String location;
-    double fuelCapacity;
+    public String plateNumber;
+    public String location;
+    public double fuelCapacity;
+
     int seat;
     double ticketPrice;
     int tickets;
     Driver driver;
     Route route;
-    
+  
     public Bus (Driver driver, Route route, String plateNumber, String location, double fuelCapacity, int seat, double ticketPrice, int tickets) {
         this.driver = driver;
         this.route = route;

@@ -54,31 +54,40 @@ public class Main extends JFrame {
 	 */
 	public Main() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 638, 444);
+		setBounds(100, 100, 771, 529);
 		
 		/*login panel*/
 		Login loginPane = new Login();
-		loginPane.getLoginButton().setLocation(403, 310);
 		JButton btnLogin = loginPane.getLoginButton();
 		JTextField usernameField = loginPane.getUsernameField();
 		JPasswordField passwordField = loginPane.getPasswordField();
 		JComboBox<Object> comboBoxRole = loginPane.getComboBoxRole();
 		
 		
-		/*bus management panel*/
-		EmployeeInfo driverPane = new EmployeeInfo();
+		/*driver profile panel*/
+		DriverProfile driverProfilePane = new DriverProfile();
+		JTextField nameField = driverProfilePane.getnameField();
+		JTextField idField = driverProfilePane.getIDField();
+		JTextField telField = driverProfilePane.getTelField();
+		JTextField currentStatusField = driverProfilePane.getCurrentStatusField();
+		JTextField bankNameField = driverProfilePane.getBankNameField();
+		JTextField bankNumberField = driverProfilePane.getBankNumberField();
+		JButton btnBankAccount = driverProfilePane.getBankAccountButton();
+		JPanel bankAccountPane = driverProfilePane.getBankAccountPanel();
+		
 		/*base panel*/
 		JPanel basePane = new JPanel();
 		CardLayout card = new CardLayout();
 		
+		
 		basePane.setLayout(card);
         basePane.add("1", loginPane);
-        basePane.add("2", driverPane);
+        basePane.add("2", driverProfilePane);
         card.show(basePane, "1");
         getContentPane().add(basePane);
         
         
-        /*add action listeners*/
+        //add action listener for login button
         btnLogin.addActionListener(new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
@@ -104,7 +113,7 @@ public class Main extends JFrame {
                         //login successful
                         if(username.equals(rs.getString("id"))) {
                         	if (comboBoxRole.getSelectedItem() == "Driver") {
-                            	setExtendedState(JFrame.MAXIMIZED_BOTH);
+                            	//setExtendedState(JFrame.MAXIMIZED_BOTH);
                             	card.show(basePane, "2");
                             }               
                             return;
@@ -119,7 +128,15 @@ public class Main extends JFrame {
                 
         	}
         });
-           
-  
+        
+        //add action listener for bank account button
+        btnBankAccount.addActionListener(new ActionListener() {
+        	@Override
+        	public void actionPerformed(ActionEvent e) {
+        		bankNameField.setText("VCB");
+        		bankNumberField.setText("97146022");
+        		bankAccountPane.setVisible(true);
+        	}
+        });
 	}
 }
