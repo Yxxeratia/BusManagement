@@ -124,6 +124,10 @@ public class Main extends JFrame {
                     return;
                 }
                 
+                usernameField.setText("");
+            	passwordField.setText("");
+            	card.show(basePane, "2");
+                /*
                 //connect to DB
                 DBConnection dbConn = new DBConnection();
                 
@@ -146,7 +150,7 @@ public class Main extends JFrame {
                 catch(Exception ex) {
                     System.out.println(ex);
                 }
-                
+                */
         	}
         });
         
