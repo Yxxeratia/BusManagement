@@ -17,12 +17,12 @@ public class communicationGUI implements ActionListener{
 	static JLabel confirm;
 	
 	public static void main(String[] args) {
-		JFrame frame = new JFrame();
-		frame.setSize(500, 300);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
-		panel = new JPanel();
-		frame.add(panel); 
+//		JFrame frame = new JFrame();
+//		frame.setSize(500, 300);
+//		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//		
+//		panel = new JPanel();
+//		frame.add(panel); 
 				
 		label = new JLabel("Manager");
 		label.setBounds(10, 20, 80, 25);
@@ -45,7 +45,7 @@ public class communicationGUI implements ActionListener{
 		panel.add(confirm);
 		
 		panel.setLayout(null);
-		frame.setVisible(true);
+//		frame.setVisible(true);
 
 	}
 
