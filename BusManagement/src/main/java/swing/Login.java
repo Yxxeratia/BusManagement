@@ -3,6 +3,10 @@ package swing;
 import javax.swing.*;
 import java.awt.Font;
 
+
+//Tri's panel
+
+
 public class Login extends JPanel  {
 
 	/**

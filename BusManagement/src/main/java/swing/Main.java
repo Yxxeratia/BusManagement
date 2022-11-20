@@ -22,6 +22,8 @@ import javax.swing.JComboBox;
 
 import java.awt.CardLayout;
 
+//Main frame
+
 public class Main extends JFrame {
 	
 	/**

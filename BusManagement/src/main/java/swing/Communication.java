@@ -6,6 +6,10 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import java.awt.Font;
 
+
+//Vy's panel
+
+
 public class Communication extends JPanel {
 
 	/**
