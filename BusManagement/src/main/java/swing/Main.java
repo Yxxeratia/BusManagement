@@ -85,6 +85,12 @@ public class Main extends JFrame {
 		JPanel bankAccountPane = driverProfilePane.getBankAccountPanel();
 		
 		
+		/*communication*/
+		Communication communicationPane = new Communication();
+		JButton btnSend = communicationPane.getSendButton();
+		JLabel lblConfirm = communicationPane.getConfirmLabel();
+		
+		
 		/*base panel*/
 		JPanel basePane = new JPanel();
 		CardLayout card = new CardLayout();
@@ -94,6 +100,7 @@ public class Main extends JFrame {
         basePane.add("1", loginPane);
         basePane.add("2", driverInterfacePane);
         basePane.add("3", driverProfilePane);
+        basePane.add("4", communicationPane);
         card.show(basePane, "1");
         getContentPane().add(basePane);
         
@@ -142,7 +149,7 @@ public class Main extends JFrame {
         });
         
         
-      //add action listener for logout button
+        //add action listener for logout button
         btnLogout.addActionListener(new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
@@ -150,13 +157,22 @@ public class Main extends JFrame {
         	}
         });
         
-      //add action listener for profile button
+        //add action listener for profile button
         btnProfile.addActionListener(new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
         		card.show(basePane, "3");
         	}
         });
+        
+        //add action listener for message button
+        btnMessage.addActionListener(new ActionListener() {
+        	@Override
+        	public void actionPerformed(ActionEvent e) {
+        		card.show(basePane, "4");
+        	}
+        });
+        
         
         //add action listener for bank account button
         btnBankAccount.addActionListener(new ActionListener() {
@@ -165,6 +181,14 @@ public class Main extends JFrame {
         		bankNameField.setText("VCB");
         		bankNumberField.setText("97146022");
         		bankAccountPane.setVisible(true);
+        	}
+        });
+        
+        //add action listener for send button
+        btnSend.addActionListener(new ActionListener() {
+        	@Override
+        	public void actionPerformed(ActionEvent e) {
+        		lblConfirm.setText("Message is successfully sent.");	
         	}
         });
 	}
