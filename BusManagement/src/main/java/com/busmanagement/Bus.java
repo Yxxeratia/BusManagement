@@ -1,13 +1,5 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-package com.busmanagement;
 
-/**
- *
- * @author DELL
- */
+package com.busmanagement;
 
 interface Vehicle {
 	void run(boolean i);
@@ -16,15 +8,16 @@ interface Vehicle {
 }
 
 public class Bus implements Vehicle {
-    String plateNumber;
-    String location;
-    double fuelCapacity;
+    public String plateNumber;
+    public String location;
+    public double fuelCapacity;
+
     int seat;
     double ticketPrice;
     int tickets;
     Driver driver;
     Route route;
-    
+  
     public Bus (Driver driver, Route route, String plateNumber, String location, double fuelCapacity, int seat, double ticketPrice, int tickets) {
         this.driver = driver;
         this.route = route;

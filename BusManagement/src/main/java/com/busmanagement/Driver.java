@@ -1,22 +1,14 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-
 
 package com.busmanagement;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-/**
- *
- * @author DELL
- */
+
 abstract class Person {
-	String name;
-    String tel;
-    String bankNumber;
-    String bankName;
+	protected String name;
+    protected String tel;
+    protected String bankNumber;
+    protected String bankName;
  
     // abstract method
     abstract String getName();
@@ -29,13 +21,20 @@ abstract class Person {
     String getBankName() {
         return bankName;
     }
+  //get info
+    public void getInfo() {
+    	System.out.println("Name: " + name);
+    	System.out.println("Telephone Number: " + tel);
+    	System.out.println("Bank Number: " + bankNumber);
+    	System.out.println("Bank Name: " + bankName);
+    }
 }
 
 // class Driver inherit abstract class Person
 class Driver extends Person{
-    String id;
-    String shift;
-    double salary;
+    private String id;
+    private String shift;
+    private double salary;
     
     Driver(String name, String tel, String bankNumber, String bankName, String id, String shift) {
         this.name = name;
@@ -53,13 +52,26 @@ class Driver extends Person{
     }
     
     //set salary for driver
-    void setSalary(double amount) {
+    public void setSalary(double amount) {
     	salary = amount;
     }
     
     //get salary
-    double getSalary() {
+    public double getSalary() {
     	return salary;
+    }
+    
+    public String getId() {
+    	return id;
+    }
+    public void setId(String id) {
+    	this.id = id;
+    }
+    public String getShift() {
+    	return shift;
+    }
+    public void setShift(String shift) {
+    	this.shift = shift;
     }
     // specify abstract method
     String getName() {
@@ -96,6 +108,17 @@ class Driver extends Person{
     //update shift
     public void update(String shift) {
     	this.shift = shift;
+    }
+    
+  //override view info from Person
+    @Override
+    public void getInfo() {
+    	System.out.println("Id: " + id);
+    	System.out.println("Driver: " + name);
+    	System.out.println("Telephone Number: " + tel);
+    	System.out.println("Bank Number: " + bankNumber);
+    	System.out.println("Bank Name: " + bankName);
+    	System.out.println("Shift: " + shift);
     }
 }
 //add getID and getShift if needed
