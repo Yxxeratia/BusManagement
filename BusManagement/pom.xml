@@ -5,6 +5,7 @@
     <artifactId>BusManagement</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
+    
     <dependencies>
     	<dependency>
     		<groupId>com.microsoft.sqlserver</groupId>
@@ -12,6 +13,22 @@
              <version>11.2.0.jre18</version>
     	</dependency>
     </dependencies>
+    
+    <build>
+    	<resources>
+        	<resource>
+            	<directory>src/main/resources</directory>
+        	</resource>
+    	</resources>
+    	<plugins>
+        	<plugin>
+            	<groupId>org.apache.maven.plugins</groupId>
+            	<artifactId>maven-jar-plugin</artifactId>
+        	</plugin>
+    	</plugins>
+ 	</build>
+ 	
+ 	
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>18</maven.compiler.source>

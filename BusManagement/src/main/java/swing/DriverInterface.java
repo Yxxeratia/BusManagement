@@ -1,8 +1,15 @@
 package swing;
 
 import javax.swing.JPanel;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.Font;
+import java.awt.image.BufferedImage;
+import java.io.File;
+
+import javax.swing.JLabel;
+import javax.swing.Icon;
 
 
 //Dat's panel
@@ -20,7 +27,7 @@ public class DriverInterface extends JPanel {
 	private JButton btnProfile;
 	private JButton btnCheckIn;
 	private JButton btnCheckOut;
-	
+	private BufferedImage image;
 	
 	public JButton getLogoutButton() {
 		return btnLogout;
@@ -77,7 +84,16 @@ public class DriverInterface extends JPanel {
 		btnCheckOut.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnCheckOut.setBounds(517, 352, 105, 21);
 		add(btnCheckOut);
-
+		
+		//get image
+		try {
+			image = ImageIO.read(getClass().getResource("/b.png"));
+			JLabel lblProfile = new JLabel(new ImageIcon(image));
+			lblProfile.setBounds(249, 66, 258, 207);
+			add(lblProfile);
+		}
+		catch(Exception e) {
+			System.out.println("Image not found");
+		}
 	}
-
 }

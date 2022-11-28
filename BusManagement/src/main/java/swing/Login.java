@@ -1,6 +1,9 @@
 package swing;
 
 import javax.swing.*;
+
+import java.awt.Color;
+import java.awt.Component;
 import java.awt.Font;
 
 
@@ -13,6 +16,7 @@ public class Login extends JPanel  {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	private JPanel headPane;
 	private JLabel lblUsername;
 	private JLabel lblPassword;
 	private JTextField usernameField;
@@ -27,6 +31,10 @@ public class Login extends JPanel  {
 	/**
 	 * Create the panel.
 	 */
+	
+	public JPanel getHeadPanel() {
+		return headPane;
+	}
 	
 	public JButton getLoginButton(){
         return btnLogin;
@@ -86,15 +94,15 @@ public class Login extends JPanel  {
 		comboBoxRole.setBounds(321, 308, 93, 21);
 		add(comboBoxRole);
 		
-		JPanel headPane = new JPanel();
-		headPane.setBounds(0, 0, 683, 124);
+		headPane = new JPanel();
+		headPane.setBounds(0, 0, 728, 124);
 		add(headPane);
 		headPane.setLayout(null);
 		
 		JLabel lblHead = new JLabel("LOGIN");
 		lblHead.setHorizontalAlignment(SwingConstants.CENTER);
 		lblHead.setFont(new Font("Tahoma", Font.PLAIN, 32));
-		lblHead.setBounds(194, 10, 303, 90);
+		lblHead.setBounds(220, 10, 303, 90);
 		headPane.add(lblHead);
 	}
 }
