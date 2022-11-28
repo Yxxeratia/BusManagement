@@ -21,6 +21,8 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 
 import java.awt.CardLayout;
+import java.awt.Color;
+import java.awt.Component;
 
 //Main frame
 
@@ -57,6 +59,8 @@ public class Main extends JFrame {
 	public Main() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 737, 509);
+		
+		//getContentPane().setBackground(Color.black);
 		
 		/*login panel*/
 		Login loginPane = new Login();
@@ -96,7 +100,7 @@ public class Main extends JFrame {
 		/*base panel*/
 		JPanel basePane = new JPanel();
 		CardLayout card = new CardLayout();
-		
+	
 		
 		basePane.setLayout(card);
         basePane.add("1", loginPane);
@@ -106,6 +110,12 @@ public class Main extends JFrame {
         card.show(basePane, "1");
         getContentPane().add(basePane);
         
+        /*
+        for (Component component : basePane.getComponents()) {
+        	if (component instanceof JPanel) {
+        		component.setBackground(Color.black);
+        	}
+        }*/
         
         //add action listener for login button
         btnLogin.addActionListener(new ActionListener() {
