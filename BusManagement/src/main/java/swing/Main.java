@@ -134,18 +134,14 @@ public class Main extends JFrame {
                     return;
                 }
                 
-                usernameField.setText("");
-            	passwordField.setText("");
-            	card.show(basePane, "2");
-                /*
                 //connect to DB
                 DBConnection dbConn = new DBConnection();
                 
-                try(PreparedStatement stmt = dbConn.getConn().prepareStatement("SELECT * FROM dbo.fn_verify_user('" + username + "')");) {
+                try(PreparedStatement stmt = dbConn.getConn().prepareStatement("SELECT * FROM dbo.fn_verify_user('" +username+ "', '"+password+"')");) {
                     ResultSet rs = stmt.executeQuery();    
                     while(rs.next()) {
                         //login successful
-                        if(username.equals(rs.getString("id"))) {
+                        if(username.equals(rs.getString("username")) && password.equals(rs.getString("password"))) {
                         	if (comboBoxRole.getSelectedItem() == "Driver") {
                             	usernameField.setText("");
                             	passwordField.setText("");
@@ -160,7 +156,7 @@ public class Main extends JFrame {
                 catch(Exception ex) {
                     System.out.println(ex);
                 }
-                */
+                
         	}
         });
         

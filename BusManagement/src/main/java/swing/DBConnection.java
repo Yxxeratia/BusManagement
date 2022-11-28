@@ -12,9 +12,9 @@ public class DBConnection {
     }
     
     public DBConnection() {
-        String url = "jdbc:sqlserver://localhost:1433;databaseName=Test;" + "encrypt=true; trustServerCertificate=true; sslProtocol=TLSv1.2";
-        String username = "sa";
-        String password = "12345";
+        String url = "jdbc:sqlserver://113.161.141.232:1433; databaseName=Bus;" + "encrypt=true; trustServerCertificate=true; sslProtocol=TLSv1.2";
+        String username = "bus";
+        String password = "vgu@$12345";
         
         try {
             conn = DriverManager.getConnection(url, username, password);
