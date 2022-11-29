@@ -12,7 +12,7 @@ public class DBConnection {
     }
     
     public DBConnection() {
-        String url = "jdbc:sqlserver://113.161.141.232:1433; databaseName=Bus;" + "encrypt=true; trustServerCertificate=true; sslProtocol=TLSv1.2";
+        String url = "jdbc:sqlserver://113.161.141.232; databaseName=Bus;" + "encrypt=true; trustServerCertificate=true; sslProtocol=TLSv1.2";
         String username = "bus";
         String password = "vgu@$12345";
         

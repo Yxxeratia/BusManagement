@@ -1,96 +1,73 @@
 package swing;
 
 import javax.swing.JPanel;
-import javax.swing.JLabel;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.JScrollPane;
+import java.awt.Color;
+import javax.swing.JButton;
 import javax.swing.JTextField;
+import javax.swing.JLabel;
+import javax.swing.SwingConstants;
+import java.awt.Font;
 
 public class BusManager extends JPanel {
-	private JTextField plateNumberField;
-	private JTextField seatsField;
-	private JTextField fuelCapacityField;
-	private JTextField driverField;
-	private JTextField ticketPriceField;
-	private JTextField ticketCountField;
-	private JTextField routeField;
-	private JTextField locationField;
+	private JTable table;
+	private JTextField textField;
+	private JTextField textField_1;
 
 	/**
 	 * Create the panel.
 	 */
 	public BusManager() {
+		setBackground(new Color(128, 255, 128));
 		setLayout(null);
 		
-		JLabel lblPlateNumber = new JLabel("Plate number: ");
-		lblPlateNumber.setBounds(33, 33, 68, 18);
-		add(lblPlateNumber);
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(10, 39, 649, 341);
+		add(scrollPane);
 		
-		plateNumberField = new JTextField();
-		plateNumberField.setBounds(111, 33, 96, 19);
-		add(plateNumberField);
-		plateNumberField.setColumns(10);
+		table = new JTable();
+		scrollPane.setViewportView(table);
+		table.setModel(new DefaultTableModel(
+			new Object[][] {
+			},
+			new String[] {
+				 "Plate Number", "Driver", "Location", "Fuel Capacity", "Seats", "Route", "Ticket Count", "Price Ticket","Revenue"
+			}
+		));
+		table.getColumnModel().getColumn(6).setResizable(false);
 		
-		JLabel lblSeats = new JLabel("Seats:");
-		lblSeats.setBounds(33, 62, 68, 18);
-		add(lblSeats);
+		JButton btnNewButton = new JButton("Back");
+		btnNewButton.setBackground(new Color(128, 255, 128));
+		btnNewButton.setBounds(27, 402, 85, 21);
+		add(btnNewButton);
 		
-		JLabel lblFuelCapacity = new JLabel("Fuel capacity:");
-		lblFuelCapacity.setBounds(33, 90, 68, 18);
-		add(lblFuelCapacity);
+		JButton btnRemove = new JButton("Remove");
+		btnRemove.setBackground(new Color(128, 255, 128));
+		btnRemove.setBounds(122, 402, 85, 21);
+		add(btnRemove);
 		
-		JLabel lblDriver = new JLabel("Driver:");
-		lblDriver.setBounds(33, 118, 68, 18);
-		add(lblDriver);
+		textField = new JTextField();
+		textField.setBounds(563, 390, 96, 19);
+		add(textField);
+		textField.setColumns(10);
 		
-		JLabel lblTicketPrice = new JLabel("Ticket price:");
-		lblTicketPrice.setBounds(33, 146, 68, 18);
-		add(lblTicketPrice);
+		JLabel lblNewLabel = new JLabel("Total");
+		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 12));
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel.setBounds(508, 392, 45, 13);
+		add(lblNewLabel);
 		
-		JLabel lblTicketCount = new JLabel("Ticket count:");
-		lblTicketCount.setBounds(33, 174, 68, 18);
-		add(lblTicketCount);
+		textField_1 = new JTextField();
+		textField_1.setColumns(10);
+		textField_1.setBounds(468, 9, 96, 19);
+		add(textField_1);
 		
-		JLabel lblRoute = new JLabel("Route: ");
-		lblRoute.setBounds(33, 202, 68, 18);
-		add(lblRoute);
-		
-		JLabel lblLocation = new JLabel("Location:");
-		lblLocation.setBounds(33, 230, 68, 18);
-		add(lblLocation);
-		
-		seatsField = new JTextField();
-		seatsField.setColumns(10);
-		seatsField.setBounds(111, 62, 96, 19);
-		add(seatsField);
-		
-		fuelCapacityField = new JTextField();
-		fuelCapacityField.setColumns(10);
-		fuelCapacityField.setBounds(111, 90, 96, 19);
-		add(fuelCapacityField);
-		
-		driverField = new JTextField();
-		driverField.setColumns(10);
-		driverField.setBounds(111, 118, 96, 19);
-		add(driverField);
-		
-		ticketPriceField = new JTextField();
-		ticketPriceField.setColumns(10);
-		ticketPriceField.setBounds(111, 146, 96, 19);
-		add(ticketPriceField);
-		
-		ticketCountField = new JTextField();
-		ticketCountField.setColumns(10);
-		ticketCountField.setBounds(111, 174, 96, 19);
-		add(ticketCountField);
-		
-		routeField = new JTextField();
-		routeField.setColumns(10);
-		routeField.setBounds(111, 202, 96, 19);
-		add(routeField);
-		
-		locationField = new JTextField();
-		locationField.setColumns(10);
-		locationField.setBounds(111, 230, 96, 19);
-		add(locationField);
+		JButton btnSearhch = new JButton("Search");
+		btnSearhch.setBackground(new Color(128, 255, 128));
+		btnSearhch.setBounds(574, 8, 85, 21);
+		add(btnSearhch);
 
 	}
 }
