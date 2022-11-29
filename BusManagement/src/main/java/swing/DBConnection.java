@@ -1,0 +1,27 @@
+package swing;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+
+
+public class DBConnection {
+	private Connection conn;
+    
+    public Connection getConn() {
+        return conn;
+    }
+    
+    public DBConnection() {
+        String url = "jdbc:sqlserver://113.161.141.232:1433; databaseName=Bus;" + "encrypt=true; trustServerCertificate=true; sslProtocol=TLSv1.2";
+        String username = "bus";
+        String password = "vgu@$12345";
+        
+        try {
+            conn = DriverManager.getConnection(url, username, password);
+            System.out.println("Connection Established");
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+        }
+    }
+}
