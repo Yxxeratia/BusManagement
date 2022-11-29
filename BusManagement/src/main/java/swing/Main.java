@@ -67,34 +67,27 @@ public class Main extends JFrame {
 		JButton btnLogin = loginPane.getLoginButton();
 		JTextField usernameField = loginPane.getUsernameField();
 		JPasswordField passwordField = loginPane.getPasswordField();
-		JComboBox<Object> comboBoxRole = loginPane.getComboBoxRole();
+		
+		/*manager interface*/
+		ManagerInterface managerPane = new ManagerInterface();
+		JButton btnBus = managerPane.getBusButton();
+		JButton btnDriver = managerPane.getDriverButton();
+		JButton btnRoute = managerPane.getRouteButton();
+		
+		/*bus info*/
+		BusInfo busPane = new BusInfo();
+		
+		/*driver info*/
+		DriverInfo driverPane = new DriverInfo();
+		
+		/*route info*/
+		RouteInfo routePane = new RouteInfo();
 		
 		
-		/*driver interface panel*/
-		DriverInterface driverInterfacePane = new DriverInterface();
-		JButton btnLogout = driverInterfacePane.getLogoutButton();
-		JButton btnMessage = driverInterfacePane.getMessageButton();
-		JButton btnRequestLeave = driverInterfacePane.getRequestLeaveButton();
-		JButton btnProfile = driverInterfacePane.getProfileButton();
-		JButton btnCheckIn = driverInterfacePane.getCheckInButton();
-		JButton btnCheckOut = driverInterfacePane.getCheckOutButton();
+	
 		
-		/*driver profile panel*/
-		DriverProfile driverProfilePane = new DriverProfile();
-		JTextField nameField = driverProfilePane.getnameField();
-		JTextField idField = driverProfilePane.getIDField();
-		JTextField telField = driverProfilePane.getTelField();
-		JTextField currentStatusField = driverProfilePane.getCurrentStatusField();
-		JTextField bankNameField = driverProfilePane.getBankNameField();
-		JTextField bankNumberField = driverProfilePane.getBankNumberField();
-		JButton btnBankAccount = driverProfilePane.getBankAccountButton();
-		JPanel bankAccountPane = driverProfilePane.getBankAccountPanel();
-		
-		
-		/*communication*/
-		Communication communicationPane = new Communication();
-		JButton btnSend = communicationPane.getSendButton();
-		JLabel lblConfirm = communicationPane.getConfirmLabel();
+
+		BusManager busManagerPane = new BusManager();
 		
 		
 		/*base panel*/
@@ -104,9 +97,11 @@ public class Main extends JFrame {
 		
 		basePane.setLayout(card);
         basePane.add("1", loginPane);
-        basePane.add("2", driverInterfacePane);
-        basePane.add("3", driverProfilePane);
-        basePane.add("4", communicationPane);
+        basePane.add("2", managerPane);
+        basePane.add("3", busPane);
+        basePane.add("4", driverPane);
+        basePane.add("5", routePane);
+        basePane.add("6", busManagerPane);
         card.show(basePane, "1");
         getContentPane().add(basePane);
         
@@ -142,66 +137,45 @@ public class Main extends JFrame {
                     while(rs.next()) {
                         //login successful
                         if(username.equals(rs.getString("username")) && password.equals(rs.getString("password"))) {
-                        	if (comboBoxRole.getSelectedItem() == "Driver") {
-                            	usernameField.setText("");
-                            	passwordField.setText("");
-                            	card.show(basePane, "2");
-                            }               
+                            usernameField.setText("");
+                            passwordField.setText("");
+                            card.show(basePane, "2");
                             return;
-                        }
+                        }               
                     }
                     //login failed
                     JOptionPane.showMessageDialog(loginPane, "Credentials do not match", "Login Error", JOptionPane.ERROR_MESSAGE);               
-                }   
+                } 
                 catch(Exception ex) {
                     System.out.println(ex);
                 }
+        	}
                 
-        	}
         });
         
-        
-        //add action listener for logout button
-        btnLogout.addActionListener(new ActionListener() {
-        	@Override
-        	public void actionPerformed(ActionEvent e) {
-        		card.show(basePane, "1");
-        	}
-        });
-        
-        //add action listener for profile button
-        btnProfile.addActionListener(new ActionListener() {
+        //on clicking bus button
+        btnBus.addActionListener(new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
         		card.show(basePane, "3");
         	}
         });
         
-        //add action listener for message button
-        btnMessage.addActionListener(new ActionListener() {
+      //on clicking driver button
+        btnDriver.addActionListener(new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
         		card.show(basePane, "4");
         	}
         });
         
-        
-        //add action listener for bank account button
-        btnBankAccount.addActionListener(new ActionListener() {
+      //on clicking route button
+        btnRoute.addActionListener(new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
-        		bankNameField.setText("VCB");
-        		bankNumberField.setText("97146022");
-        		bankAccountPane.setVisible(true);
+        		card.show(basePane, "5");
         	}
         });
-        
-        //add action listener for send button
-        btnSend.addActionListener(new ActionListener() {
-        	@Override
-        	public void actionPerformed(ActionEvent e) {
-        		lblConfirm.setText("Message is successfully sent.");	
-        	}
-        });
+      
 	}
 }
