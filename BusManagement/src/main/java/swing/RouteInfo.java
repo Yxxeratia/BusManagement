@@ -57,7 +57,7 @@ public class RouteInfo extends JPanel {
 			
 			}
 		));
-		tblRoute.getColumnModel().getColumn(5).setResizable(false);
+		tblRoute.getColumnModel().getColumn(4).setResizable(false);
 		
 		btnBackRoutePanel = new JButton("Back");
 		btnBackRoutePanel.setBackground(new Color(128, 255, 128));

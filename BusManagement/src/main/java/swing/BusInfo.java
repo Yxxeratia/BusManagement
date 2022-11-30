@@ -59,7 +59,7 @@ public class BusInfo extends JPanel {
 				 "ID", "Plate Number", "Fuel Capacity", "Seats", "Status"
 			}
 		));
-		tblBus.getColumnModel().getColumn(6).setResizable(false);
+		tblBus.getColumnModel().getColumn(4).setResizable(false);
 		
 		btnBackBusPanel = new JButton("Back");
 		btnBackBusPanel.setBackground(new Color(128, 255, 128));

@@ -10,12 +10,14 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.JButton;
 import java.awt.Color;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class ManagerInterface extends JPanel {
 	private BufferedImage imageBus;
 	private BufferedImage imageDriver;
 	private BufferedImage imageRoute;
-	
+	private BufferedImage imageLogOut;
 	private JButton btnBus;
 	private JButton btnDriver;
 	private JButton btnRoute;
@@ -44,7 +46,7 @@ public class ManagerInterface extends JPanel {
 	
 	
 	public ManagerInterface() {
-		setBackground(new Color(255, 255, 255));
+		setBackground(new Color(128, 255, 128));
 		try {
 			imageBus = ImageIO.read(getClass().getResource("/bus2.png"));
 			setLayout(null);
@@ -60,50 +62,49 @@ public class ManagerInterface extends JPanel {
 		catch(Exception e) {
 			System.out.println("Image not found");
 		}
+		try {
+			imageLogOut = ImageIO.read(getClass().getResource("/logout.png"));
+			setLayout(null);
+		}
+		catch(Exception e) {
+			System.out.println("Image not found");
+		}
 		
 		try {
 			imageRoute = ImageIO.read(getClass().getResource("/route.png"));
 			setLayout(null);
 			{
-				btnBus = new JButton("Bus");
-				btnBus.setBackground(new Color(151, 255, 255));
+				btnBus = new JButton(new ImageIcon(imageBus));
+				btnBus.setBackground(new Color(255, 255, 255));
 				btnBus.setForeground(new Color(0, 0, 0));
 				btnBus.setFont(new Font("Tahoma", Font.BOLD, 45));
-				btnBus.setBounds(10, 140, 213, 101);
+				btnBus.setBounds(10, 10, 213, 475);
 				add(btnBus);
 			}
-			JLabel lblBus = new JLabel(new ImageIcon(imageBus));
-			
-				lblBus.setBounds(10, 10, 213, 417);
-				add(lblBus);
 				{
-					btnDriver = new JButton("Driver");
+					btnDriver = new JButton(new ImageIcon(imageDriver));
 					btnDriver.setBackground(new Color(255, 89, 89));
 					btnDriver.setFont(new Font("Tahoma", Font.BOLD, 45));
-					btnDriver.setBounds(233, 140, 223, 101);
+					btnDriver.setBounds(233, 10, 223, 475);
 					add(btnDriver);
 				}
-				JLabel lblDriver = new JLabel(new ImageIcon(imageDriver));
-				
-					lblDriver.setBounds(233, 10, 223, 417);
-					add(lblDriver);
 					{
-						btnRoute = new JButton("Route");
+						btnRoute = new JButton(new ImageIcon(imageRoute));
 						btnRoute.setBackground(new Color(223, 223, 223));
 						btnRoute.setFont(new Font("Tahoma", Font.BOLD, 45));
-						btnRoute.setBounds(466, 140, 223, 101);
+						btnRoute.setBounds(463, 10, 223, 475);
 						add(btnRoute);
 					}
 						{
-						btnlogOut = new JButton("Log Out");
+						btnlogOut = new JButton(new ImageIcon(imageLogOut));
+						btnlogOut.addActionListener(new ActionListener() {
+							public void actionPerformed(ActionEvent e) {
+							}
+						});
 						btnlogOut.setFont(new Font("Tahoma", Font.PLAIN, 15));
-						btnlogOut.setBounds(588, 390, 101, 37);
+						btnlogOut.setBounds(696, 10, 223, 475);
 						add(btnlogOut);
 						}
-						JLabel lblRoute = new JLabel(new ImageIcon(imageRoute));
-						
-							lblRoute.setBounds(466, 10, 223, 417);
-							add(lblRoute);
 			
 			
 		}
