@@ -13,11 +13,10 @@ import java.awt.Font;
 
 public class RouteInfo extends JPanel {
 	private JTable tblRoute;
-	private JTextField textFieldStop5;
-	private JTextField textFieldStop4;
-	private JTextField textFieldStop3;
+	private JTextField textFieldDescription;
+	private JTextField textFieldTotalDistance;
 	private JTextField textFieldStop2;
-	private JTextField textFieldStop1;
+	private JTextField textFieldTicketCount;
 	private JTextField textFieldIdRoutePanel;
 	private JTextField textFieldSearchRoutePanel;
 	private JButton btnBackRoutePanel;
@@ -54,7 +53,7 @@ public class RouteInfo extends JPanel {
 			new Object[][] {
 			},
 			new String[] {
-					"Route ID", "Stop 1", "Stop 2","Stop 3","Stop 4","Stop 5"
+					"Route Number", "Ticket Count", "Ticket price", "Total Distance", "Description"
 			
 			}
 		));
@@ -85,30 +84,25 @@ public class RouteInfo extends JPanel {
 		btnAddRoutePanel.setBounds(72, 358, 85, 21);
 		addRoutePanel.add(btnAddRoutePanel);
 		
-		textFieldStop5 = new JTextField();
-		textFieldStop5.setColumns(10);
-		textFieldStop5.setBounds(107, 266, 96, 19);
-		addRoutePanel.add(textFieldStop5);
+		textFieldDescription = new JTextField();
+		textFieldDescription.setColumns(10);
+		textFieldDescription.setBounds(107, 228, 96, 19);
+		addRoutePanel.add(textFieldDescription);
 		
-		textFieldStop4 = new JTextField();
-		textFieldStop4.setColumns(10);
-		textFieldStop4.setBounds(107, 228, 96, 19);
-		addRoutePanel.add(textFieldStop4);
-		
-		textFieldStop3 = new JTextField();
-		textFieldStop3.setColumns(10);
-		textFieldStop3.setBounds(107, 190, 96, 19);
-		addRoutePanel.add(textFieldStop3);
+		textFieldTotalDistance = new JTextField();
+		textFieldTotalDistance.setColumns(10);
+		textFieldTotalDistance.setBounds(107, 190, 96, 19);
+		addRoutePanel.add(textFieldTotalDistance);
 		
 		textFieldStop2 = new JTextField();
 		textFieldStop2.setColumns(10);
 		textFieldStop2.setBounds(107, 152, 96, 19);
 		addRoutePanel.add(textFieldStop2);
 		
-		textFieldStop1 = new JTextField();
-		textFieldStop1.setColumns(10);
-		textFieldStop1.setBounds(107, 114, 96, 19);
-		addRoutePanel.add(textFieldStop1);
+		textFieldTicketCount = new JTextField();
+		textFieldTicketCount.setColumns(10);
+		textFieldTicketCount.setBounds(107, 114, 96, 19);
+		addRoutePanel.add(textFieldTicketCount);
 		
 		textFieldIdRoutePanel = new JTextField();
 		textFieldIdRoutePanel.setColumns(10);
@@ -121,29 +115,25 @@ public class RouteInfo extends JPanel {
 		lblAddRoute.setBounds(53, 10, 97, 38);
 		addRoutePanel.add(lblAddRoute);
 		
-		JLabel lblIdRoutePanel = new JLabel("Route ID");
-		lblIdRoutePanel.setBounds(10, 75, 67, 28);
-		addRoutePanel.add(lblIdRoutePanel);
+		JLabel lblNumberRoutePanel = new JLabel("Route Number");
+		lblNumberRoutePanel.setBounds(10, 75, 67, 28);
+		addRoutePanel.add(lblNumberRoutePanel);
 		
-		JLabel lblStop1 = new JLabel("Stop 1");
-		lblStop1.setBounds(10, 109, 67, 28);
-		addRoutePanel.add(lblStop1);
+		JLabel lblTicketCount = new JLabel("Ticket Count");
+		lblTicketCount.setBounds(10, 109, 67, 28);
+		addRoutePanel.add(lblTicketCount);
 		
-		JLabel lblStop2 = new JLabel("Stop 2");
-		lblStop2.setBounds(10, 147, 97, 28);
-		addRoutePanel.add(lblStop2);
+		JLabel lblTicketPrice = new JLabel("Ticket Price");
+		lblTicketPrice.setBounds(10, 147, 97, 28);
+		addRoutePanel.add(lblTicketPrice);
 		
-		JLabel lblStop3 = new JLabel("Stop 3");
-		lblStop3.setBounds(10, 185, 67, 28);
-		addRoutePanel.add(lblStop3);
+		JLabel lblTotalDistance = new JLabel("Total Distance");
+		lblTotalDistance.setBounds(10, 185, 67, 28);
+		addRoutePanel.add(lblTotalDistance);
 		
-		JLabel lblStop4 = new JLabel("Stop 4");
-		lblStop4.setBounds(10, 223, 67, 28);
-		addRoutePanel.add(lblStop4);
-		
-		JLabel lblStop5 = new JLabel("Stop 5");
-		lblStop5.setBounds(10, 261, 67, 28);
-		addRoutePanel.add(lblStop5);
+		JLabel lblDescription = new JLabel("Description");
+		lblDescription.setBounds(10, 223, 67, 28);
+		addRoutePanel.add(lblDescription);
 		
 		textFieldSearchRoutePanel = new JTextField();
 		textFieldSearchRoutePanel.setColumns(10);

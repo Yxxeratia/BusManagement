@@ -58,7 +58,7 @@ public class DriverInfo extends JPanel {
 			new Object[][] {
 			},
 			new String[] {
-				"ID", "Name", "Telephone Number", "Shift", "Bank Name", "Bank Number", "Status", "Salary"
+				"ID", "Name", "Telephone Number", "Bank Name", "Bank Number","Shift", "Status"
 			}
 		));
 		tblDriver.getColumnModel().getColumn(7).setResizable(false);

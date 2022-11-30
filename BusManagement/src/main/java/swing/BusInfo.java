@@ -17,8 +17,6 @@ public class BusInfo extends JPanel {
 	private JTable tblBus;
 	private JTextField textFieldRevenueTotal;
 	private JTextField textFieldFuelCapacity;
-	private JTextField textFieldTicketCount;
-	private JTextField textFieldTicketPrice;
 	private JTextField textFieldSeats;
 	private JTextField textFieldLocation;
 	private JTextField textFieldPlateNumber;
@@ -58,7 +56,7 @@ public class BusInfo extends JPanel {
 			new Object[][] {
 			},
 			new String[] {
-				 "Plate Number", "Location", "Fuel Capacity", "Seats", "Ticket Count", "Price Ticket","Revenue"
+				 "ID", "Plate Number", "Fuel Capacity", "Seats", "Status"
 			}
 		));
 		tblBus.getColumnModel().getColumn(6).setResizable(false);
@@ -118,21 +116,13 @@ public class BusInfo extends JPanel {
 		lblPlateNumber.setBounds(10, 104, 67, 28);
 		addBusPanel.add(lblPlateNumber);
 		
-		JLabel lblLocation = new JLabel("Location");
-		lblLocation.setBounds(10, 142, 67, 28);
-		addBusPanel.add(lblLocation);
+		JLabel lblStatus = new JLabel("Status");
+		lblStatus.setBounds(10, 142, 67, 28);
+		addBusPanel.add(lblStatus);
 		
 		JLabel lblSeats = new JLabel("Seats");
 		lblSeats.setBounds(10, 180, 67, 28);
 		addBusPanel.add(lblSeats);
-		
-		JLabel lblTicketPrice = new JLabel("Ticket Price");
-		lblTicketPrice.setBounds(10, 218, 67, 28);
-		addBusPanel.add(lblTicketPrice);
-		
-		JLabel lblTicketCount = new JLabel("Ticket Count");
-		lblTicketCount.setBounds(10, 256, 67, 28);
-		addBusPanel.add(lblTicketCount);
 		
 		JLabel lblFuelCapacity = new JLabel("Fuel Capacity");
 		lblFuelCapacity.setBounds(10, 294, 67, 28);
@@ -142,16 +132,6 @@ public class BusInfo extends JPanel {
 		textFieldFuelCapacity.setColumns(10);
 		textFieldFuelCapacity.setBounds(107, 299, 96, 19);
 		addBusPanel.add(textFieldFuelCapacity);
-		
-		textFieldTicketCount = new JTextField();
-		textFieldTicketCount.setColumns(10);
-		textFieldTicketCount.setBounds(107, 261, 96, 19);
-		addBusPanel.add(textFieldTicketCount);
-		
-		textFieldTicketPrice = new JTextField();
-		textFieldTicketPrice.setColumns(10);
-		textFieldTicketPrice.setBounds(107, 223, 96, 19);
-		addBusPanel.add(textFieldTicketPrice);
 		
 		textFieldSeats = new JTextField();
 		textFieldSeats.setColumns(10);
