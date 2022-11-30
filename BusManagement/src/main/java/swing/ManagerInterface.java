@@ -14,6 +14,10 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class ManagerInterface extends JPanel {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private BufferedImage imageBus;
 	private BufferedImage imageDriver;
 	private BufferedImage imageRoute;
@@ -81,38 +85,35 @@ public class ManagerInterface extends JPanel {
 				btnBus.setBounds(10, 10, 213, 475);
 				add(btnBus);
 			}
-				{
-					btnDriver = new JButton(new ImageIcon(imageDriver));
-					btnDriver.setBackground(new Color(255, 89, 89));
-					btnDriver.setFont(new Font("Tahoma", Font.BOLD, 45));
-					btnDriver.setBounds(233, 10, 223, 475);
-					add(btnDriver);
-				}
-					{
-						btnRoute = new JButton(new ImageIcon(imageRoute));
-						btnRoute.setBackground(new Color(223, 223, 223));
-						btnRoute.setFont(new Font("Tahoma", Font.BOLD, 45));
-						btnRoute.setBounds(463, 10, 223, 475);
-						add(btnRoute);
-					}
-						{
-						btnlogOut = new JButton(new ImageIcon(imageLogOut));
-						btnlogOut.addActionListener(new ActionListener() {
-							public void actionPerformed(ActionEvent e) {
-							}
-						});
-						btnlogOut.setFont(new Font("Tahoma", Font.PLAIN, 15));
-						btnlogOut.setBounds(696, 10, 223, 475);
-						add(btnlogOut);
-						}
 			
+			{
+				btnDriver = new JButton(new ImageIcon(imageDriver));
+				btnDriver.setBackground(new Color(255, 89, 89));
+				btnDriver.setFont(new Font("Tahoma", Font.BOLD, 45));
+				btnDriver.setBounds(233, 10, 223, 475);
+				add(btnDriver);
+			}
+			
+			{
+				btnRoute = new JButton(new ImageIcon(imageRoute));
+				btnRoute.setBackground(new Color(223, 223, 223));
+				btnRoute.setFont(new Font("Tahoma", Font.BOLD, 45));
+				btnRoute.setBounds(463, 10, 223, 475);
+				add(btnRoute);
+			}
+			
+			{
+				
+				btnlogOut = new JButton(new ImageIcon(imageLogOut));
+				btnlogOut.setFont(new Font("Tahoma", Font.PLAIN, 15));
+				btnlogOut.setBounds(696, 10, 223, 475);
+				add(btnlogOut);
+			}
 			
 		}
 		catch(Exception e) {
 			System.out.println("Image not found");
 		
+		}
 	}
-		
-
-}
 }
