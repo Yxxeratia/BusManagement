@@ -18,27 +18,57 @@ public class BusInfo extends JPanel {
 	private JTextField textFieldRevenueTotal;
 	private JTextField textFieldFuelCapacity;
 	private JTextField textFieldSeats;
-	private JTextField textFieldLocation;
+	private JTextField textFieldStatus;
 	private JTextField textFieldPlateNumber;
-	private JTextField textFieldIdBusPanel;
-	private JTextField textFieldSearchBusPanel;
-	private JButton btnBackBusPanel;
-	private JButton btnRemoveBusPanel;
-	private JButton btnSearchBusPanel;
-	private JButton btnAddBusPanel;
+	private JTextField textFieldBusId;
+	private JTextField textFieldSearchBus;
+	private JButton btnBackBus;
+	private JButton btnRemoveBus;
+	private JButton btnSearchBus;
+	private JButton btnAddBus;
 	
-	public JButton getBackBusPanelButton() {
-		return btnBackBusPanel;
+	public JButton getBackBusButton() {
+		return btnBackBus;
 	}
-	public JButton getRemoveBusPanelButton() {
-		return btnRemoveBusPanel;
+	public JButton getRemoveBusButton() {
+		return btnRemoveBus;
 	}
-	public JButton getSearchBusPanelButton() {
-		return btnSearchBusPanel;
+	public JButton getSearchBusButton() {
+		return btnSearchBus;
 	}
-	public JButton getAddBusPanelButton() {
-		return btnAddBusPanel;
+	public JButton getAddBusButton() {
+		return btnAddBus;
 	}
+	
+	public JTextField getBusIdField() {
+		return textFieldBusId;
+	}
+	
+	public JTextField getPlateNumberField() {
+		return textFieldPlateNumber;
+	}
+	
+	public JTextField getSeatsField() {
+		return textFieldSeats;
+	}
+	
+	public JTextField getFuelCapacityField() {
+		return textFieldFuelCapacity;
+	}
+	
+	public JTextField getStatusField() {
+		return textFieldStatus;
+	}
+	
+	public JTextField getSearchField() {
+		return textFieldSearchBus;
+	}
+	
+	public JTable getBusTable() {
+		return tblBus;
+	}
+	
+	
 	/**
 	 * Create the panel.
 	 */
@@ -59,22 +89,22 @@ public class BusInfo extends JPanel {
 				 "ID", "Plate Number", "Fuel Capacity", "Seats", "Status"
 			}
 		));
-		tblBus.getColumnModel().getColumn(6).setResizable(false);
+		tblBus.getColumnModel().getColumn(4).setResizable(false);
 		
-		btnBackBusPanel = new JButton("Back");
-		btnBackBusPanel.setBackground(new Color(128, 255, 128));
-		btnBackBusPanel.setBounds(27, 402, 85, 21);
-		add(btnBackBusPanel);
+		btnBackBus = new JButton("Back");
+		btnBackBus.setBackground(new Color(128, 255, 128));
+		btnBackBus.setBounds(27, 402, 85, 21);
+		add(btnBackBus);
 		
-		btnRemoveBusPanel = new JButton("Remove");
-		btnRemoveBusPanel.setBackground(new Color(128, 255, 128));
-		btnRemoveBusPanel.setBounds(122, 402, 85, 21);
-		add(btnRemoveBusPanel);
+		btnRemoveBus = new JButton("Remove");
+		btnRemoveBus.setBackground(new Color(128, 255, 128));
+		btnRemoveBus.setBounds(122, 402, 85, 21);
+		add(btnRemoveBus);
 		
-		btnSearchBusPanel = new JButton("Search");
-		btnSearchBusPanel.setBackground(new Color(128, 255, 128));
-		btnSearchBusPanel.setBounds(574, 22, 85, 21);
-		add(btnSearchBusPanel);
+		btnSearchBus = new JButton("Search");
+		btnSearchBus.setBackground(new Color(128, 255, 128));
+		btnSearchBus.setBounds(574, 22, 85, 21);
+		add(btnSearchBus);
 		
 		textFieldRevenueTotal = new JTextField();
 		textFieldRevenueTotal.setBounds(563, 403, 96, 19);
@@ -87,20 +117,20 @@ public class BusInfo extends JPanel {
 		lblTotalRevenue.setBounds(509, 405, 45, 13);
 		add(lblTotalRevenue);
 		
-		textFieldSearchBusPanel = new JTextField();
-		textFieldSearchBusPanel.setColumns(10);
-		textFieldSearchBusPanel.setBounds(468, 23, 96, 19);
-		add(textFieldSearchBusPanel);
+		textFieldSearchBus = new JTextField();
+		textFieldSearchBus.setColumns(10);
+		textFieldSearchBus.setBounds(468, 23, 96, 19);
+		add(textFieldSearchBus);
 		
 		JPanel addBusPanel = new JPanel();
 		addBusPanel.setBounds(669, 10, 216, 413);
 		add(addBusPanel);
 		addBusPanel.setLayout(null);
 		
-		btnAddBusPanel = new JButton("Add");
-		btnAddBusPanel.setBackground(new Color(255, 255, 255));
-		btnAddBusPanel.setBounds(60, 371, 85, 21);
-		addBusPanel.add(btnAddBusPanel);
+		btnAddBus = new JButton("Add");
+		btnAddBus.setBackground(new Color(255, 255, 255));
+		btnAddBus.setBounds(60, 371, 85, 21);
+		addBusPanel.add(btnAddBus);
 		
 		JLabel lblAddBus = new JLabel("Add Bus");
 		lblAddBus.setHorizontalAlignment(SwingConstants.CENTER);
@@ -138,19 +168,19 @@ public class BusInfo extends JPanel {
 		textFieldSeats.setBounds(107, 185, 96, 19);
 		addBusPanel.add(textFieldSeats);
 		
-		textFieldLocation = new JTextField();
-		textFieldLocation.setColumns(10);
-		textFieldLocation.setBounds(107, 147, 96, 19);
-		addBusPanel.add(textFieldLocation);
+		textFieldStatus = new JTextField();
+		textFieldStatus.setColumns(10);
+		textFieldStatus.setBounds(107, 147, 96, 19);
+		addBusPanel.add(textFieldStatus);
 		
 		textFieldPlateNumber = new JTextField();
 		textFieldPlateNumber.setColumns(10);
 		textFieldPlateNumber.setBounds(107, 109, 96, 19);
 		addBusPanel.add(textFieldPlateNumber);
 		
-		textFieldIdBusPanel = new JTextField();
-		textFieldIdBusPanel.setColumns(10);
-		textFieldIdBusPanel.setBounds(107, 75, 96, 19);
-		addBusPanel.add(textFieldIdBusPanel);
+		textFieldBusId = new JTextField();
+		textFieldBusId.setColumns(10);
+		textFieldBusId.setBounds(107, 75, 96, 19);
+		addBusPanel.add(textFieldBusId);
 	}
 }

@@ -85,7 +85,7 @@ public class ManagerInterface extends JPanel {
 				}
 				JLabel lblDriver = new JLabel(new ImageIcon(imageDriver));
 				
-					lblDriver.setBounds(233, 10, 223, 417);
+					lblDriver.setBounds(233, 10, 239, 417);
 					add(lblDriver);
 					{
 						btnRoute = new JButton("Route");

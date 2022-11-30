@@ -20,27 +20,56 @@ public class DriverInfo extends JPanel {
 	private JTextField textFieldBankNumber;
 	private JTextField textFieldBankName;
 	private JTextField textFieldTelephoneNumber;
-	private JTextField textFieldName;
-	private JTextField textFieldIdDriverPanel;
-	private JTextField textFieldSearchDriverPanel;
-	private JButton btnBackDriverPanel;
-	private JButton btnRemoveDriverPanel;
-	private JButton btnSearchDriverPanel;
-	private JButton btnAddDriverPanel;
+	private JTextField textFieldDriverName;
+	private JTextField textFieldDriverId;
+	private JTextField textFieldSearchDriver;
+	private JButton btnBackDriver;
+	private JButton btnRemoveDriver;
+	private JButton btnSearchDriver;
+	private JButton btnAddDriver;
 	
-	public JButton getBackDriverPanelButton() {
-		return btnBackDriverPanel;
+	public JButton getBackDriverButton() {
+		return btnBackDriver;
 	}
-	public JButton getRemoveDriverPanelButton() {
-		return btnRemoveDriverPanel;
+	public JButton getRemoveDriverButton() {
+		return btnRemoveDriver;
 	}
-	public JButton getSearchDriverPanelButton() {
-		return btnSearchDriverPanel;
+	public JButton getSearchDriverButton() {
+		return btnSearchDriver;
 	}
-	public JButton getAddDriverPanelButton() {
-		return btnAddDriverPanel;
+	public JButton getAddDriverButton() {
+		return btnAddDriver;
 	}
-
+	
+	public JTextField getDriverIdField() {
+		return textFieldDriverId;
+	}
+	
+	public JTextField getDriverNameField() {
+		return textFieldDriverName;
+	}
+	
+	public JTextField getTelephoneNumberField() {
+		return textFieldTelephoneNumber;
+	}
+	
+	public JTextField getShiftField() {
+		return textFieldShift;
+	}
+	
+	public JTextField getStatusField() {
+		return textFieldStatus;
+	}
+	
+	public JTextField getSearchField() {
+		return textFieldSearchDriver;
+	}
+	
+	public JTable getDriverTable() {
+		return tblDriver;
+	}
+	
+	
 	/**
 	 * Create the panel.
 	 */
@@ -61,37 +90,37 @@ public class DriverInfo extends JPanel {
 				"ID", "Name", "Telephone Number", "Bank Name", "Bank Number","Shift", "Status"
 			}
 		));
-		tblDriver.getColumnModel().getColumn(7).setResizable(false);
+		tblDriver.getColumnModel().getColumn(6).setResizable(false);
 		
-		btnBackDriverPanel = new JButton("Back");
-		btnBackDriverPanel.setBackground(new Color(128, 255, 128));
-		btnBackDriverPanel.setBounds(20, 412, 85, 21);
-		add(btnBackDriverPanel);
+		btnBackDriver = new JButton("Back");
+		btnBackDriver.setBackground(new Color(128, 255, 128));
+		btnBackDriver.setBounds(20, 412, 85, 21);
+		add(btnBackDriver);
 		
-		btnRemoveDriverPanel = new JButton("Remove");
-		btnRemoveDriverPanel.setBackground(new Color(128, 255, 128));
-		btnRemoveDriverPanel.setBounds(122, 412, 85, 21);
-		add(btnRemoveDriverPanel);
+		btnRemoveDriver = new JButton("Remove");
+		btnRemoveDriver.setBackground(new Color(128, 255, 128));
+		btnRemoveDriver.setBounds(122, 412, 85, 21);
+		add(btnRemoveDriver);
 		
-		btnSearchDriverPanel = new JButton("Search");
-		btnSearchDriverPanel.setBackground(new Color(128, 255, 128));
-		btnSearchDriverPanel.setBounds(574, 25, 85, 21);
-		add(btnSearchDriverPanel);
+		btnSearchDriver = new JButton("Search");
+		btnSearchDriver.setBackground(new Color(128, 255, 128));
+		btnSearchDriver.setBounds(574, 25, 85, 21);
+		add(btnSearchDriver);
 		
-		textFieldSearchDriverPanel = new JTextField();
-		textFieldSearchDriverPanel.setBounds(468, 26, 96, 19);
-		add(textFieldSearchDriverPanel);
-		textFieldSearchDriverPanel.setColumns(10);
+		textFieldSearchDriver = new JTextField();
+		textFieldSearchDriver.setBounds(468, 26, 96, 19);
+		add(textFieldSearchDriver);
+		textFieldSearchDriver.setColumns(10);
 
 		JPanel addDriverPanel = new JPanel();
 		addDriverPanel.setBounds(669, 10, 216, 413);
 		add(addDriverPanel);
 		addDriverPanel.setLayout(null);
 		
-		btnAddDriverPanel = new JButton("Add");
-		btnAddDriverPanel.setBounds(72, 382, 85, 21);
-		btnAddDriverPanel.setBackground(new Color(255, 255, 255));
-		addDriverPanel.add(btnAddDriverPanel);
+		btnAddDriver = new JButton("Add");
+		btnAddDriver.setBounds(72, 382, 85, 21);
+		btnAddDriver.setBackground(new Color(255, 255, 255));
+		addDriverPanel.add(btnAddDriver);
 		
 		textFieldStatus = new JTextField();
 		textFieldStatus.setBounds(107, 310, 96, 19);
@@ -118,15 +147,15 @@ public class DriverInfo extends JPanel {
 		textFieldTelephoneNumber.setColumns(10);
 		addDriverPanel.add(textFieldTelephoneNumber);
 		
-		textFieldName = new JTextField();
-		textFieldName.setBounds(107, 118, 96, 19);
-		textFieldName.setColumns(10);
-		addDriverPanel.add(textFieldName);
+		textFieldDriverName = new JTextField();
+		textFieldDriverName.setBounds(107, 118, 96, 19);
+		textFieldDriverName.setColumns(10);
+		addDriverPanel.add(textFieldDriverName);
 		
-		textFieldIdDriverPanel = new JTextField();
-		textFieldIdDriverPanel.setBounds(107, 80, 96, 19);
-		textFieldIdDriverPanel.setColumns(10);
-		addDriverPanel.add(textFieldIdDriverPanel);
+		textFieldDriverId = new JTextField();
+		textFieldDriverId.setBounds(107, 80, 96, 19);
+		textFieldDriverId.setColumns(10);
+		addDriverPanel.add(textFieldDriverId);
 		
 		JLabel lblIdDriverPanel = new JLabel("ID");
 		lblIdDriverPanel.setBounds(10, 75, 67, 28);
