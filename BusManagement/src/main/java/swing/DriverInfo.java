@@ -61,7 +61,7 @@ public class DriverInfo extends JPanel {
 				"ID", "Name", "Telephone Number", "Bank Name", "Bank Number","Shift", "Status"
 			}
 		));
-		tblDriver.getColumnModel().getColumn(7).setResizable(false);
+		tblDriver.getColumnModel().getColumn(6).setResizable(false);
 		
 		btnBackDriverPanel = new JButton("Back");
 		btnBackDriverPanel.setBackground(new Color(128, 255, 128));
