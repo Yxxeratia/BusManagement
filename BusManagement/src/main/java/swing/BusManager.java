@@ -13,9 +13,21 @@ import java.awt.Font;
 
 public class BusManager extends JPanel {
 	private JTable table;
-	private JTextField textField;
-	private JTextField textField_1;
+	private JTextField textFieldTotal;
+	private JTextField textFieldSearchBusManagerPanel;
+	private JButton btnBackBusManagerPanel;
+	private JButton btnRemoveBusManagerPanel;
+	private JButton btnSearchBusManagerPanel;
 
+	public JButton getBackBusManagerPanelButton() {
+		return btnBackBusManagerPanel;
+	}
+	public JButton getRemoveBusManagerPanelButton() {
+		return btnRemoveBusManagerPanel;
+	}
+	public JButton getSearchBusManagerPanelButton() {
+		return btnSearchBusManagerPanel;
+	}
 	/**
 	 * Create the panel.
 	 */
@@ -23,12 +35,12 @@ public class BusManager extends JPanel {
 		setBackground(new Color(128, 255, 128));
 		setLayout(null);
 		
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 39, 649, 341);
-		add(scrollPane);
+		JScrollPane scrollBusManagerPane = new JScrollPane();
+		scrollBusManagerPane.setBounds(10, 39, 649, 341);
+		add(scrollBusManagerPane);
 		
 		table = new JTable();
-		scrollPane.setViewportView(table);
+		scrollBusManagerPane.setViewportView(table);
 		table.setModel(new DefaultTableModel(
 			new Object[][] {
 			},
@@ -38,36 +50,36 @@ public class BusManager extends JPanel {
 		));
 		table.getColumnModel().getColumn(6).setResizable(false);
 		
-		JButton btnNewButton = new JButton("Back");
-		btnNewButton.setBackground(new Color(128, 255, 128));
-		btnNewButton.setBounds(27, 402, 85, 21);
-		add(btnNewButton);
+		btnBackBusManagerPanel = new JButton("Back");
+		btnBackBusManagerPanel.setBackground(new Color(128, 255, 128));
+		btnBackBusManagerPanel.setBounds(27, 402, 85, 21);
+		add(btnBackBusManagerPanel);
 		
-		JButton btnRemove = new JButton("Remove");
-		btnRemove.setBackground(new Color(128, 255, 128));
-		btnRemove.setBounds(122, 402, 85, 21);
-		add(btnRemove);
+		btnRemoveBusManagerPanel = new JButton("Remove");
+		btnRemoveBusManagerPanel.setBackground(new Color(128, 255, 128));
+		btnRemoveBusManagerPanel.setBounds(122, 402, 85, 21);
+		add(btnRemoveBusManagerPanel);
 		
-		textField = new JTextField();
-		textField.setBounds(563, 390, 96, 19);
-		add(textField);
-		textField.setColumns(10);
+		btnSearchBusManagerPanel = new JButton("Search");
+		btnSearchBusManagerPanel.setBackground(new Color(128, 255, 128));
+		btnSearchBusManagerPanel.setBounds(574, 8, 85, 21);
+		add(btnSearchBusManagerPanel);
 		
-		JLabel lblNewLabel = new JLabel("Total");
-		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setBounds(508, 392, 45, 13);
-		add(lblNewLabel);
+		textFieldSearchBusManagerPanel = new JTextField();
+		textFieldSearchBusManagerPanel.setColumns(10);
+		textFieldSearchBusManagerPanel.setBounds(468, 9, 96, 19);
+		add(textFieldSearchBusManagerPanel);
 		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBounds(468, 9, 96, 19);
-		add(textField_1);
+		textFieldTotal = new JTextField();
+		textFieldTotal.setBounds(563, 390, 96, 19);
+		add(textFieldTotal);
+		textFieldTotal.setColumns(10);
 		
-		JButton btnSearhch = new JButton("Search");
-		btnSearhch.setBackground(new Color(128, 255, 128));
-		btnSearhch.setBounds(574, 8, 85, 21);
-		add(btnSearhch);
+		JLabel lblTotal = new JLabel("Total");
+		lblTotal.setFont(new Font("Tahoma", Font.BOLD, 12));
+		lblTotal.setHorizontalAlignment(SwingConstants.CENTER);
+		lblTotal.setBounds(508, 392, 45, 13);
+		add(lblTotal);
 
 	}
 }

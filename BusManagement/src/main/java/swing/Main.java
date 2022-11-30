@@ -58,7 +58,7 @@ public class Main extends JFrame {
 	 */
 	public Main() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 737, 509);
+		setBounds(100, 100, 917, 510);
 		
 		//getContentPane().setBackground(Color.black);
 		
@@ -73,22 +73,34 @@ public class Main extends JFrame {
 		JButton btnBus = managerPane.getBusButton();
 		JButton btnDriver = managerPane.getDriverButton();
 		JButton btnRoute = managerPane.getRouteButton();
+		JButton btnlogOut = managerPane.getlogOutButton();
 		
 		/*bus info*/
 		BusInfo busPane = new BusInfo();
+		JButton btnBackBusPanel = busPane.getBackBusPanelButton();
+		JButton btnRemoveBusPanel = busPane.getRemoveBusPanelButton();
+		JButton btnSearchBusPanel = busPane.getSearchBusPanelButton();
+		JButton btnAddBusPanel = busPane.getAddBusPanelButton();
 		
 		/*driver info*/
 		DriverInfo driverPane = new DriverInfo();
+		JButton btnBackDriverPanel = driverPane.getBackDriverPanelButton();
+		JButton btnRemoveDriverPanel = driverPane.getRemoveDriverPanelButton();
+		JButton btnSearchDriverPanel = driverPane.getSearchDriverPanelButton();
+		JButton btnAddDriverPanel = driverPane.getAddDriverPanelButton();
 		
 		/*route info*/
 		RouteInfo routePane = new RouteInfo();
+		JButton btnBackRoutePanel = routePane.getBackRoutePanelButton();
+		JButton btnRemoveRoutePanel = routePane.getRemoveRoutePanelButton();
+		JButton btnSearchRoutePanel = routePane.getSearchRoutePanelButton();
+		JButton btnAddRoutePanel = routePane.getAddRoutePanelButton();
 		
-		
-	
-		
-
+		/*bus manager*/
 		BusManager busManagerPane = new BusManager();
-		
+		JButton btnBackBusManagerPanel = busManagerPane.getBackBusManagerPanelButton();
+		JButton btnRemoveBusManagerPanel = busManagerPane.getRemoveBusManagerPanelButton();
+		JButton btnSearchBusManagerPanel = busManagerPane.getSearchBusManagerPanelButton();
 		
 		/*base panel*/
 		JPanel basePane = new JPanel();
@@ -176,6 +188,44 @@ public class Main extends JFrame {
         		card.show(basePane, "5");
         	}
         });
+        
+      //on clicking logout button
+        btnlogOut.addActionListener(new ActionListener() {
+        	@Override
+        	public void actionPerformed(ActionEvent e) {
+        		card.show(basePane, "1");
+        	}
+        });
       
+      //on clicking back button bus panel
+        btnBackBusPanel.addActionListener(new ActionListener() {
+        	@Override
+        	public void actionPerformed(ActionEvent e) {
+        		card.show(basePane, "2");
+        	}
+        });
+        
+      //on clicking back button driver panel
+        btnBackDriverPanel.addActionListener(new ActionListener() {
+        	@Override
+        	public void actionPerformed(ActionEvent e) {
+        		card.show(basePane, "2");
+        	}
+        });
+        
+      //on clicking back button route panel
+        btnBackRoutePanel.addActionListener(new ActionListener() {
+        	@Override
+        	public void actionPerformed(ActionEvent e) {
+        		card.show(basePane, "2");
+        	}
+        });
+        
+      //on clicking add button bus panel
+        btnBackRoutePanel.addActionListener(new ActionListener() {
+        	@Override
+        	public void actionPerformed(ActionEvent e) {
+        	}
+        });
 	}
 }
