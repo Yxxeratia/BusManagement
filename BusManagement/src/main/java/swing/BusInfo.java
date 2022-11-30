@@ -14,19 +14,33 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class BusInfo extends JPanel {
-	private JTable table;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_3;
-	private JTextField textField_4;
-	private JTextField textField_5;
-	private JTextField textField_6;
-	private JTextField textField_7;
-	private JTextField textField_8;
-	private JTextField textField_2;
+	private JTable tblBus;
+	private JTextField textFieldRevenueTotal;
+	private JTextField textFieldFuelCapacity;
+	private JTextField textFieldTicketCount;
+	private JTextField textFieldTicketPrice;
+	private JTextField textFieldSeats;
+	private JTextField textFieldLocation;
+	private JTextField textFieldPlateNumber;
+	private JTextField textFieldIdBusPanel;
+	private JTextField textFieldSearchBusPanel;
+	private JButton btnBackBusPanel;
+	private JButton btnRemoveBusPanel;
+	private JButton btnSearchBusPanel;
+	private JButton btnAddBusPanel;
 	
-	
-	
+	public JButton getBackBusPanelButton() {
+		return btnBackBusPanel;
+	}
+	public JButton getRemoveBusPanelButton() {
+		return btnRemoveBusPanel;
+	}
+	public JButton getSearchBusPanelButton() {
+		return btnSearchBusPanel;
+	}
+	public JButton getAddBusPanelButton() {
+		return btnAddBusPanel;
+	}
 	/**
 	 * Create the panel.
 	 */
@@ -34,134 +48,129 @@ public class BusInfo extends JPanel {
 		setBackground(new Color(128, 255, 128));
 		setLayout(null);
 		
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 50, 649, 347);
-		add(scrollPane);
+		JScrollPane scrollBusPane = new JScrollPane();
+		scrollBusPane.setBounds(10, 50, 649, 347);
+		add(scrollBusPane);
 		
-		table = new JTable();
-		scrollPane.setViewportView(table);
-		table.setModel(new DefaultTableModel(
+		tblBus = new JTable();
+		scrollBusPane.setViewportView(tblBus);
+		tblBus.setModel(new DefaultTableModel(
 			new Object[][] {
 			},
 			new String[] {
 				 "Plate Number", "Location", "Fuel Capacity", "Seats", "Ticket Count", "Price Ticket","Revenue"
 			}
 		));
-		table.getColumnModel().getColumn(6).setResizable(false);
+		tblBus.getColumnModel().getColumn(6).setResizable(false);
 		
-		JButton btnBack = new JButton("Back");
-		btnBack.setBackground(new Color(128, 255, 128));
-		btnBack.setBounds(27, 402, 85, 21);
-		add(btnBack);
+		btnBackBusPanel = new JButton("Back");
+		btnBackBusPanel.setBackground(new Color(128, 255, 128));
+		btnBackBusPanel.setBounds(27, 402, 85, 21);
+		add(btnBackBusPanel);
 		
-		JButton btnRemove = new JButton("Remove");
-		btnRemove.setBackground(new Color(128, 255, 128));
-		btnRemove.setBounds(122, 402, 85, 21);
-		add(btnRemove);
+		btnRemoveBusPanel = new JButton("Remove");
+		btnRemoveBusPanel.setBackground(new Color(128, 255, 128));
+		btnRemoveBusPanel.setBounds(122, 402, 85, 21);
+		add(btnRemoveBusPanel);
 		
-		textField = new JTextField();
-		textField.setBounds(563, 403, 96, 19);
-		add(textField);
-		textField.setColumns(10);
+		btnSearchBusPanel = new JButton("Search");
+		btnSearchBusPanel.setBackground(new Color(128, 255, 128));
+		btnSearchBusPanel.setBounds(574, 22, 85, 21);
+		add(btnSearchBusPanel);
 		
-		JLabel lblNewLabel = new JLabel("Total");
-		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setBounds(509, 405, 45, 13);
-		add(lblNewLabel);
+		textFieldRevenueTotal = new JTextField();
+		textFieldRevenueTotal.setBounds(563, 403, 96, 19);
+		add(textFieldRevenueTotal);
+		textFieldRevenueTotal.setColumns(10);
 		
-		JPanel panel = new JPanel();
-		panel.setBounds(669, 10, 216, 413);
-		add(panel);
-		panel.setLayout(null);
+		JLabel lblTotalRevenue = new JLabel("Total");
+		lblTotalRevenue.setFont(new Font("Tahoma", Font.BOLD, 12));
+		lblTotalRevenue.setHorizontalAlignment(SwingConstants.CENTER);
+		lblTotalRevenue.setBounds(509, 405, 45, 13);
+		add(lblTotalRevenue);
 		
-		JLabel lblId_1 = new JLabel("ID");
-		lblId_1.setBounds(10, 70, 67, 28);
-		panel.add(lblId_1);
+		textFieldSearchBusPanel = new JTextField();
+		textFieldSearchBusPanel.setColumns(10);
+		textFieldSearchBusPanel.setBounds(468, 23, 96, 19);
+		add(textFieldSearchBusPanel);
 		
-		JLabel lblPlateNumber = new JLabel("Plate Number");
-		lblPlateNumber.setBounds(10, 104, 67, 28);
-		panel.add(lblPlateNumber);
+		JPanel addBusPanel = new JPanel();
+		addBusPanel.setBounds(669, 10, 216, 413);
+		add(addBusPanel);
+		addBusPanel.setLayout(null);
 		
-		JLabel lblLocation = new JLabel("Location");
-		lblLocation.setBounds(10, 142, 67, 28);
-		panel.add(lblLocation);
-		
-		JLabel lblSeats = new JLabel("Seats");
-		lblSeats.setBounds(10, 180, 67, 28);
-		panel.add(lblSeats);
-		
-		JLabel lblTicketPrice = new JLabel("Ticket Price");
-		lblTicketPrice.setBounds(10, 218, 67, 28);
-		panel.add(lblTicketPrice);
-		
-		JLabel lblTicketCount = new JLabel("Ticket Count");
-		lblTicketCount.setBounds(10, 256, 67, 28);
-		panel.add(lblTicketCount);
-		
-		JLabel lblFuelCapacity = new JLabel("Fuel Capacity");
-		lblFuelCapacity.setBounds(10, 294, 67, 28);
-		panel.add(lblFuelCapacity);
-		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBounds(107, 299, 96, 19);
-		panel.add(textField_1);
-		
-		textField_3 = new JTextField();
-		textField_3.setColumns(10);
-		textField_3.setBounds(107, 261, 96, 19);
-		panel.add(textField_3);
-		
-		textField_4 = new JTextField();
-		textField_4.setColumns(10);
-		textField_4.setBounds(107, 223, 96, 19);
-		panel.add(textField_4);
-		
-		textField_5 = new JTextField();
-		textField_5.setColumns(10);
-		textField_5.setBounds(107, 185, 96, 19);
-		panel.add(textField_5);
-		
-		textField_6 = new JTextField();
-		textField_6.setColumns(10);
-		textField_6.setBounds(107, 147, 96, 19);
-		panel.add(textField_6);
-		
-		textField_7 = new JTextField();
-		textField_7.setColumns(10);
-		textField_7.setBounds(107, 109, 96, 19);
-		panel.add(textField_7);
-		
-		textField_8 = new JTextField();
-		textField_8.setColumns(10);
-		textField_8.setBounds(107, 75, 96, 19);
-		panel.add(textField_8);
+		btnAddBusPanel = new JButton("Add");
+		btnAddBusPanel.setBackground(new Color(255, 255, 255));
+		btnAddBusPanel.setBounds(60, 371, 85, 21);
+		addBusPanel.add(btnAddBusPanel);
 		
 		JLabel lblAddBus = new JLabel("Add Bus");
 		lblAddBus.setHorizontalAlignment(SwingConstants.CENTER);
 		lblAddBus.setFont(new Font("Tahoma", Font.BOLD, 16));
 		lblAddBus.setBounds(60, 10, 97, 38);
-		panel.add(lblAddBus);
+		addBusPanel.add(lblAddBus);
 		
-		JButton btnNewButton_1 = new JButton("Add");
-		btnNewButton_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		btnNewButton_1.setBackground(new Color(255, 255, 255));
-		btnNewButton_1.setBounds(60, 371, 85, 21);
-		panel.add(btnNewButton_1);
+		JLabel lblIdBusPane = new JLabel("ID");
+		lblIdBusPane.setBounds(10, 70, 67, 28);
+		addBusPanel.add(lblIdBusPane);
 		
-		textField_2 = new JTextField();
-		textField_2.setColumns(10);
-		textField_2.setBounds(468, 23, 96, 19);
-		add(textField_2);
+		JLabel lblPlateNumber = new JLabel("Plate Number");
+		lblPlateNumber.setBounds(10, 104, 67, 28);
+		addBusPanel.add(lblPlateNumber);
 		
-		JButton btnSearhch = new JButton("Search");
-		btnSearhch.setBackground(new Color(128, 255, 128));
-		btnSearhch.setBounds(574, 22, 85, 21);
-		add(btnSearhch);
-
+		JLabel lblLocation = new JLabel("Location");
+		lblLocation.setBounds(10, 142, 67, 28);
+		addBusPanel.add(lblLocation);
+		
+		JLabel lblSeats = new JLabel("Seats");
+		lblSeats.setBounds(10, 180, 67, 28);
+		addBusPanel.add(lblSeats);
+		
+		JLabel lblTicketPrice = new JLabel("Ticket Price");
+		lblTicketPrice.setBounds(10, 218, 67, 28);
+		addBusPanel.add(lblTicketPrice);
+		
+		JLabel lblTicketCount = new JLabel("Ticket Count");
+		lblTicketCount.setBounds(10, 256, 67, 28);
+		addBusPanel.add(lblTicketCount);
+		
+		JLabel lblFuelCapacity = new JLabel("Fuel Capacity");
+		lblFuelCapacity.setBounds(10, 294, 67, 28);
+		addBusPanel.add(lblFuelCapacity);
+		
+		textFieldFuelCapacity = new JTextField();
+		textFieldFuelCapacity.setColumns(10);
+		textFieldFuelCapacity.setBounds(107, 299, 96, 19);
+		addBusPanel.add(textFieldFuelCapacity);
+		
+		textFieldTicketCount = new JTextField();
+		textFieldTicketCount.setColumns(10);
+		textFieldTicketCount.setBounds(107, 261, 96, 19);
+		addBusPanel.add(textFieldTicketCount);
+		
+		textFieldTicketPrice = new JTextField();
+		textFieldTicketPrice.setColumns(10);
+		textFieldTicketPrice.setBounds(107, 223, 96, 19);
+		addBusPanel.add(textFieldTicketPrice);
+		
+		textFieldSeats = new JTextField();
+		textFieldSeats.setColumns(10);
+		textFieldSeats.setBounds(107, 185, 96, 19);
+		addBusPanel.add(textFieldSeats);
+		
+		textFieldLocation = new JTextField();
+		textFieldLocation.setColumns(10);
+		textFieldLocation.setBounds(107, 147, 96, 19);
+		addBusPanel.add(textFieldLocation);
+		
+		textFieldPlateNumber = new JTextField();
+		textFieldPlateNumber.setColumns(10);
+		textFieldPlateNumber.setBounds(107, 109, 96, 19);
+		addBusPanel.add(textFieldPlateNumber);
+		
+		textFieldIdBusPanel = new JTextField();
+		textFieldIdBusPanel.setColumns(10);
+		textFieldIdBusPanel.setBounds(107, 75, 96, 19);
+		addBusPanel.add(textFieldIdBusPanel);
 	}
 }

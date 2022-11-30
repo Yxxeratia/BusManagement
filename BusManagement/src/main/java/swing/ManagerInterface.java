@@ -19,6 +19,7 @@ public class ManagerInterface extends JPanel {
 	private JButton btnBus;
 	private JButton btnDriver;
 	private JButton btnRoute;
+	private JButton btnlogOut;
 	
 	
 	
@@ -32,6 +33,9 @@ public class ManagerInterface extends JPanel {
 	
 	public JButton getRouteButton() {
 		return btnRoute;
+	}
+	public JButton getlogOutButton() {
+		return btnlogOut;
 	}
 	
 	/**
@@ -91,10 +95,10 @@ public class ManagerInterface extends JPanel {
 						add(btnRoute);
 					}
 						{
-							JButton btnlogOut = new JButton("Log Out");
-							btnlogOut.setFont(new Font("Tahoma", Font.PLAIN, 15));
-							btnlogOut.setBounds(588, 390, 101, 37);
-							add(btnlogOut);
+						btnlogOut = new JButton("Log Out");
+						btnlogOut.setFont(new Font("Tahoma", Font.PLAIN, 15));
+						btnlogOut.setBounds(588, 390, 101, 37);
+						add(btnlogOut);
 						}
 						JLabel lblRoute = new JLabel(new ImageIcon(imageRoute));
 						

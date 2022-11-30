@@ -7,9 +7,10 @@ public class Main {
 	        /*System.out.println("Driver: " + tom.getName());
 	        System.out.println("Telephone Number: " + tom.getTel());*/
 	        tom.getInfo();
-	        tom.duty(true);
-	        System.out.println("Message from "+tom.getName()+ ": "+tom.communicate("Clear")+" ");
-	        System.out.println(tom.checkIn());
+			/*
+			 * tom.duty(true); System.out.println("Message from "+tom.getName()+
+			 * ": "+tom.communicate("Clear")+" "); System.out.println(tom.checkIn());
+			 */
 	        Route A14 = new Route(14,"VGU","Nga tu Binh Phuoc","Ben xe Mien Dong","Hang Xanh","Ho con Rua");
 	        A14.getInfo();
 	        Bus A2 = new Bus(tom, A14, "61B 61773", "Ho con Rua", 30, 40, 8000, 50);
@@ -21,8 +22,9 @@ public class Main {
 	        /*System.out.println("Driver: " + jerry.getName());
 	        System.out.println("Telephone Number: " + jerry.getTel());*/
 	        jerry.getInfo();
-	        jerry.duty(false);
-	        jerry.checkOut();
+			/*
+			 * jerry.duty(false); jerry.checkOut();
+			 */
 	        Route A51 = new Route(51,"VGU","Hikari","Thu Vien Tinh Binh Duong","Nga Ba Lo Chen","Ben xe Mien Dong");
 	        A51.getInfo();
 	        Bus A1 = new Bus(jerry, A51,"61B 61554", "Hikari", 50, 0, 8000, 0);
