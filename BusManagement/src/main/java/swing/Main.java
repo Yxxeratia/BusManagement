@@ -55,6 +55,7 @@ public class Main extends JFrame {
 					e.printStackTrace();
 				}
 			}
+			
 		});
 	}
 
@@ -84,6 +85,7 @@ public class Main extends JFrame {
 		JButton btnDriver = managerPane.getDriverButton();
 		JButton btnRoute = managerPane.getRouteButton();
 		JButton btnlogOut = managerPane.getlogOutButton();
+		JButton btnAssign = managerPane.getAssignButton();
 		
 		
 		
@@ -135,6 +137,11 @@ public class Main extends JFrame {
 		JButton btnRemoveRoute = routePane.getRemoveRouteButton();
 		JButton btnSearchRoute = routePane.getSearchRouteButton();
 		JButton btnAddRoute = routePane.getAddRouteButton();
+		JTextField textFieldRouteNumber = routePane.getRouteNumberField();
+		JTextField textFieldTicketCount = routePane.getTicketCountField();
+		JTextField textFieldTicketPrice = routePane.getTicketPriceField();
+		JTextField textFieldTotalDistance = routePane.getTotalDistanceField();
+		JTextField textFieldDescription = routePane.getDescriptionField();
 		JTextField textFieldSearchRoute = routePane.getSearchField();
 		JTable tblRoute = routePane.getRouteTable();
 		//table model
@@ -167,7 +174,7 @@ public class Main extends JFrame {
         card.show(basePane, "1");
         getContentPane().add(basePane);
         
-        
+	      
         
         /*ACTION LISTENERS*/
         
@@ -255,13 +262,69 @@ public class Main extends JFrame {
         btnDriver.addActionListener(new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
+        		//empty all text fields
+                textFieldDriverId.setText("");
+    			textFieldDriverName.setText("");
+    			textFieldTelNumber.setText("");
+    			textFieldShift.setText("");
+    			textFieldDriverStatus.setText("");
+        		textFieldSearchDriver.setText("");
+        		
+        		//connect to DB
+                DBConnection dbConn = new DBConnection();
+                try(PreparedStatement statement = dbConn.getConn().prepareStatement("SELECT * FROM DIMemployees WHERE role_id = 3");) {      	
+                	ResultSet rs = statement.executeQuery();
+                	
+                	while (rs.next()) {
+                		Object driverId = rs.getString("employee_id");
+            			Object driverName = rs.getString("employee_name");
+            			Object telNum = rs.getString("tel");
+            			Object shift = rs.getString("shift");
+            			Object status = (rs.getInt("available") == 1) ? "Available" : "Busy";
+            			
+            			Object[] row = {driverId, driverName, telNum, shift, status};
+            			tblDriverModel.addRow(row);
+                	}  	
+                }
+                catch(Exception ex) {
+                	System.out.println(ex);
+                }
         		card.show(basePane, "4");
         	}
-        });        
+        });  
+       
         //on clicking route button
         btnRoute.addActionListener(new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
+        		
+        		//empty all text fields
+                textFieldRouteNumber.setText("");
+    			textFieldTicketCount.setText("");
+    			textFieldTicketPrice.setText("");
+    			textFieldTotalDistance.setText("");
+    			textFieldDescription.setText("");
+        		
+        		
+        		//connect to DB
+                DBConnection dbConn = new DBConnection();
+                try(PreparedStatement statement = dbConn.getConn().prepareStatement("SELECT * FROM DIMroutes");) {      	
+                	ResultSet rs = statement.executeQuery();
+                	
+                	while (rs.next()) {
+                		Object routeNumber = rs.getString("route_number");
+            			Object ticketCount = rs.getString("ticket_count");
+            			Object ticketPrice = rs.getString("ticket_price");
+            			Object totalDistance = rs.getString("total_distance");
+            			Object description = rs.getString("description");
+            			
+            			Object[] row = {routeNumber, ticketCount, ticketPrice, totalDistance, description};
+            			tblRouteModel.addRow(row);
+                	}  	
+                }
+                catch(Exception ex) {
+                	System.out.println(ex);
+                }
         		card.show(basePane, "5");
         	}
         });
@@ -270,6 +333,14 @@ public class Main extends JFrame {
         	@Override
         	public void actionPerformed(ActionEvent e) {
         		card.show(basePane, "1");
+        	}
+        });
+        
+      //on clicking assign button
+        btnAssign.addActionListener(new ActionListener() {
+        	@Override
+        	public void actionPerformed(ActionEvent e) {
+        		card.show(basePane, "6");
         	}
         });
       
@@ -354,7 +425,7 @@ public class Main extends JFrame {
                 }   
         	}
         });
-        //on clicking remove button
+        //on clicking search button
         btnSearchBus.addActionListener(new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
@@ -386,28 +457,248 @@ public class Main extends JFrame {
                 
         	}
         });
+        /*DRIVER PANEL*/
         
         //on clicking back button driver panel
         btnBackDriver.addActionListener(new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
+        		
+        	//unfilter table
+        		sorterDriver.setRowFilter(null);
+            		
+                int totalRow = tblDriver.getRowCount();
+                int count = 0;
+                //delete all records in table model
+                while (count < totalRow) {
+                	tblDriverModel.removeRow(0);
+                	count++;
+                 }
         		card.show(basePane, "2");
         	}
         });
+        //on clicking add button
+        btnAddDriver.addActionListener(new ActionListener() {
+        	@Override
+        	public void actionPerformed(ActionEvent e) {        		
+        		//some fields are empty
+        		if (textFieldDriverId.getText().isEmpty() || textFieldDriverName.getText().isEmpty() || textFieldTelNumber.getText().isEmpty() 
+                		|| textFieldShift.getText().isEmpty()|| textFieldDriverStatus.getText().isEmpty()) {
+                	JOptionPane.showMessageDialog(busPane, "Fields cannot be empty", "Login Error", JOptionPane.ERROR_MESSAGE);  
+                }
+        		else {
+        			String driverId = textFieldBusId.getText();
+        			String driverName = textFieldPlateNumber.getText();
+        			String telNumber = textFieldSeats.getText();
+        			String shift = textFieldFuelCapacity.getText();
+        			String status = "Available";
+        			
+        			//connect to DB
+                    DBConnection dbConn = new DBConnection();
+                    try(CallableStatement statement = dbConn.getConn().prepareCall("{call dbo.sp_add_bus(?, ?, ?, ?,?)}");) {
+                    	statement.setInt(1, Integer.parseInt(driverId));
+                    	statement.setString(2, driverName);
+                    	statement.setFloat(3, Float.parseFloat(telNumber));
+                    	statement.setInt(4, Integer.parseInt(shift));
+                    	statement.setInt(5, Integer.parseInt(status));
+                    	statement.execute();
+                    	
+	                    //add row to table
+	                    Object[] row = {driverId, driverName, telNumber, shift, status};
+	                    tblDriverModel.addRow(row);
+	                    JOptionPane.showMessageDialog(tblDriver, "Driver added!");
+                    }
+                    
+                    catch(Exception ex) {
+                    	System.out.println(ex);
+                    }
+        		}
+        		
+        	}
+        });
         
+      //on clicking remove button
+        btnRemoveDriver.addActionListener(new ActionListener() {
+        	@Override
+        	public void actionPerformed(ActionEvent e) {         
+                if(tblDriver.getSelectedRow() > -1) {
+                	//id of selected bus
+                    String driverId = (String) tblDriverModel.getValueAt(tblDriver.getSelectedRow(), 0);
+                    //connect to DB
+                    DBConnection dbConn = new DBConnection();
+                    try(CallableStatement statement = dbConn.getConn().prepareCall("{call dbo.sp_remove_driver(?)}");) {
+                    	statement.setInt(1, Integer.parseInt(driverId));
+                    	statement.execute();
+                    	
+                    	//remove selected row from the model
+                        tblDriverModel.removeRow(tblDriver.getSelectedRow());
+                    	JOptionPane.showMessageDialog(tblDriver, "Driver removed!");
+                    }    
+                    catch(Exception ex) {
+                    	System.out.println(ex);
+                    }
+                }   
+        	}
+        });
+        //on clicking search button
+        btnSearchDriver.addActionListener(new ActionListener() {
+        	@Override
+        	public void actionPerformed(ActionEvent e) {
+                //searched driver
+                String searchedDriver = textFieldSearchDriver.getText();
+                
+                //does not sort
+                if (searchedDriver.length() == 0) {
+                    //unfilter
+                    sorterDriver.setRowFilter(null);
+                	
+                }
+                else {
+                    try {
+                    	//list of filters
+                    	List<RowFilter<Object, Object>> filters = new ArrayList<RowFilter<Object, Object>>(2);
+                    	filters.add(RowFilter.regexFilter(searchedDriver, 0));
+                    	filters.add(RowFilter.regexFilter("(?i)" + searchedDriver, 4));
+                    	//add all into 1 or filter
+                    	RowFilter<Object, Object> rf = RowFilter.orFilter(filters);
+                    	
+                        //filter by any column
+                        sorterDriver.setRowFilter(rf);
+                    }
+                    catch(PatternSyntaxException pse) {
+                        System.out.println(pse);
+                    }
+                }
+                
+        	}
+        });
+        /*ROUTE PANEL*/
         //on clicking back button route panel
         btnBackRoute.addActionListener(new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
+        		//unfilter table
+        		sorterRoute.setRowFilter(null);
+            		
+                int totalRow = tblRoute.getRowCount();
+                int count = 0;
+                //delete all records in table model
+                while (count < totalRow) {
+                	tblRouteModel.removeRow(0);
+                	count++;
+                 }
         		card.show(basePane, "2");
         	}
         });
         
-        //on clicking add button bus panel
-        btnBackRoute.addActionListener(new ActionListener() {
+      //on clicking add button
+        btnAddRoute.addActionListener(new ActionListener() {
         	@Override
-        	public void actionPerformed(ActionEvent e) {
+        	public void actionPerformed(ActionEvent e) {        		
+        		//some fields are empty
+        		if (textFieldRouteNumber.getText().isEmpty() || textFieldTicketCount.getText().isEmpty() || textFieldTicketPrice.getText().isEmpty() 
+                		|| textFieldTotalDistance.getText().isEmpty()|| textFieldDescription.getText().isEmpty()) {
+                	JOptionPane.showMessageDialog(routePane, "Fields cannot be empty", "Login Error", JOptionPane.ERROR_MESSAGE);  
+                }
+        		else {
+        			String routeNumber = textFieldRouteNumber.getText();
+        			String ticketCount = textFieldTicketCount.getText();
+        			String ticketPrice = textFieldTicketPrice.getText();
+        			String totalDistance = textFieldTotalDistance.getText();
+        			String description = textFieldDescription.getText();
+        			
+        			//connect to DB
+                    DBConnection dbConn = new DBConnection();
+                    try(CallableStatement statement = dbConn.getConn().prepareCall("{call dbo.sp_add_bus(?, ?, ?, ?,?)}");) {
+                    	statement.setInt(1, Integer.parseInt(routeNumber));
+                    	statement.setString(2, ticketCount);
+                    	statement.setFloat(3, Float.parseFloat(ticketPrice));
+                    	statement.setInt(4, Integer.parseInt(totalDistance));
+                    	statement.setInt(5, Integer.parseInt(description));
+                    	statement.execute();
+                    	
+	                    //add row to table
+	                    Object[] row = {routeNumber, ticketCount, ticketPrice, totalDistance, description};
+	                    tblRouteModel.addRow(row);
+	                    JOptionPane.showMessageDialog(tblRoute, "Route added!");
+                    }
+                    
+                    catch(Exception ex) {
+                    	System.out.println(ex);
+                    }
+        		}
+        		
         	}
         });
-	}
-}
+	
+      
+        //on clicking remove button
+        btnRemoveRoute.addActionListener(new ActionListener() {
+        	@Override
+        	public void actionPerformed(ActionEvent e) {         
+        		if(tblRoute.getSelectedRow() > -1) {
+        			//id of selected bus
+        			String routeName = (String) tblRouteModel.getValueAt(tblRoute.getSelectedRow(), 0);
+        			//connect to DB
+        			DBConnection dbConn = new DBConnection();
+        			try(CallableStatement statement = dbConn.getConn().prepareCall("{call dbo.sp_remove_route(?)}");) {
+        				statement.setInt(1, Integer.parseInt(routeName));
+        				statement.execute();
+            	
+        				//remove selected row from the model
+        				tblRouteModel.removeRow(tblRoute.getSelectedRow());
+        				JOptionPane.showMessageDialog(tblRoute, "Route removed!");
+        			}    
+        			catch(Exception ex) {
+        				System.out.println(ex);
+        			}
+        		}   
+        	}
+        });
+        //on clicking search button
+        btnSearchRoute.addActionListener(new ActionListener() {
+        	@Override
+        	public void actionPerformed(ActionEvent e) {
+                //searched route
+                String searchedRoute = textFieldSearchRoute.getText();
+                
+                //does not sort
+                if (searchedRoute.length() == 0) {
+                    //unfilter
+                    sorterRoute.setRowFilter(null);
+                	
+                }
+                else {
+                    try {
+                    	//list of filters
+                    	List<RowFilter<Object, Object>> filters = new ArrayList<RowFilter<Object, Object>>(2);
+                    	filters.add(RowFilter.regexFilter(searchedRoute, 0));
+                    	filters.add(RowFilter.regexFilter("(?i)" + searchedRoute, 4));
+                    	//add all into 1 or filter
+                    	RowFilter<Object, Object> rf = RowFilter.orFilter(filters);
+                    	
+                        //filter by any column
+                        sorterRoute.setRowFilter(rf);
+                    }
+                    catch(PatternSyntaxException pse) {
+                        System.out.println(pse);
+                    }
+                }
+                
+        	}
+        });
+        /*ASSIGN PANEL*/
+      //on clicking back button assign panel
+        btnBackBusManagerPanel.addActionListener(new ActionListener() {
+        	
+        	public void actionPerformed(ActionEvent e) {
+        		
+        		card.show(basePane, "2");
+        	}
+        });
+        
+        
+        
+        
+		}}
+
