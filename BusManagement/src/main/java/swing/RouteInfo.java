@@ -16,6 +16,8 @@ import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.awt.event.ActionEvent;
+import javax.swing.JComboBox;
+import javax.swing.JTextArea;
 
 public class RouteInfo extends JPanel {
 	private JTable tblRoute;
@@ -81,7 +83,7 @@ public class RouteInfo extends JPanel {
 		setLayout(null);
 		
 		JScrollPane scrollRoutePane = new JScrollPane();
-		scrollRoutePane.setBounds(8, 48, 649, 401);
+		scrollRoutePane.setBounds(8, 48, 482, 401);
 		add(scrollRoutePane);
 		
 		tblRoute = new JTable();
@@ -125,17 +127,21 @@ public class RouteInfo extends JPanel {
 		
 		btnSearchRoute = new JButton(new ImageIcon(imageSearch));
 		btnSearchRoute.setBackground(new Color(255, 255, 255));
-		btnSearchRoute.setBounds(627, 18, 30, 21);
+		btnSearchRoute.setBounds(460, 18, 30, 21);
 		add(btnSearchRoute);
 		
 		JPanel btnAddRoute = new JPanel();
-		btnAddRoute.setBounds(669, 10, 216, 439);
+		btnAddRoute.setBounds(669, 10, 216, 470);
 		add(btnAddRoute);
 		btnAddRoute.setLayout(null);
 		
 		btnAddRoutePanel = new JButton("Add");
+		btnAddRoutePanel.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btnAddRoutePanel.setBackground(new Color(255, 255, 255));
-		btnAddRoutePanel.setBounds(69, 408, 85, 21);
+		btnAddRoutePanel.setBounds(73, 257, 85, 21);
 		btnAddRoute.add(btnAddRoutePanel);
 		
 		textFieldDescription = new JTextField();
@@ -189,9 +195,48 @@ public class RouteInfo extends JPanel {
 		lblDescription.setBounds(10, 223, 87, 28);
 		btnAddRoute.add(lblDescription);
 		
+		JComboBox comboBoxRoutes = new JComboBox();
+		comboBoxRoutes.setBounds(107, 346, 96, 21);
+		btnAddRoute.add(comboBoxRoutes);
+		
+		JComboBox comboBoxBusStops = new JComboBox();
+		comboBoxBusStops.setBounds(107, 395, 96, 21);
+		btnAddRoute.add(comboBoxBusStops);
+		
+		JButton btnAddBusStop = new JButton("Add");
+		btnAddBusStop.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnAddBusStop.setBackground(Color.WHITE);
+		btnAddBusStop.setBounds(73, 439, 85, 21);
+		btnAddRoute.add(btnAddBusStop);
+		
+		JLabel lblAddBusStop = new JLabel("Add Bus Stop");
+		lblAddBusStop.setHorizontalAlignment(SwingConstants.CENTER);
+		lblAddBusStop.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lblAddBusStop.setBounds(53, 288, 131, 38);
+		btnAddRoute.add(lblAddBusStop);
+		
 		textFieldSearchRoute = new JTextField();
 		textFieldSearchRoute.setColumns(10);
-		textFieldSearchRoute.setBounds(521, 19, 96, 19);
+		textFieldSearchRoute.setBounds(354, 19, 96, 19);
 		add(textFieldSearchRoute);
+		
+		JPanel panel = new JPanel();
+		panel.setBounds(500, 48, 159, 193);
+		add(panel);
+		panel.setLayout(null);
+		
+		JTextArea txtrBusStops = new JTextArea();
+		txtrBusStops.setRows(2);
+		txtrBusStops.setBounds(10, 65, 139, 118);
+		panel.add(txtrBusStops);
+		
+		JLabel lblBusStops = new JLabel("Bus Stops");
+		lblBusStops.setHorizontalAlignment(SwingConstants.CENTER);
+		lblBusStops.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lblBusStops.setBounds(29, 10, 97, 38);
+		panel.add(lblBusStops);
 	}
 }

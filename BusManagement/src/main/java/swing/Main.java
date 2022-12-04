@@ -99,7 +99,6 @@ public class Main extends JFrame {
 		JTextField textFieldPlateNumber = busPane.getPlateNumberField();
 		JTextField textFieldSeats = busPane.getSeatsField();
 		JTextField textFieldFuelCapacity = busPane.getFuelCapacityField();
-		JTextField textFieldBusStatus = busPane.getStatusField();
 		JTextField textFieldSearchBus = busPane.getSearchField();
 		JTable tblBus = busPane.getBusTable();
 		//table model
@@ -119,7 +118,6 @@ public class Main extends JFrame {
 		JTextField textFieldDriverName = driverPane.getDriverNameField();
 		JTextField textFieldTelNumber = driverPane.getTelephoneNumberField();
 		JTextField textFieldShift = driverPane.getShiftField();
-		JTextField textFieldDriverStatus = driverPane.getStatusField();
 		JTextField textFieldSearchDriver = driverPane.getSearchField();
 		JTable tblDriver = driverPane.getDriverTable();
 		//table model
@@ -230,7 +228,6 @@ public class Main extends JFrame {
     			textFieldPlateNumber.setText("");
     			textFieldSeats.setText("");
     			textFieldFuelCapacity.setText("");
-    			textFieldBusStatus.setText("");
         		textFieldSearchBus.setText("");
         		
         		
@@ -267,7 +264,6 @@ public class Main extends JFrame {
     			textFieldDriverName.setText("");
     			textFieldTelNumber.setText("");
     			textFieldShift.setText("");
-    			textFieldDriverStatus.setText("");
         		textFieldSearchDriver.setText("");
         		
         		//connect to DB
@@ -483,24 +479,24 @@ public class Main extends JFrame {
         	public void actionPerformed(ActionEvent e) {        		
         		//some fields are empty
         		if (textFieldDriverId.getText().isEmpty() || textFieldDriverName.getText().isEmpty() || textFieldTelNumber.getText().isEmpty() 
-                		|| textFieldShift.getText().isEmpty()|| textFieldDriverStatus.getText().isEmpty()) {
-                	JOptionPane.showMessageDialog(busPane, "Fields cannot be empty", "Login Error", JOptionPane.ERROR_MESSAGE);  
+                		|| textFieldShift.getText().isEmpty()) {
+                	JOptionPane.showMessageDialog(driverPane, "Fields cannot be empty", "Login Error", JOptionPane.ERROR_MESSAGE);  
                 }
         		else {
-        			String driverId = textFieldBusId.getText();
-        			String driverName = textFieldPlateNumber.getText();
-        			String telNumber = textFieldSeats.getText();
-        			String shift = textFieldFuelCapacity.getText();
+        			String driverId = textFieldDriverId.getText();
+        			String driverName = textFieldDriverName.getText();
+        			String telNumber = textFieldTelNumber.getText();
+        			String shift = textFieldShift.getText();
         			String status = "Available";
         			
         			//connect to DB
                     DBConnection dbConn = new DBConnection();
-                    try(CallableStatement statement = dbConn.getConn().prepareCall("{call dbo.sp_add_bus(?, ?, ?, ?,?)}");) {
+                    try(CallableStatement statement = dbConn.getConn().prepareCall("{call dbo.sp_add_driver(?, ?, ?, ?)}");) {
                     	statement.setInt(1, Integer.parseInt(driverId));
                     	statement.setString(2, driverName);
-                    	statement.setFloat(3, Float.parseFloat(telNumber));
-                    	statement.setInt(4, Integer.parseInt(shift));
-                    	statement.setInt(5, Integer.parseInt(status));
+                    	statement.setString(3, telNumber);
+                    	statement.setString(4,shift);
+                    	
                     	statement.execute();
                     	
 	                    //add row to table
@@ -522,7 +518,7 @@ public class Main extends JFrame {
         	@Override
         	public void actionPerformed(ActionEvent e) {         
                 if(tblDriver.getSelectedRow() > -1) {
-                	//id of selected bus
+                	//id of selected driver
                     String driverId = (String) tblDriverModel.getValueAt(tblDriver.getSelectedRow(), 0);
                     //connect to DB
                     DBConnection dbConn = new DBConnection();
@@ -609,12 +605,12 @@ public class Main extends JFrame {
         			
         			//connect to DB
                     DBConnection dbConn = new DBConnection();
-                    try(CallableStatement statement = dbConn.getConn().prepareCall("{call dbo.sp_add_bus(?, ?, ?, ?,?)}");) {
+                    try(CallableStatement statement = dbConn.getConn().prepareCall("{call dbo.sp_add_route(?, ?, ?, ?,?)}");) {
                     	statement.setInt(1, Integer.parseInt(routeNumber));
-                    	statement.setString(2, ticketCount);
+                    	statement.setInt(2, Integer.parseInt(ticketCount));
                     	statement.setFloat(3, Float.parseFloat(ticketPrice));
                     	statement.setInt(4, Integer.parseInt(totalDistance));
-                    	statement.setInt(5, Integer.parseInt(description));
+                    	statement.setString(5, description);
                     	statement.execute();
                     	
 	                    //add row to table
@@ -673,7 +669,6 @@ public class Main extends JFrame {
                     	//list of filters
                     	List<RowFilter<Object, Object>> filters = new ArrayList<RowFilter<Object, Object>>(2);
                     	filters.add(RowFilter.regexFilter(searchedRoute, 0));
-                    	filters.add(RowFilter.regexFilter("(?i)" + searchedRoute, 4));
                     	//add all into 1 or filter
                     	RowFilter<Object, Object> rf = RowFilter.orFilter(filters);
                     	

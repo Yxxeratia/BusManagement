@@ -19,7 +19,6 @@ import java.awt.event.ActionEvent;
 
 public class DriverInfo extends JPanel {
 	private JTable tblDriver;
-	private JTextField textFieldStatus;
 	private JTextField textFieldShift;
 	private JTextField textFieldTelephoneNumber;
 	private JTextField textFieldDriverName;
@@ -60,9 +59,7 @@ public class DriverInfo extends JPanel {
 		return textFieldShift;
 	}
 	
-	public JTextField getStatusField() {
-		return textFieldStatus;
-	}
+
 	
 	public JTextField getSearchField() {
 		return textFieldSearchDriver;
@@ -138,11 +135,6 @@ public class DriverInfo extends JPanel {
 		btnAddDriver.setBackground(new Color(255, 255, 255));
 		addDriverPanel.add(btnAddDriver);
 		
-		textFieldStatus = new JTextField();
-		textFieldStatus.setBounds(107, 232, 96, 19);
-		textFieldStatus.setColumns(10);
-		addDriverPanel.add(textFieldStatus);
-		
 		textFieldShift = new JTextField();
 		textFieldShift.setBounds(107, 194, 96, 19);
 		textFieldShift.setColumns(10);
@@ -178,10 +170,6 @@ public class DriverInfo extends JPanel {
 		JLabel lblShift = new JLabel("Shift");
 		lblShift.setBounds(10, 189, 67, 28);
 		addDriverPanel.add(lblShift);
-		
-		JLabel lblStatus = new JLabel("Status");
-		lblStatus.setBounds(10, 227, 67, 28);
-		addDriverPanel.add(lblStatus);
 		
 		JLabel lblAddDriver = new JLabel("Add Driver");
 		lblAddDriver.setHorizontalAlignment(SwingConstants.CENTER);

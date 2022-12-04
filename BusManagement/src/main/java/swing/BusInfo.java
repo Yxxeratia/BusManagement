@@ -22,7 +22,6 @@ public class BusInfo extends JPanel {
 	private JTextField textFieldRevenueTotal;
 	private JTextField textFieldFuelCapacity;
 	private JTextField textFieldSeats;
-	private JTextField textFieldStatus;
 	private JTextField textFieldPlateNumber;
 	private JTextField textFieldBusId;
 	private JTextField textFieldSearchBus;
@@ -62,9 +61,6 @@ public class BusInfo extends JPanel {
 		return textFieldFuelCapacity;
 	}
 	
-	public JTextField getStatusField() {
-		return textFieldStatus;
-	}
 	
 	public JTextField getSearchField() {
 		return textFieldSearchBus;
@@ -161,32 +157,23 @@ public class BusInfo extends JPanel {
 		lblPlateNumber.setBounds(10, 104, 87, 28);
 		addBusPanel.add(lblPlateNumber);
 		
-		JLabel lblStatus = new JLabel("Status");
-		lblStatus.setBounds(10, 142, 67, 28);
-		addBusPanel.add(lblStatus);
-		
 		JLabel lblSeats = new JLabel("Seats");
-		lblSeats.setBounds(10, 180, 67, 28);
+		lblSeats.setBounds(10, 142, 67, 28);
 		addBusPanel.add(lblSeats);
 		
 		JLabel lblFuelCapacity = new JLabel("Fuel Capacity");
-		lblFuelCapacity.setBounds(10, 218, 87, 28);
+		lblFuelCapacity.setBounds(10, 180, 87, 28);
 		addBusPanel.add(lblFuelCapacity);
 		
 		textFieldFuelCapacity = new JTextField();
 		textFieldFuelCapacity.setColumns(10);
-		textFieldFuelCapacity.setBounds(107, 223, 96, 19);
+		textFieldFuelCapacity.setBounds(107, 185, 96, 19);
 		addBusPanel.add(textFieldFuelCapacity);
 		
 		textFieldSeats = new JTextField();
 		textFieldSeats.setColumns(10);
-		textFieldSeats.setBounds(107, 185, 96, 19);
+		textFieldSeats.setBounds(107, 147, 96, 19);
 		addBusPanel.add(textFieldSeats);
-		
-		textFieldStatus = new JTextField();
-		textFieldStatus.setColumns(10);
-		textFieldStatus.setBounds(107, 147, 96, 19);
-		addBusPanel.add(textFieldStatus);
 		
 		textFieldPlateNumber = new JTextField();
 		textFieldPlateNumber.setColumns(10);

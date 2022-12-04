@@ -14,6 +14,9 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import java.awt.Font;
 import java.awt.image.BufferedImage;
+import javax.swing.JComboBox;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class BusManager extends JPanel {
 	private JTable table;
@@ -94,6 +97,52 @@ public class BusManager extends JPanel {
 		lblTotal.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTotal.setBounds(508, 465, 45, 13);
 		add(lblTotal);
+		
+		JPanel panelAssign = new JPanel();
+		panelAssign.setBounds(669, 39, 190, 237);
+		add(panelAssign);
+		panelAssign.setLayout(null);
+		
+		JComboBox comboBoxRoutes = new JComboBox();
+		comboBoxRoutes.setBounds(88, 69, 92, 21);
+		panelAssign.add(comboBoxRoutes);
+		
+		JComboBox comboBoxBuses = new JComboBox();
+		comboBoxBuses.setBounds(88, 113, 92, 21);
+		panelAssign.add(comboBoxBuses);
+		
+		JComboBox comboBoxDrivers = new JComboBox();
+		comboBoxDrivers.setBounds(88, 157, 92, 21);
+		panelAssign.add(comboBoxDrivers);
+		
+		JLabel lblRoutes = new JLabel("Routes");
+		lblRoutes.setHorizontalAlignment(SwingConstants.LEFT);
+		lblRoutes.setBounds(22, 73, 45, 13);
+		panelAssign.add(lblRoutes);
+		
+		JLabel lblBuses = new JLabel("Buses");
+		lblBuses.setHorizontalAlignment(SwingConstants.LEFT);
+		lblBuses.setBounds(22, 117, 45, 13);
+		panelAssign.add(lblBuses);
+		
+		JLabel lblDrivers = new JLabel("Drivers");
+		lblDrivers.setHorizontalAlignment(SwingConstants.LEFT);
+		lblDrivers.setBounds(22, 161, 45, 13);
+		panelAssign.add(lblDrivers);
+		
+		JLabel lblAssign = new JLabel("Assign");
+		lblAssign.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblAssign.setHorizontalAlignment(SwingConstants.CENTER);
+		lblAssign.setBounds(65, 22, 64, 27);
+		panelAssign.add(lblAssign);
+		
+		JButton btnAssign = new JButton("Assign");
+		btnAssign.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnAssign.setBounds(49, 206, 85, 21);
+		panelAssign.add(btnAssign);
 
 	}
 }
