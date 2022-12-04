@@ -107,10 +107,6 @@ public class DriverInfo extends JPanel {
 		add(btnBackDriver);
 		
 		btnRemoveDriver = new JButton("Remove");
-		btnRemoveDriver.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
 		btnRemoveDriver.setBackground(new Color(255, 255, 255));
 		btnRemoveDriver.setBounds(114, 453, 85, 21);
 		add(btnRemoveDriver);

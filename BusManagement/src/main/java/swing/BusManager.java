@@ -137,10 +137,6 @@ public class BusManager extends JPanel {
 		panelAssign.add(lblAssign);
 		
 		JButton btnAssign = new JButton("Assign");
-		btnAssign.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
 		btnAssign.setBounds(49, 206, 85, 21);
 		panelAssign.add(btnAssign);
 
