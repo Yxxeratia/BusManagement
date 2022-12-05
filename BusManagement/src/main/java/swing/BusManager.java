@@ -19,13 +19,17 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class BusManager extends JPanel {
-	private JTable table;
+	private JTable tblBusManager;
 	private JTextField textFieldTotal;
 	private JTextField textFieldSearchBusManagerPanel;
 	private JButton btnBackBusManagerPanel;
 	private JButton btnRemoveBusManagerPanel;
 	private JButton btnSearchBusManagerPanel;
+	private JButton btnAssign;
 	private BufferedImage imageSearch;
+	private JComboBox<Object> comboBoxRoutes;
+	private JComboBox<Object> comboBoxBuses;
+	private JComboBox<Object> comboBoxDrivers;
 
 	public JButton getBackBusManagerPanelButton() {
 		return btnBackBusManagerPanel;
@@ -36,6 +40,24 @@ public class BusManager extends JPanel {
 	public JButton getSearchBusManagerPanelButton() {
 		return btnSearchBusManagerPanel;
 	}
+	public JButton getAssignButton() {
+		return btnAssign;
+	}
+	public JComboBox<Object> getRoutesComboBox() {
+		return comboBoxRoutes;
+	}
+	public JComboBox<Object> getBusesComboBox() {
+		return comboBoxBuses;
+	}
+	public JComboBox<Object> getDriversComboBox() {
+		return comboBoxDrivers;
+	}
+	public JTable getBusManagerTable() {
+		return tblBusManager;
+	}
+	
+	
+	
 	/**
 	 * Create the panel.
 	 */
@@ -47,13 +69,13 @@ public class BusManager extends JPanel {
 		scrollBusManagerPane.setBounds(10, 39, 649, 413);
 		add(scrollBusManagerPane);
 		
-		table = new JTable();
-		scrollBusManagerPane.setViewportView(table);
-		table.setModel(new DefaultTableModel(
+		tblBusManager = new JTable();
+		scrollBusManagerPane.setViewportView(tblBusManager);
+		tblBusManager.setModel(new DefaultTableModel(
 			new Object[][] {
 			},
 			new String[] {
-				 "Plate Number", "Driver", "Location", "Fuel Capacity", "Seats", "Route", "Ticket Count", "Price Ticket","Revenue"
+				"Route", "Bus", "Driver"//, "Fuel Capacity", "Seats", "Ticket Count", "Ticket Price", "Revenue"
 			}
 		));
 		//image
@@ -65,7 +87,7 @@ public class BusManager extends JPanel {
 			System.out.println("Image not found");
 		}
 		
-		table.getColumnModel().getColumn(6).setResizable(false);
+		tblBusManager.getColumnModel().getColumn(2).setResizable(false);
 		
 		btnBackBusManagerPanel = new JButton("Back");
 		btnBackBusManagerPanel.setBackground(new Color(255, 255, 255));
@@ -103,15 +125,15 @@ public class BusManager extends JPanel {
 		add(panelAssign);
 		panelAssign.setLayout(null);
 		
-		JComboBox comboBoxRoutes = new JComboBox();
+		comboBoxRoutes = new JComboBox();
 		comboBoxRoutes.setBounds(88, 69, 92, 21);
 		panelAssign.add(comboBoxRoutes);
 		
-		JComboBox comboBoxBuses = new JComboBox();
+		comboBoxBuses = new JComboBox();
 		comboBoxBuses.setBounds(88, 113, 92, 21);
 		panelAssign.add(comboBoxBuses);
 		
-		JComboBox comboBoxDrivers = new JComboBox();
+		comboBoxDrivers = new JComboBox();
 		comboBoxDrivers.setBounds(88, 157, 92, 21);
 		panelAssign.add(comboBoxDrivers);
 		
@@ -136,7 +158,7 @@ public class BusManager extends JPanel {
 		lblAssign.setBounds(65, 22, 64, 27);
 		panelAssign.add(lblAssign);
 		
-		JButton btnAssign = new JButton("Assign");
+		btnAssign = new JButton("Assign");
 		btnAssign.setBounds(49, 206, 85, 21);
 		panelAssign.add(btnAssign);
 

@@ -31,13 +31,15 @@ public class RouteInfo extends JPanel {
 	private JButton btnRemoveRoute;
 	private JButton btnSearchRoute;
 	private JButton btnAddRoutePanel;
-	private JButton btnAddBusStop;
+	private JButton btnAddBusStopToRoute;
+	private JButton btnRemoveBusStopFromRoute;
 	private JButton btnRemoveBusStop;
 	private BufferedImage imageSearch;
 	private JComboBox<Object> comboBoxRoutes;
-	private JComboBox<Object> comboBoxBusStops;
+	private JComboBox<Object> comboBoxBusStopsToAdd;
 	private JComboBox<Object> comboBoxRouteBusStops; 
-	private JLabel lblRoute;
+	private JComboBox<Object> comboBoxBusStops;
+	private JLabel lblRouteNumber;
 	
 	public JButton getBackRouteButton() {
 		return btnBackRoute;
@@ -52,14 +54,17 @@ public class RouteInfo extends JPanel {
 		return btnAddRoutePanel;
 	}
 	
-	public JButton getAddBusStopButton() {
-		return btnAddBusStop;
+	public JButton getAddBusStopToRouteButton() {
+		return btnAddBusStopToRoute;
+	}
+	
+	public JButton removeBusStopFromRouteButton() {
+		return btnRemoveBusStopFromRoute;
 	}
 	
 	public JButton removeBusStopButton() {
 		return btnRemoveBusStop;
 	}
-	
 	public JTextField getRouteNumberField() {
 		return textFieldRouteNumber;
 	}
@@ -92,16 +97,18 @@ public class RouteInfo extends JPanel {
 		return comboBoxRoutes;
 	}
 	
-	public JComboBox<Object> getBusStopsComboBox() {
-		return comboBoxBusStops;
+	public JComboBox<Object> getBusStopsToAddComboBox() {
+		return comboBoxBusStopsToAdd;
 	}
 	
 	public JComboBox<Object> getRouteBusStopsComboBox() {
 		return comboBoxRouteBusStops;
 	}
-	
-	public JLabel getRouteLabel() {
-		return lblRoute;
+	public JComboBox<Object> getBusStopsComboBox() {
+		return comboBoxBusStops;
+	}
+	public JLabel getRouteNumberLabel() {
+		return lblRouteNumber;
 	}
 	
 	/**
@@ -224,19 +231,19 @@ public class RouteInfo extends JPanel {
 		comboBoxRoutes.setBounds(107, 346, 96, 21);
 		btnAddRoute.add(comboBoxRoutes);
 		
-		comboBoxBusStops = new JComboBox();
-		comboBoxBusStops.setBounds(107, 395, 96, 21);
-		btnAddRoute.add(comboBoxBusStops);
+		comboBoxBusStopsToAdd = new JComboBox();
+		comboBoxBusStopsToAdd.setBounds(107, 395, 96, 21);
+		btnAddRoute.add(comboBoxBusStopsToAdd);
 		
-		btnAddBusStop = new JButton("Add");
-		btnAddBusStop.setBackground(Color.WHITE);
-		btnAddBusStop.setBounds(65, 439, 85, 21);
-		btnAddRoute.add(btnAddBusStop);
+		btnAddBusStopToRoute = new JButton("Add");
+		btnAddBusStopToRoute.setBackground(Color.WHITE);
+		btnAddBusStopToRoute.setBounds(65, 439, 85, 21);
+		btnAddRoute.add(btnAddBusStopToRoute);
 		
-		JLabel lblAddBusStop = new JLabel("Add Bus Stop");
+		JLabel lblAddBusStop = new JLabel("Add Bus Stop To Route");
 		lblAddBusStop.setHorizontalAlignment(SwingConstants.CENTER);
 		lblAddBusStop.setFont(new Font("Tahoma", Font.BOLD, 16));
-		lblAddBusStop.setBounds(40, 290, 131, 38);
+		lblAddBusStop.setBounds(0, 290, 203, 38);
 		btnAddRoute.add(lblAddBusStop);
 		
 		JLabel lblRoutes = new JLabel("Routes");
@@ -253,26 +260,53 @@ public class RouteInfo extends JPanel {
 		add(textFieldSearchRoute);
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(500, 48, 159, 170);
+		panel.setBounds(500, 48, 159, 203);
 		add(panel);
 		panel.setLayout(null);
 		
-		JLabel lblBusStops = new JLabel("Bus Stops");
-		lblBusStops.setHorizontalAlignment(SwingConstants.CENTER);
-		lblBusStops.setFont(new Font("Tahoma", Font.BOLD, 16));
-		lblBusStops.setBounds(28, 10, 97, 38);
-		panel.add(lblBusStops);
+		JLabel lblRoutes1 = new JLabel("Routes");
+		lblRoutes1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblRoutes1.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lblRoutes1.setBounds(28, 10, 97, 38);
+		panel.add(lblRoutes1);
 		
 		comboBoxRouteBusStops = new JComboBox();
-		comboBoxRouteBusStops.setBounds(28, 96, 119, 21);
+		comboBoxRouteBusStops.setBounds(67, 113, 82, 21);
 		panel.add(comboBoxRouteBusStops);
 		
-		btnRemoveBusStop = new JButton("Remove");
-		btnRemoveBusStop.setBounds(40, 139, 85, 21);
-		panel.add(btnRemoveBusStop);
+		btnRemoveBusStopFromRoute = new JButton("Remove");
+		btnRemoveBusStopFromRoute.setBounds(40, 172, 85, 21);
+		panel.add(btnRemoveBusStopFromRoute);
 		
-		lblRoute = new JLabel("");
-		lblRoute.setBounds(54, 58, 56, 13);
+		lblRouteNumber = new JLabel("");
+		lblRouteNumber.setBounds(67, 70, 70, 13);
+		panel.add(lblRouteNumber);
+		
+		JLabel lblRoute = new JLabel("Route");
+		lblRoute.setBounds(10, 70, 45, 13);
 		panel.add(lblRoute);
+		
+		JLabel lblBusStops = new JLabel("Stops");
+		lblBusStops.setBounds(10, 117, 45, 13);
+		panel.add(lblBusStops);
+		
+		JPanel panel_1 = new JPanel();
+		panel_1.setBounds(509, 290, 150, 159);
+		add(panel_1);
+		panel_1.setLayout(null);
+		
+		JLabel lblBusStops1 = new JLabel("Bus Stops");
+		lblBusStops1.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lblBusStops1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblBusStops1.setBounds(26, 10, 93, 24);
+		panel_1.add(lblBusStops1);
+		
+		comboBoxBusStops = new JComboBox();
+		comboBoxBusStops.setBounds(26, 62, 103, 21);
+		panel_1.add(comboBoxBusStops);
+		
+		btnRemoveBusStop = new JButton("Remove");
+		btnRemoveBusStop.setBounds(34, 128, 85, 21);
+		panel_1.add(btnRemoveBusStop);
 	}
 }

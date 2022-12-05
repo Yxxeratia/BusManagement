@@ -16,6 +16,8 @@ import javax.swing.JOptionPane;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.sql.CallableStatement;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -138,7 +140,8 @@ public class Main extends JFrame {
 		JButton btnRemoveRoute = routePane.getRemoveRouteButton();
 		JButton btnSearchRoute = routePane.getSearchRouteButton();
 		JButton btnAddRoute = routePane.getAddRouteButton();
-		JButton btnAddBusStop = routePane.getAddBusStopButton();
+		JButton btnAddBusStopToRoute = routePane.getAddBusStopToRouteButton();
+		JButton btnRemoveBusStopFromRoute = routePane.removeBusStopFromRouteButton();
 		JButton btnRemoveBusStop = routePane.removeBusStopButton();
 		JTextField textFieldRouteNumber = routePane.getRouteNumberField();
 		JTextField textFieldTicketCount = routePane.getTicketCountField();
@@ -147,9 +150,11 @@ public class Main extends JFrame {
 		JTextField textFieldDescription = routePane.getDescriptionField();
 		JTextField textFieldSearchRoute = routePane.getSearchField();
 		JComboBox<Object> comboBoxRoutes = routePane.getRoutesComboBox();
-		JComboBox<Object> comboBoxBusStops = routePane.getBusStopsComboBox();
+		JComboBox<Object> comboBoxBusStopsToAdd = routePane.getBusStopsToAddComboBox();
 		JComboBox<Object> comboBoxRouteBusStops = routePane.getRouteBusStopsComboBox();
-		JLabel lblRoute = routePane.getRouteLabel();
+		JComboBox<Object> comboBoxBusStops = routePane.getBusStopsComboBox();
+		
+		JLabel lblRouteNumber = routePane.getRouteNumberLabel();
 		JTable tblRoute = routePane.getRouteTable();
 		//table model
         DefaultTableModel tblRouteModel = (DefaultTableModel) tblRoute.getModel(); 
@@ -161,12 +166,19 @@ public class Main extends JFrame {
         
 		/*bus manager*/
 		BusManager busManagerPane = new BusManager();
-		JButton btnBackBusManagerPanel = busManagerPane.getBackBusManagerPanelButton();
-		JButton btnRemoveBusManagerPanel = busManagerPane.getRemoveBusManagerPanelButton();
-		JButton btnSearchBusManagerPanel = busManagerPane.getSearchBusManagerPanelButton();
-		
-		
-		
+		JButton btnBackBusManager= busManagerPane.getBackBusManagerPanelButton();
+		JButton btnRemoveBusManager = busManagerPane.getRemoveBusManagerPanelButton();
+		JButton btnSearchBusManager = busManagerPane.getSearchBusManagerPanelButton();
+		JButton btnAssignBusManager = busManagerPane.getAssignButton();
+		JComboBox<Object> comboBoxRoutesAssign = busManagerPane.getRoutesComboBox();
+		JComboBox<Object> comboBoxBusesAssign = busManagerPane.getBusesComboBox();
+		JComboBox<Object> comboBoxDriversAssign = busManagerPane.getDriversComboBox();
+		JTable tblBusManager = busManagerPane.getBusManagerTable();
+		//table model
+        DefaultTableModel tblBusManagerModel = (DefaultTableModel) tblBusManager.getModel(); 
+        //row sorter
+        TableRowSorter<DefaultTableModel> sorterBusManager = new TableRowSorter<DefaultTableModel>(tblBusManagerModel);
+        tblBusManager.setRowSorter(sorterBusManager);
 		
 		/*base panel*/
 		JPanel basePane = new JPanel();
@@ -233,11 +245,11 @@ public class Main extends JFrame {
         	@Override
         	public void actionPerformed(ActionEvent e) {
         		//empty all text fields
+        		 //empty text fields
                 textFieldBusId.setText("");
-    			textFieldPlateNumber.setText("");
-    			textFieldSeats.setText("");
-    			textFieldFuelCapacity.setText("");
-        		textFieldSearchBus.setText("");
+                textFieldPlateNumber.setText("");
+                textFieldSeats.setText("");
+                textFieldFuelCapacity.setText("");
         		
         		
         		
@@ -264,6 +276,7 @@ public class Main extends JFrame {
         		card.show(basePane, "3");
         	}
         });
+        
         //on clicking driver button (go to driver panel)
         btnDriver.addActionListener(new ActionListener() {
         	@Override
@@ -273,7 +286,6 @@ public class Main extends JFrame {
     			textFieldDriverName.setText("");
     			textFieldTelNumber.setText("");
     			textFieldShift.setText("");
-        		textFieldSearchDriver.setText("");
         		
         		//connect to DB
                 DBConnection dbConn = new DBConnection();
@@ -303,10 +315,11 @@ public class Main extends JFrame {
         	@Override
         	public void actionPerformed(ActionEvent e) {
         		
-        		//refresh
-        		comboBoxBusStops.removeAllItems();
+        		//empty all combo boxes
+        		comboBoxBusStopsToAdd.removeAllItems();
         		comboBoxRoutes.removeAllItems();
         		comboBoxRouteBusStops.removeAllItems();
+        		comboBoxBusStops.removeAllItems();
         		
         		//empty all text fields
                 textFieldRouteNumber.setText("");
@@ -315,10 +328,10 @@ public class Main extends JFrame {
     			textFieldTotalDistance.setText("");
     			textFieldDescription.setText("");
         		
-        		
         		//connect to DB
                 DBConnection dbConn = new DBConnection();
                 
+                //get all routes
                 try(PreparedStatement statement = dbConn.getConn().prepareStatement("SELECT * FROM DIMroutes");) {      	
                 	ResultSet rs = statement.executeQuery();
                 	
@@ -340,14 +353,15 @@ public class Main extends JFrame {
                 	System.out.println(ex);
                 }
                 
-                try(PreparedStatement statement = dbConn.getConn().prepareStatement("SELECT * FROM DIMbus_stops");) {   	
+                //get all bus stops
+                try(PreparedStatement statement = dbConn.getConn().prepareStatement("SELECT * FROM DIMbus_stops");) {      	
                 	ResultSet rs = statement.executeQuery();
                 	
                 	while (rs.next()) {
                 		String stopId = rs.getString("stop_id");
-            			String stopName = rs.getString("stop_name");
+                		String stopName = rs.getString("stop_name");
             			//add to bus stops
-            			comboBoxBusStops.addItem(new ComboItem(stopName, stopId));	
+            			comboBoxBusStops.addItem(new ComboItem(stopName, stopId));
                 	}  	
                 }
                 catch(Exception ex) {
@@ -357,6 +371,7 @@ public class Main extends JFrame {
         		card.show(basePane, "5");
         	}
         });
+        
         //on clicking logout button (back to login)
         btnlogOut.addActionListener(new ActionListener() {
         	@Override
@@ -369,6 +384,71 @@ public class Main extends JFrame {
         btnAssign.addActionListener(new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
+        		
+        		//refresh
+        		comboBoxRoutesAssign.removeAllItems();
+        		comboBoxBusesAssign.removeAllItems();
+        		comboBoxDriversAssign.removeAllItems();
+        		
+        		//connect to DB
+                DBConnection dbConn = new DBConnection();
+                
+                //get assigned routes
+                try(PreparedStatement statement = dbConn.getConn().prepareStatement("SELECT * FROM FACTroutes");) {      	
+                	ResultSet rs = statement.executeQuery();
+                	
+                	while (rs.next()) {
+                		String routeNumber = rs.getString("route_number");
+                		String busId = rs.getString("bus_id");
+                		String driverId = rs.getString("driver_id");
+            			
+                		Object[] row = {routeNumber, busId, driverId};
+                		tblBusManagerModel.addRow(row);
+                	}  	
+                }
+                catch(Exception ex) {
+                	System.out.println(ex);
+                }
+                
+                //get routes
+                try(PreparedStatement statement = dbConn.getConn().prepareStatement("SELECT route_number FROM DIMroutes");) {      	
+                	ResultSet rs = statement.executeQuery();
+                	
+                	while (rs.next()) {
+                		String routeNumber = rs.getString("route_number");
+            			comboBoxRoutesAssign.addItem(routeNumber);
+                	}  	
+                }
+                catch(Exception ex) {
+                	System.out.println(ex);
+                }
+        		
+                //get available buses
+                try(PreparedStatement statement = dbConn.getConn().prepareStatement("SELECT bus_id FROM DIMbuses WHERE available = 1");) {      	
+                	ResultSet rs = statement.executeQuery();
+                	
+                	while (rs.next()) {
+                		String busId = rs.getString("bus_id");
+            			comboBoxBusesAssign.addItem(busId);
+                	}  	
+                }
+                catch(Exception ex) {
+                	System.out.println(ex);
+                }
+                
+                //get available drivers
+                try(PreparedStatement statement = dbConn.getConn().prepareStatement("SELECT employee_id FROM DIMemployees WHERE role_id = 3 AND available = 1");) {      	
+                	ResultSet rs = statement.executeQuery();
+                	
+                	while (rs.next()) {
+                		String driverId = rs.getString("employee_id");
+            			comboBoxDriversAssign.addItem(driverId);
+                	}  	
+                }
+                catch(Exception ex) {
+                	System.out.println(ex);
+                }
+                
         		card.show(basePane, "6");
         	}
         });
@@ -388,6 +468,7 @@ public class Main extends JFrame {
         		card.show(basePane, "2");
         	}
         });
+        
         //on clicking add button (add new bus)
         btnAddBus.addActionListener(new ActionListener() {
         	@Override
@@ -433,6 +514,7 @@ public class Main extends JFrame {
         		
         	}
         });
+        
         //on clicking remove button (remove bus)
         btnRemoveBus.addActionListener(new ActionListener() {
         	@Override
@@ -456,6 +538,7 @@ public class Main extends JFrame {
                 }   
         	}
         });
+        
         //on clicking search button (search for bus)
         btnSearchBus.addActionListener(new ActionListener() {
         	@Override
@@ -504,6 +587,7 @@ public class Main extends JFrame {
         		card.show(basePane, "2");
         	}
         });
+        
         //on clicking add button (add new driver)
         btnAddDriver.addActionListener(new ActionListener() {
         	@Override
@@ -573,6 +657,7 @@ public class Main extends JFrame {
                 }   
         	}
         });
+        
         //on clicking search button (search for driver)
         btnSearchDriver.addActionListener(new ActionListener() {
         	@Override
@@ -615,6 +700,8 @@ public class Main extends JFrame {
         		//unfilter table
         		sorterRoute.setRowFilter(null);
             	
+        		//clear route number label
+        		lblRouteNumber.setText("");
                 //delete all records in table model
                 tblRouteModel.setRowCount(0);
         		card.show(basePane, "2");
@@ -687,6 +774,9 @@ public class Main extends JFrame {
             	
         				//remove selected row from the model
         				tblRouteModel.removeRow(tblRoute.getSelectedRow());
+        				
+        				//remove from combo box
+        				comboBoxRoutes.removeItem(routeNumber);
         				JOptionPane.showMessageDialog(routePane, "Route " + routeNumber + " removed!");
         			}    
         			catch(Exception ex) {
@@ -695,6 +785,7 @@ public class Main extends JFrame {
         		}   
         	}
         });
+        
         //on clicking search button (search for route)
         btnSearchRoute.addActionListener(new ActionListener() {
         	@Override
@@ -726,12 +817,13 @@ public class Main extends JFrame {
                 
         	}
         });
-        //on clicking add bus stop button (add route to bus stop)
-        btnAddBusStop.addActionListener(new ActionListener() {
+        
+        //on clicking add bus stop button (add bus stop to route)
+        btnAddBusStopToRoute.addActionListener(new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
                 Object routeNumber = comboBoxRoutes.getSelectedItem();
-                Object busStop = comboBoxBusStops.getSelectedItem();
+                Object busStop = comboBoxBusStopsToAdd.getSelectedItem();
                 
                 //connect to DB
                 DBConnection dbConn = new DBConnection();
@@ -740,6 +832,12 @@ public class Main extends JFrame {
                 	statement.setInt(2, Integer.parseInt(((ComboItem)busStop).getValue()));
                 	statement.execute();
                     
+                	//route selected on table same as route from combo box
+                	if (lblRouteNumber.getText() == routeNumber) {
+                		comboBoxRouteBusStops.addItem(busStop);
+                	}
+                	//remove from bus stops
+                	comboBoxBusStopsToAdd.removeItem(busStop);
                     JOptionPane.showMessageDialog(routePane, "Bus stop " + ((ComboItem)busStop).getKey() + " added " + "to Route " + routeNumber.toString() + "!");
                 }
                 
@@ -761,7 +859,7 @@ public class Main extends JFrame {
 	        		//get route number
 	        		String routeNumber = (String) tblRoute.getValueAt(tblRoute.getSelectedRow(), 0);
 	        		//add route number to label
-	    			lblRoute.setText(routeNumber);
+	    			lblRouteNumber.setText(routeNumber);
 	    			
 	        		//connect to DB
 	                DBConnection dbConn = new DBConnection();
@@ -786,20 +884,24 @@ public class Main extends JFrame {
         });
         
         
-        //on clicking remove bus stop button (remove selected bus stop)
-        btnRemoveBusStop.addActionListener(new ActionListener() {
+        //on clicking remove bus stop button (remove selected bus stop from route)
+        btnRemoveBusStopFromRoute.addActionListener(new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
-        		String routeNumber = lblRoute.getText();
+        		String routeNumber = lblRouteNumber.getText();
         		Object busStop = comboBoxRouteBusStops.getSelectedItem();
         		
         		//connect to DB
                 DBConnection dbConn = new DBConnection();
                 try(CallableStatement statement = dbConn.getConn().prepareCall("{call dbo.sp_remove_bus_stop_from_route(?, ?)}");) {
-                	statement.setString(1, routeNumber);
+                	statement.setInt(1, Integer.parseInt(routeNumber));
                 	statement.setInt(2, Integer.parseInt(((ComboItem)busStop).getValue()));
                 	statement.execute();
                 	
+                	//remove bus stop from combo box
+                	comboBoxRouteBusStops.removeItem(busStop);
+                	//add back
+                	comboBoxBusStopsToAdd.addItem(busStop);
                 	JOptionPane.showMessageDialog(routePane, "Bus stop " + ((ComboItem)busStop).getKey() + " removed " + "from Route " + routeNumber.toString() + "!");
                 }    
                 catch(Exception ex) {
@@ -808,19 +910,138 @@ public class Main extends JFrame {
         	}
         });
         
-        /*ASSIGN PANEL*/
-      //on clicking back button assign panel
-        btnBackBusManagerPanel.addActionListener(new ActionListener() {
-        	
-        	public void actionPerformed(ActionEvent e) {
+        //on changing items in combo box routes
+        comboBoxRoutes.addItemListener(new ItemListener() {
+        	@Override
+        	public void itemStateChanged(ItemEvent e) {
+        		//refresh
+        		comboBoxBusStopsToAdd.removeAllItems();
         		
+        		//allow to clear
+    			if (comboBoxRoutes.getItemCount() > 0) {
+        			//connect to DB
+    				DBConnection dbConn = new DBConnection();
+	        		//selected route number from combo box
+	                String routeNumberSelected = (String) comboBoxRoutes.getSelectedItem();
+	                try(PreparedStatement statement = dbConn.getConn().prepareStatement("SELECT * FROM dbo.fn_get_stops_not_in_route('"+routeNumberSelected+"')");) {   	
+	                	ResultSet rs = statement.executeQuery();
+	                	
+	                	while (rs.next()) {
+	                		String stopId = rs.getString("stop_id");
+	            			String stopName = rs.getString("stop_name");
+	            			//add to bus stops
+	            			comboBoxBusStopsToAdd.addItem(new ComboItem(stopName, stopId));	
+	                	}  	
+	                }
+	                catch(Exception ex) {
+	                	System.out.println(ex);
+	                }
+    			}
+        	}
+        });
+        
+        //on clicking remove bus stop (not from route)
+        btnRemoveBusStop.addActionListener(new ActionListener() {
+        	@Override
+        	public void actionPerformed(ActionEvent e) {
+        		Object busStop = comboBoxBusStops.getSelectedItem();
+        		
+        		//connect to DB
+                DBConnection dbConn = new DBConnection();
+                try(CallableStatement statement = dbConn.getConn().prepareCall("{call dbo.sp_remove_bus_stop(?)}");) {
+                	statement.setInt(1, Integer.parseInt(((ComboItem)busStop).getValue()));
+                	statement.execute();
+                	
+                	//remove bus stop from combo boxes
+                	comboBoxBusStops.removeItem(busStop);
+                	JOptionPane.showMessageDialog(routePane, "Bus stop " + ((ComboItem)busStop).getKey() + " removed!");
+                }    
+                catch(Exception ex) {
+                	System.out.println(ex);
+                }
+        	}
+        });
+        
+        /*ASSIGN PANEL*/
+        //on clicking back button 
+        btnBackBusManager.addActionListener(new ActionListener() {
+        	@Override
+        	public void actionPerformed(ActionEvent e) {
+        		//unfilter table
+        		sorterBusManager.setRowFilter(null);
+            	
+                //delete all records in table model
+                tblBusManagerModel.setRowCount(0);
         		card.show(basePane, "2");
         	}
         });
         
+        //on clicking assign button (assign routes)
+        btnAssignBusManager.addActionListener(new ActionListener() {
+        	@Override
+        	public void actionPerformed(ActionEvent e) {
+        			
+        		String routeNumber = (String) comboBoxRoutesAssign.getSelectedItem();
+        		String busId = (String) comboBoxBusesAssign.getSelectedItem();
+        		String driverId = (String) comboBoxDriversAssign.getSelectedItem();
+        		
+        		//connect to DB
+				DBConnection dbConn = new DBConnection();
+				//insert into database
+                try(CallableStatement statement = dbConn.getConn().prepareCall("{call dbo.sp_assign(?, ?, ?)}");) {     
+                	statement.setInt(1, Integer.parseInt(routeNumber));
+                	statement.setInt(2, Integer.parseInt(busId));
+                	statement.setInt(3, Integer.parseInt(driverId));
+                	statement.execute();
+                	
+                	//add to table
+                	Object[] row = {routeNumber, busId, driverId};
+                	tblBusManagerModel.addRow(row);
+                	
+                	//remove driver and bus from combo 
+                	comboBoxBusesAssign.removeItem(busId);
+                	comboBoxDriversAssign.removeItem(driverId);
+                	JOptionPane.showMessageDialog(busManagerPane, "Assigned Driver " + driverId + " to Bus " + busId + " on Route " + routeNumber + "!");
+                }
+                catch(Exception ex) {
+                	System.out.println(ex);
+                }
+        	}
+        });
         
-        
-        
+        //on clicking remove button (remove assignment)
+        btnRemoveBusManager.addActionListener(new ActionListener() {
+        	@Override
+        	public void actionPerformed(ActionEvent e) {
+        		
+        		if (tblBusManager.getSelectedRow() > -1) {		
+	        		String routeNumber = (String) tblBusManagerModel.getValueAt(tblBusManager.getSelectedRow(), 0);
+	        		String busId = (String) tblBusManagerModel.getValueAt(tblBusManager.getSelectedRow(), 1);
+	        		String driverId = (String) tblBusManagerModel.getValueAt(tblBusManager.getSelectedRow(), 2);
+	        		
+	        		//connect to DB
+					DBConnection dbConn = new DBConnection();
+					//insert into database
+	                try(CallableStatement statement = dbConn.getConn().prepareCall("{call dbo.sp_unassign(?, ?, ?)}");) {     
+	                	statement.setInt(1, Integer.parseInt(routeNumber));
+	                	statement.setInt(2, Integer.parseInt(busId));
+	                	statement.setInt(3, Integer.parseInt(driverId));
+	                	statement.execute();
+	                	
+	                	//remove from table
+	                	tblBusManagerModel.removeRow(tblBusManager.getSelectedRow()); 	
+	                	//add back bus and driver
+	                	comboBoxBusesAssign.addItem(busId);
+	                	comboBoxDriversAssign.addItem(driverId);
+	                	
+	                	JOptionPane.showMessageDialog(busManagerPane, "Removed Driver " + driverId + " and Bus " + busId + " from Route " + routeNumber + "!");
+	                }
+	                catch(Exception ex) {
+	                	System.out.println(ex);
+	                }
+        		}
+        	}
+        });
 	}
 }
 
