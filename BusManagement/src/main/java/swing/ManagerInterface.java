@@ -12,6 +12,7 @@ import javax.swing.JButton;
 import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.Icon;
 
 public class ManagerInterface extends JPanel {
 	/**
@@ -22,11 +23,12 @@ public class ManagerInterface extends JPanel {
 	private BufferedImage imageDriver;
 	private BufferedImage imageRoute;
 	private BufferedImage imageLogOut;
+	private BufferedImage imageAssign;
 	private JButton btnBus;
 	private JButton btnDriver;
 	private JButton btnRoute;
 	private JButton btnlogOut;
-	
+	private JButton btnAssign;
 	
 	
 	public JButton getBusButton() {
@@ -42,6 +44,9 @@ public class ManagerInterface extends JPanel {
 	}
 	public JButton getlogOutButton() {
 		return btnlogOut;
+	}
+	public JButton getAssignButton() {
+		return btnAssign;
 	}
 	
 	/**
@@ -73,6 +78,13 @@ public class ManagerInterface extends JPanel {
 		catch(Exception e) {
 			System.out.println("Image not found");
 		}
+		try {
+			imageAssign = ImageIO.read(getClass().getResource("/assignicon.png"));
+			setLayout(null);
+		}
+		catch(Exception e) {
+			System.out.println("Image not found");
+		}
 		
 		try {
 			imageRoute = ImageIO.read(getClass().getResource("/route.png"));
@@ -88,7 +100,7 @@ public class ManagerInterface extends JPanel {
 			
 			{
 				btnDriver = new JButton(new ImageIcon(imageDriver));
-				btnDriver.setBackground(new Color(255, 89, 89));
+				btnDriver.setBackground(new Color(255, 255, 255));
 				btnDriver.setFont(new Font("Tahoma", Font.BOLD, 45));
 				btnDriver.setBounds(233, 10, 223, 475);
 				add(btnDriver);
@@ -96,7 +108,7 @@ public class ManagerInterface extends JPanel {
 			
 			{
 				btnRoute = new JButton(new ImageIcon(imageRoute));
-				btnRoute.setBackground(new Color(223, 223, 223));
+				btnRoute.setBackground(new Color(255, 255, 255));
 				btnRoute.setFont(new Font("Tahoma", Font.BOLD, 45));
 				btnRoute.setBounds(463, 10, 223, 475);
 				add(btnRoute);
@@ -105,10 +117,21 @@ public class ManagerInterface extends JPanel {
 			{
 				
 				btnlogOut = new JButton(new ImageIcon(imageLogOut));
+				btnlogOut.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+					}
+				});
+				btnlogOut.setBackground(new Color(255, 255, 255));
 				btnlogOut.setFont(new Font("Tahoma", Font.PLAIN, 15));
-				btnlogOut.setBounds(696, 10, 223, 475);
+				btnlogOut.setBounds(696, 255, 203, 230);
 				add(btnlogOut);
 			}
+			
+			btnAssign = new JButton(new ImageIcon(imageAssign));
+			btnAssign.setBackground(new Color(255, 255, 255));
+			btnAssign.setFont(new Font("Tahoma", Font.PLAIN, 15));
+			btnAssign.setBounds(696, 10, 203, 235);
+			add(btnAssign);
 			
 		}
 		catch(Exception e) {

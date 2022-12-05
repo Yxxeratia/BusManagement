@@ -69,7 +69,7 @@ public class Login extends JPanel  {
 			image = ImageIO.read(getClass().getResource("/buslogo.png"));
 			JLabel lblLogo = new JLabel(new ImageIcon(image));
 		
-			lblLogo.setBounds(20, 10, 419, 437);
+			lblLogo.setBounds(24, 10, 419, 437);
 			add(lblLogo);
 		}
 		catch(Exception e) {
