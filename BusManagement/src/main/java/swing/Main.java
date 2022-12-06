@@ -100,7 +100,7 @@ public class Main extends JFrame {
 		JButton btnRemoveBus = busPane.getRemoveBusButton();
 		JButton btnSearchBus = busPane.getSearchBusButton();
 		JButton btnAddBus = busPane.getAddBusButton();
-		JTextField textFieldBusId = busPane.getBusIdField();
+	
 		JTextField textFieldPlateNumber = busPane.getPlateNumberField();
 		JTextField textFieldSeats = busPane.getSeatsField();
 		JTextField textFieldFuelCapacity = busPane.getFuelCapacityField();
@@ -246,7 +246,6 @@ public class Main extends JFrame {
         	public void actionPerformed(ActionEvent e) {
         		//empty all text fields
         		 //empty text fields
-                textFieldBusId.setText("");
                 textFieldPlateNumber.setText("");
                 textFieldSeats.setText("");
                 textFieldFuelCapacity.setText("");
@@ -262,10 +261,11 @@ public class Main extends JFrame {
                 		Object busId = rs.getString("bus_id");
             			Object plateNumber = rs.getString("plate_number");
             			Object seats = rs.getString("seat_count");
-            			Object fuelCapacity = rs.getString("fuel_capacity");
+            			Object fuelCapacity = rs.getString("max_fuel_capacity");
+            			Object remaining = rs.getString("remaining_fuel_capacity");
             			Object status = (rs.getInt("available") == 1) ? "Available" : "Busy";
             			
-            			Object[] row = {busId, plateNumber, fuelCapacity, seats, status};
+            			Object[] row = {busId, plateNumber,remaining, fuelCapacity, seats, status};
             			tblBusModel.addRow(row);
                 	}  	
                 }
@@ -474,37 +474,47 @@ public class Main extends JFrame {
         	@Override
         	public void actionPerformed(ActionEvent e) {        		
         		//some fields are empty
-        		if (textFieldBusId.getText().isEmpty() || textFieldPlateNumber.getText().isEmpty() || textFieldSeats.getText().isEmpty() 
+        		if ( textFieldPlateNumber.getText().isEmpty() || textFieldSeats.getText().isEmpty() 
                 		|| textFieldFuelCapacity.getText().isEmpty()) {
                 	JOptionPane.showMessageDialog(busPane, "Fields cannot be empty", "Login Error", JOptionPane.ERROR_MESSAGE);  
                 }
+        		
         		else {
-        			String busId = textFieldBusId.getText();
+        			int count = 0;
+        			//connect to DB
+                    DBConnection dbConn = new DBConnection();
+                    try(PreparedStatement statement = dbConn.getConn().prepareStatement("SELECT COUNT(*) FROM DIMBuses");) {
+                    	ResultSet rs = statement.executeQuery();
+                    	while (rs.next()) {
+                    		count = Integer.parseInt(rs.getString(1));
+                    	}
+                    }
+                    catch(Exception ex) {
+                    	System.out.println(ex);
+                    }
+                    
+                    
         			String plateNumber = textFieldPlateNumber.getText();
         			String seats = textFieldSeats.getText();
         			String fuelCapacity = textFieldFuelCapacity.getText();
         			String status = "Available";
         			
-        			//connect to DB
-                    DBConnection dbConn = new DBConnection();
-                    try(CallableStatement statement = dbConn.getConn().prepareCall("{call dbo.sp_add_bus(?, ?, ?, ?)}");) {
-                    	statement.setInt(1, Integer.parseInt(busId));
-                    	statement.setString(2, plateNumber);
-                    	statement.setFloat(3, Float.parseFloat(fuelCapacity));
-                    	statement.setInt(4, Integer.parseInt(seats));
+                    try(CallableStatement statement = dbConn.getConn().prepareCall("{call dbo.sp_add_bus(?, ?, ?)}");) {
+                    	statement.setString(1, plateNumber);
+                    	statement.setInt(2, Integer.parseInt(fuelCapacity));
+                    	statement.setInt(3, Integer.parseInt(seats));
                     	statement.execute();
                     	
 	                    //add row to table
-	                    Object[] row = {busId, plateNumber, fuelCapacity, seats, status};
+	                    Object[] row = {count+1, plateNumber, fuelCapacity,fuelCapacity, seats, status};
 	                    tblBusModel.addRow(row);
 	                    
 	                    //empty text fields
-	                    textFieldBusId.setText("");
 	                    textFieldPlateNumber.setText("");
 	                    textFieldSeats.setText("");
 	                    textFieldFuelCapacity.setText("");
 	                    
-	                    JOptionPane.showMessageDialog(busPane, "Bus " + busId + " added!");
+	                    JOptionPane.showMessageDialog(busPane, "Bus "  + " added!");
                     }
                     
                     catch(Exception ex) {

@@ -40,6 +40,7 @@ public class RouteInfo extends JPanel {
 	private JComboBox<Object> comboBoxRouteBusStops; 
 	private JComboBox<Object> comboBoxBusStops;
 	private JLabel lblRouteNumber;
+	private JTextField textFieldAddBusStop;
 	
 	public JButton getBackRouteButton() {
 		return btnBackRoute;
@@ -240,11 +241,11 @@ public class RouteInfo extends JPanel {
 		btnAddBusStopToRoute.setBounds(65, 439, 85, 21);
 		btnAddRoute.add(btnAddBusStopToRoute);
 		
-		JLabel lblAddBusStop = new JLabel("Add Bus Stop To Route");
-		lblAddBusStop.setHorizontalAlignment(SwingConstants.CENTER);
-		lblAddBusStop.setFont(new Font("Tahoma", Font.BOLD, 16));
-		lblAddBusStop.setBounds(0, 290, 203, 38);
-		btnAddRoute.add(lblAddBusStop);
+		JLabel lblAddStopToRoute = new JLabel("Add Stop To Route");
+		lblAddStopToRoute.setHorizontalAlignment(SwingConstants.CENTER);
+		lblAddStopToRoute.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lblAddStopToRoute.setBounds(0, 286, 213, 38);
+		btnAddRoute.add(lblAddStopToRoute);
 		
 		JLabel lblRoutes = new JLabel("Routes");
 		lblRoutes.setBounds(10, 350, 45, 13);
@@ -260,22 +261,22 @@ public class RouteInfo extends JPanel {
 		add(textFieldSearchRoute);
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(500, 48, 159, 203);
+		panel.setBounds(500, 48, 159, 145);
 		add(panel);
 		panel.setLayout(null);
 		
-		JLabel lblRoutes1 = new JLabel("Routes");
-		lblRoutes1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblRoutes1.setFont(new Font("Tahoma", Font.BOLD, 16));
-		lblRoutes1.setBounds(28, 10, 97, 38);
-		panel.add(lblRoutes1);
+		JLabel lblRemoveStopFromRoute = new JLabel("Remove Stop ");
+		lblRemoveStopFromRoute.setHorizontalAlignment(SwingConstants.CENTER);
+		lblRemoveStopFromRoute.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lblRemoveStopFromRoute.setBounds(10, 10, 139, 38);
+		panel.add(lblRemoveStopFromRoute);
 		
 		comboBoxRouteBusStops = new JComboBox();
-		comboBoxRouteBusStops.setBounds(67, 113, 82, 21);
+		comboBoxRouteBusStops.setBounds(67, 70, 82, 21);
 		panel.add(comboBoxRouteBusStops);
 		
-		btnRemoveBusStopFromRoute = new JButton("Remove");
-		btnRemoveBusStopFromRoute.setBounds(40, 172, 85, 21);
+		btnRemoveBusStopFromRoute = new JButton("Remove from Route");
+		btnRemoveBusStopFromRoute.setBounds(10, 111, 139, 21);
 		panel.add(btnRemoveBusStopFromRoute);
 		
 		lblRouteNumber = new JLabel("");
@@ -283,30 +284,50 @@ public class RouteInfo extends JPanel {
 		panel.add(lblRouteNumber);
 		
 		JLabel lblRoute = new JLabel("Route");
-		lblRoute.setBounds(10, 70, 45, 13);
+		lblRoute.setBounds(10, 49, 45, 13);
 		panel.add(lblRoute);
 		
 		JLabel lblBusStops = new JLabel("Stops");
-		lblBusStops.setBounds(10, 117, 45, 13);
+		lblBusStops.setBounds(10, 74, 45, 13);
 		panel.add(lblBusStops);
 		
 		JPanel panel_1 = new JPanel();
-		panel_1.setBounds(509, 290, 150, 159);
+		panel_1.setBounds(500, 203, 159, 127);
 		add(panel_1);
 		panel_1.setLayout(null);
 		
-		JLabel lblBusStops1 = new JLabel("Bus Stops");
-		lblBusStops1.setFont(new Font("Tahoma", Font.BOLD, 16));
-		lblBusStops1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblBusStops1.setBounds(26, 10, 93, 24);
-		panel_1.add(lblBusStops1);
+		JLabel lblRemoveStops = new JLabel("Remove Stop");
+		lblRemoveStops.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lblRemoveStops.setHorizontalAlignment(SwingConstants.CENTER);
+		lblRemoveStops.setBounds(10, 10, 139, 24);
+		panel_1.add(lblRemoveStops);
 		
 		comboBoxBusStops = new JComboBox();
-		comboBoxBusStops.setBounds(26, 62, 103, 21);
+		comboBoxBusStops.setBounds(10, 55, 139, 21);
 		panel_1.add(comboBoxBusStops);
 		
 		btnRemoveBusStop = new JButton("Remove");
-		btnRemoveBusStop.setBounds(34, 128, 85, 21);
+		btnRemoveBusStop.setBounds(36, 96, 85, 21);
 		panel_1.add(btnRemoveBusStop);
+		
+		JPanel panelAddBusStop = new JPanel();
+		panelAddBusStop.setLayout(null);
+		panelAddBusStop.setBounds(500, 340, 159, 109);
+		add(panelAddBusStop);
+		
+		JLabel lblAddStop = new JLabel("Add Stop");
+		lblAddStop.setHorizontalAlignment(SwingConstants.CENTER);
+		lblAddStop.setFont(new Font("Tahoma", Font.BOLD, 16));
+		lblAddStop.setBounds(36, 10, 93, 24);
+		panelAddBusStop.add(lblAddStop);
+		
+		JButton btnAddBusStop = new JButton("Add");
+		btnAddBusStop.setBounds(36, 75, 85, 21);
+		panelAddBusStop.add(btnAddBusStop);
+		
+		textFieldAddBusStop = new JTextField();
+		textFieldAddBusStop.setBounds(24, 46, 108, 19);
+		panelAddBusStop.add(textFieldAddBusStop);
+		textFieldAddBusStop.setColumns(10);
 	}
 }

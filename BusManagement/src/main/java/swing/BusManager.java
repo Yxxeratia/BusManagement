@@ -20,7 +20,6 @@ import java.awt.event.ActionEvent;
 
 public class BusManager extends JPanel {
 	private JTable tblBusManager;
-	private JTextField textFieldTotal;
 	private JTextField textFieldSearchBusManagerPanel;
 	private JButton btnBackBusManagerPanel;
 	private JButton btnRemoveBusManagerPanel;
@@ -108,17 +107,6 @@ public class BusManager extends JPanel {
 		textFieldSearchBusManagerPanel.setColumns(10);
 		textFieldSearchBusManagerPanel.setBounds(523, 9, 96, 19);
 		add(textFieldSearchBusManagerPanel);
-		
-		textFieldTotal = new JTextField();
-		textFieldTotal.setBounds(563, 463, 96, 19);
-		add(textFieldTotal);
-		textFieldTotal.setColumns(10);
-		
-		JLabel lblTotal = new JLabel("Total");
-		lblTotal.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblTotal.setHorizontalAlignment(SwingConstants.CENTER);
-		lblTotal.setBounds(508, 465, 45, 13);
-		add(lblTotal);
 		
 		JPanel panelAssign = new JPanel();
 		panelAssign.setBounds(669, 39, 190, 237);
