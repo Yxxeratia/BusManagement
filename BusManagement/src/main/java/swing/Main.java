@@ -100,7 +100,7 @@ public class Main extends JFrame {
 		JButton btnRemoveBus = busPane.getRemoveBusButton();
 		JButton btnSearchBus = busPane.getSearchBusButton();
 		JButton btnAddBus = busPane.getAddBusButton();
-		JTextField textFieldBusId = busPane.getBusIdField();
+	
 		JTextField textFieldPlateNumber = busPane.getPlateNumberField();
 		JTextField textFieldSeats = busPane.getSeatsField();
 		JTextField textFieldFuelCapacity = busPane.getFuelCapacityField();
@@ -141,14 +141,17 @@ public class Main extends JFrame {
 		JButton btnSearchRoute = routePane.getSearchRouteButton();
 		JButton btnAddRoute = routePane.getAddRouteButton();
 		JButton btnAddBusStopToRoute = routePane.getAddBusStopToRouteButton();
-		JButton btnRemoveBusStopFromRoute = routePane.removeBusStopFromRouteButton();
-		JButton btnRemoveBusStop = routePane.removeBusStopButton();
+		JButton btnRemoveBusStopFromRoute = routePane.getRemoveBusStopFromRouteButton();
+		JButton btnAddBusStop = routePane.getAddBusStopButton();
+		JButton btnRemoveBusStop = routePane.getRemoveBusStopButton();
 		JTextField textFieldRouteNumber = routePane.getRouteNumberField();
 		JTextField textFieldTicketCount = routePane.getTicketCountField();
 		JTextField textFieldTicketPrice = routePane.getTicketPriceField();
 		JTextField textFieldTotalDistance = routePane.getTotalDistanceField();
+		JTextField textFieldSchedule = routePane.getScheduleField();
 		JTextField textFieldDescription = routePane.getDescriptionField();
 		JTextField textFieldSearchRoute = routePane.getSearchField();
+		JTextField textFieldAddBusStop = routePane.getAddStopField();
 		JComboBox<Object> comboBoxRoutes = routePane.getRoutesComboBox();
 		JComboBox<Object> comboBoxBusStopsToAdd = routePane.getBusStopsToAddComboBox();
 		JComboBox<Object> comboBoxRouteBusStops = routePane.getRouteBusStopsComboBox();
@@ -246,7 +249,6 @@ public class Main extends JFrame {
         	public void actionPerformed(ActionEvent e) {
         		//empty all text fields
         		 //empty text fields
-                textFieldBusId.setText("");
                 textFieldPlateNumber.setText("");
                 textFieldSeats.setText("");
                 textFieldFuelCapacity.setText("");
@@ -262,10 +264,11 @@ public class Main extends JFrame {
                 		Object busId = rs.getString("bus_id");
             			Object plateNumber = rs.getString("plate_number");
             			Object seats = rs.getString("seat_count");
-            			Object fuelCapacity = rs.getString("fuel_capacity");
+            			Object fuelCapacity = rs.getString("max_fuel_capacity");
+            			Object remaining = rs.getString("remaining_fuel_capacity");
             			Object status = (rs.getInt("available") == 1) ? "Available" : "Busy";
             			
-            			Object[] row = {busId, plateNumber, fuelCapacity, seats, status};
+            			Object[] row = {busId, plateNumber,remaining, fuelCapacity, seats, status};
             			tblBusModel.addRow(row);
                 	}  	
                 }
@@ -326,7 +329,9 @@ public class Main extends JFrame {
     			textFieldTicketCount.setText("");
     			textFieldTicketPrice.setText("");
     			textFieldTotalDistance.setText("");
+    			textFieldSchedule.setText("");
     			textFieldDescription.setText("");
+    			textFieldAddBusStop.setText("");
         		
         		//connect to DB
                 DBConnection dbConn = new DBConnection();
@@ -340,9 +345,10 @@ public class Main extends JFrame {
             			Object ticketCount = rs.getString("ticket_count");
             			Object ticketPrice = rs.getString("ticket_price");
             			Object totalDistance = rs.getString("total_distance");
+            			Object schedule = rs.getString("schedule");
             			Object description = rs.getString("description");
             			
-            			Object[] row = {routeNumber, ticketCount, ticketPrice, totalDistance, description};
+            			Object[] row = {routeNumber, ticketCount, ticketPrice, totalDistance, schedule, description};
             			//add to route to table
             			tblRouteModel.addRow(row);
             			//add to routes
@@ -474,37 +480,47 @@ public class Main extends JFrame {
         	@Override
         	public void actionPerformed(ActionEvent e) {        		
         		//some fields are empty
-        		if (textFieldBusId.getText().isEmpty() || textFieldPlateNumber.getText().isEmpty() || textFieldSeats.getText().isEmpty() 
+        		if ( textFieldPlateNumber.getText().isEmpty() || textFieldSeats.getText().isEmpty() 
                 		|| textFieldFuelCapacity.getText().isEmpty()) {
                 	JOptionPane.showMessageDialog(busPane, "Fields cannot be empty", "Login Error", JOptionPane.ERROR_MESSAGE);  
                 }
+        		
         		else {
-        			String busId = textFieldBusId.getText();
+        			int count = 0;
+        			//connect to DB
+                    DBConnection dbConn = new DBConnection();
+                    try(PreparedStatement statement = dbConn.getConn().prepareStatement("SELECT COUNT(*) FROM DIMBuses");) {
+                    	ResultSet rs = statement.executeQuery();
+                    	while (rs.next()) {
+                    		count = Integer.parseInt(rs.getString(1));
+                    	}
+                    }
+                    catch(Exception ex) {
+                    	System.out.println(ex);
+                    }
+                    
+                    
         			String plateNumber = textFieldPlateNumber.getText();
         			String seats = textFieldSeats.getText();
         			String fuelCapacity = textFieldFuelCapacity.getText();
         			String status = "Available";
         			
-        			//connect to DB
-                    DBConnection dbConn = new DBConnection();
-                    try(CallableStatement statement = dbConn.getConn().prepareCall("{call dbo.sp_add_bus(?, ?, ?, ?)}");) {
-                    	statement.setInt(1, Integer.parseInt(busId));
-                    	statement.setString(2, plateNumber);
-                    	statement.setFloat(3, Float.parseFloat(fuelCapacity));
-                    	statement.setInt(4, Integer.parseInt(seats));
+                    try(CallableStatement statement = dbConn.getConn().prepareCall("{call dbo.sp_add_bus(?, ?, ?)}");) {
+                    	statement.setString(1, plateNumber);
+                    	statement.setInt(2, Integer.parseInt(fuelCapacity));
+                    	statement.setInt(3, Integer.parseInt(seats));
                     	statement.execute();
                     	
 	                    //add row to table
-	                    Object[] row = {busId, plateNumber, fuelCapacity, seats, status};
+	                    Object[] row = {count+1, plateNumber, fuelCapacity,fuelCapacity, seats, status};
 	                    tblBusModel.addRow(row);
 	                    
 	                    //empty text fields
-	                    textFieldBusId.setText("");
 	                    textFieldPlateNumber.setText("");
 	                    textFieldSeats.setText("");
 	                    textFieldFuelCapacity.setText("");
 	                    
-	                    JOptionPane.showMessageDialog(busPane, "Bus " + busId + " added!");
+	                    JOptionPane.showMessageDialog(busPane, "Bus "  + " added!");
                     }
                     
                     catch(Exception ex) {
@@ -715,7 +731,7 @@ public class Main extends JFrame {
         	public void actionPerformed(ActionEvent e) {        		
         		//some fields are empty
         		if (textFieldRouteNumber.getText().isEmpty() || textFieldTicketCount.getText().isEmpty() || textFieldTicketPrice.getText().isEmpty() 
-                		|| textFieldTotalDistance.getText().isEmpty() || textFieldDescription.getText().isEmpty()) {
+                		|| textFieldTotalDistance.getText().isEmpty() || textFieldSchedule.getText().isEmpty() || textFieldDescription.getText().isEmpty()) {
                 	JOptionPane.showMessageDialog(routePane, "Fields cannot be empty", "Login Error", JOptionPane.ERROR_MESSAGE);  
                 }
         		else {
@@ -723,20 +739,22 @@ public class Main extends JFrame {
         			String ticketCount = textFieldTicketCount.getText();
         			String ticketPrice = textFieldTicketPrice.getText();
         			String totalDistance = textFieldTotalDistance.getText();
+        			String schedule = textFieldSchedule.getText();
         			String description = textFieldDescription.getText();
         			
         			//connect to DB
                     DBConnection dbConn = new DBConnection();
-                    try(CallableStatement statement = dbConn.getConn().prepareCall("{call dbo.sp_add_route(?, ?, ?, ?, ?)}");) {
+                    try(CallableStatement statement = dbConn.getConn().prepareCall("{call dbo.sp_add_route(?, ?, ?, ?, ?, ?)}");) {
                     	statement.setInt(1, Integer.parseInt(routeNumber));
                     	statement.setInt(2, Integer.parseInt(ticketCount));
                     	statement.setFloat(3, Float.parseFloat(ticketPrice));
                     	statement.setInt(4, Integer.parseInt(totalDistance));
-                    	statement.setString(5, description);
+                    	statement.setString(5, schedule);
+                    	statement.setString(6, description);
                     	statement.execute();
                     	
 	                    //add row to table
-	                    Object[] row = {routeNumber, ticketCount, ticketPrice, totalDistance, description};
+	                    Object[] row = {routeNumber, ticketCount, ticketPrice, totalDistance, schedule, description};
 	                    tblRouteModel.addRow(row);
 	                    //add to combo box routes
 	                    comboBoxRoutes.addItem(routeNumber);
@@ -746,6 +764,7 @@ public class Main extends JFrame {
 	        			textFieldTicketCount.setText("");
 	        			textFieldTicketPrice.setText("");
 	        			textFieldTotalDistance.setText("");
+	        			textFieldSchedule.setText("");
 	        			textFieldDescription.setText("");
 	                    JOptionPane.showMessageDialog(routePane, "Route " + routeNumber + " added!");
                     }
@@ -937,6 +956,32 @@ public class Main extends JFrame {
 	                	System.out.println(ex);
 	                }
     			}
+        	}
+        });
+        
+        //on clicking add bus stop 
+        btnAddBusStop.addActionListener(new ActionListener() {
+        	@Override
+        	public void actionPerformed(ActionEvent e) {
+        		if (textFieldAddBusStop.getText().isEmpty()) {
+        			JOptionPane.showMessageDialog(routePane, "Please include a bus stop");
+        		}
+        		else {
+        			String busStop = textFieldAddBusStop.getText();
+        			
+        			//connect to DB
+                    DBConnection dbConn = new DBConnection();
+                    try(CallableStatement statement = dbConn.getConn().prepareCall("{call dbo.sp_add_bus_stop(?)}");) {
+                    	statement.setString(1, busStop);
+                    	statement.execute();
+                        
+                        JOptionPane.showMessageDialog(routePane, "Bus stop " + busStop + " added!");
+                    }
+                    
+                    catch(Exception ex) {
+                    	System.out.println(ex);
+                    }
+        		}
         	}
         });
         

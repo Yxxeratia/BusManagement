@@ -19,11 +19,9 @@ import java.awt.event.ActionEvent;
 
 public class BusInfo extends JPanel {
 	private JTable tblBus;
-	private JTextField textFieldRevenueTotal;
 	private JTextField textFieldFuelCapacity;
 	private JTextField textFieldSeats;
 	private JTextField textFieldPlateNumber;
-	private JTextField textFieldBusId;
 	private JTextField textFieldSearchBus;
 	private JButton btnBackBus;
 	private JButton btnRemoveBus;
@@ -45,9 +43,7 @@ public class BusInfo extends JPanel {
 		return btnAddBus;
 	}
 	
-	public JTextField getBusIdField() {
-		return textFieldBusId;
-	}
+
 	
 	public JTextField getPlateNumberField() {
 		return textFieldPlateNumber;
@@ -88,9 +84,10 @@ public class BusInfo extends JPanel {
 			new Object[][] {
 			},
 			new String[] {
-				 "ID", "Plate Number", "Fuel Capacity", "Seats", "Status"
+				"ID", "Plate Number", "Remaining Fuel(L)", "Max Fuel Capacity(L)", "Seats", "Status"
 			}
 		));
+		tblBus.getColumnModel().getColumn(4).setResizable(false);
 		//image
 		try {
 			imageSearch = ImageIO.read(getClass().getResource("/searchicon.png"));
@@ -99,8 +96,6 @@ public class BusInfo extends JPanel {
 		catch(Exception e) {
 			System.out.println("Image not found");
 		}
-		
-		tblBus.getColumnModel().getColumn(4).setResizable(false);
 		
 		btnBackBus = new JButton("Back");
 		btnBackBus.setBackground(new Color(255, 255, 255));
@@ -116,17 +111,6 @@ public class BusInfo extends JPanel {
 		btnSearchBus.setBackground(new Color(255, 255, 255));
 		btnSearchBus.setBounds(629, 22, 30, 21);
 		add(btnSearchBus);
-		
-		textFieldRevenueTotal = new JTextField();
-		textFieldRevenueTotal.setBounds(563, 454, 96, 19);
-		add(textFieldRevenueTotal);
-		textFieldRevenueTotal.setColumns(10);
-		
-		JLabel lblTotalRevenue = new JLabel("Total");
-		lblTotalRevenue.setFont(new Font("Tahoma", Font.BOLD, 12));
-		lblTotalRevenue.setHorizontalAlignment(SwingConstants.CENTER);
-		lblTotalRevenue.setBounds(508, 457, 45, 13);
-		add(lblTotalRevenue);
 		
 		textFieldSearchBus = new JTextField();
 		textFieldSearchBus.setColumns(10);
@@ -148,10 +132,6 @@ public class BusInfo extends JPanel {
 		lblAddBus.setFont(new Font("Tahoma", Font.BOLD, 16));
 		lblAddBus.setBounds(60, 10, 97, 38);
 		addBusPanel.add(lblAddBus);
-		
-		JLabel lblIdBusPane = new JLabel("ID");
-		lblIdBusPane.setBounds(10, 70, 67, 28);
-		addBusPanel.add(lblIdBusPane);
 		
 		JLabel lblPlateNumber = new JLabel("Plate Number");
 		lblPlateNumber.setBounds(10, 104, 87, 28);
@@ -179,10 +159,5 @@ public class BusInfo extends JPanel {
 		textFieldPlateNumber.setColumns(10);
 		textFieldPlateNumber.setBounds(107, 109, 96, 19);
 		addBusPanel.add(textFieldPlateNumber);
-		
-		textFieldBusId = new JTextField();
-		textFieldBusId.setColumns(10);
-		textFieldBusId.setBounds(107, 75, 96, 19);
-		addBusPanel.add(textFieldBusId);
 	}
 }
