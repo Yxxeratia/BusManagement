@@ -84,9 +84,10 @@ public class BusInfo extends JPanel {
 			new Object[][] {
 			},
 			new String[] {
-				 "ID","Plate Number","Remaining Fuel(L)", "Max Fuel Capacity(L)", "Seats", "Status"
+				"ID", "Plate Number", "Remaining Fuel(L)", "Max Fuel Capacity(L)", "Seats", "Status"
 			}
 		));
+		tblBus.getColumnModel().getColumn(4).setResizable(false);
 		//image
 		try {
 			imageSearch = ImageIO.read(getClass().getResource("/searchicon.png"));
@@ -95,8 +96,6 @@ public class BusInfo extends JPanel {
 		catch(Exception e) {
 			System.out.println("Image not found");
 		}
-		
-		tblBus.getColumnModel().getColumn(4).setResizable(false);
 		
 		btnBackBus = new JButton("Back");
 		btnBackBus.setBackground(new Color(255, 255, 255));
