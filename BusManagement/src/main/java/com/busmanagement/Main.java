@@ -3,27 +3,33 @@ package com.busmanagement;
 public class Main {
 
 	public static void main(String args[]) {
-	        Driver tom = new Driver("18148", "Tom", "0914257933","Day", "Unavailable");
-	        /*System.out.println("Driver: " + tom.getName());
-	        System.out.println("Telephone Number: " + tom.getTel());*/
+	        Driver tom = new Driver("18148", "Tom", "914257933","Day", "Busy");
+			/*
+			 * System.out.println("Driver: " + tom.getName());
+			 * System.out.println("Telephone Number: " + tom.getTel());
+			 */
 	        tom.getInfo();
-	        //Route A14 = new Route(14,"VGU","Nga tu Binh Phuoc","Ben xe Mien Dong","Hang Xanh","Ho con Rua");
-	        Route A14 = new Route(14, 50, 8000, 10, "Hi");
-	        A14.getInfo();
-	        Bus A2 = new Bus(tom, A14, "61B 61773", 30, 40, "Unavailable");
+	        Route A51 = new Route(51, 50, 8000, 27, "40 minutes", "VGU to Ben xe Binh Duong");
+	        A51.getInfo();
+	        Bus A2 = new Bus(tom, A51, 1, "61B 61773", 30, 50, 40, "Busy");
 	        A2.getInfo();
 	        
-	        Driver jerry = new Driver("17355", "Jerry", "0918025543","Afternoon", "Avaiable");
-	        /*System.out.println("Driver: " + jerry.getName());
-	        System.out.println("Telephone Number: " + jerry.getTel());*/
+	        Driver jerry = new Driver("17355", "Jerry", "918025543","Night", "Available");
+			/*
+			 * System.out.println("Driver: " + jerry.getName());
+			 * System.out.println("Telephone Number: " + jerry.getTel());
+			 */
 	        jerry.getInfo();
-	        //Route A51 = new Route(51,"VGU","Hikari","Thu Vien Tinh Binh Duong","Nga Ba Lo Chen","Ben xe Mien Dong");
-	        Route A51 = new Route(51, 0, 8000, 8, "Hello");
-	        A51.getInfo();
-	        Bus A1 = new Bus(jerry, A51,"61B 61554", 50, 0, "Available");
+	        Route A14 = new Route(14, 0, 8000, 40, "2 hours", "VGU to Ho Con Rua");
+	        A14.getInfo();
+	        Bus A1 = new Bus(jerry, A14, 1, "61B 61554", 50, 50, 0, "Available");
 	        A1.getInfo();
 
+	        Manager jack = new Manager("Jack", "0920116378");
+	        jack.getInfo();
 	        
+	        //Route 51: VGU, Hikari, Thu vien tinh Binh Duong, Nga ba Lo Chen, Ben xe Binh Duong
+	        //Route 14: VGU, Nga tu Binh Phuoc, Ben xe mien Dong, Hang Xanh, Ho Con Rua
 	}
 
 }

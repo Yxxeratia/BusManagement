@@ -1,4 +1,3 @@
-
 package com.busmanagement;
 
 abstract class Person {
@@ -75,18 +74,23 @@ class Driver extends Person {
 	}
 }
 
-//add getID and getShift if needed
 class Manager extends Person {
 	Manager(String name, String tel) {
 		this.name = name;
 		this.tel = tel;
 	}
-
+	
 	String getName() {
 		return name;
 	}
 
 	String getTel() {
 		return tel;
+	}
+	
+	public void getInfo() {
+		System.out.println("Name: " + name);
+		System.out.println("Telephone Number: " + tel);
+		System.out.println();
 	}
 }
