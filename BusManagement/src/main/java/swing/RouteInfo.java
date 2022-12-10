@@ -298,7 +298,7 @@ public class RouteInfo extends JPanel {
 		panel.add(lblRouteStops);
 		
 		comboBoxRouteBusStops = new JComboBox();
-		comboBoxRouteBusStops.setBounds(67, 70, 82, 21);
+		comboBoxRouteBusStops.setBounds(67, 72, 82, 21);
 		panel.add(comboBoxRouteBusStops);
 		
 		btnRemoveBusStopFromRoute = new JButton("Remove from Route");
@@ -306,7 +306,7 @@ public class RouteInfo extends JPanel {
 		panel.add(btnRemoveBusStopFromRoute);
 		
 		lblRouteNumber = new JLabel("");
-		lblRouteNumber.setBounds(67, 70, 70, 13);
+		lblRouteNumber.setBounds(68, 49, 70, 13);
 		panel.add(lblRouteNumber);
 		
 		JLabel lblRoute = new JLabel("Route");
