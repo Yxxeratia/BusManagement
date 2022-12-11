@@ -75,7 +75,7 @@ public class BusInfo extends JPanel {
 		setLayout(null);
 		
 		JScrollPane scrollBusPane = new JScrollPane();
-		scrollBusPane.setBounds(10, 50, 649, 394);
+		scrollBusPane.setBounds(10, 53, 649, 394);
 		add(scrollBusPane);
 		
 		tblBus = new JTable();
@@ -84,7 +84,7 @@ public class BusInfo extends JPanel {
 			new Object[][] {
 			},
 			new String[] {
-				"ID", "Plate Number", "Remaining Fuel(L)", "Max Fuel Capacity(L)", "Seats", "Status"
+				"ID", "Plate Number", "Remaining Fuel(L)", "Fuel Capacity(L)", "Seats", "Status"
 			}
 		));
 		tblBus.getColumnModel().getColumn(4).setResizable(false);
