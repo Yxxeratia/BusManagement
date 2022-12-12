@@ -500,6 +500,7 @@ public class Main extends JFrame {
                     }
                     
                     
+                    String busId = Integer.toString(count+1);
         			String plateNumber = textFieldPlateNumber.getText();
         			String seats = textFieldSeats.getText();
         			String fuelCapacity = textFieldFuelCapacity.getText();
@@ -512,7 +513,7 @@ public class Main extends JFrame {
                     	statement.execute();
                     	
 	                    //add row to table
-	                    Object[] row = {count+1, plateNumber, fuelCapacity,fuelCapacity, seats, status};
+	                    Object[] row = {busId, plateNumber, fuelCapacity,fuelCapacity, seats, status};
 	                    tblBusModel.addRow(row);
 	                    
 	                    //empty text fields
