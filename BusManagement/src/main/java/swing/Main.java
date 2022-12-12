@@ -169,6 +169,7 @@ public class Main extends JFrame {
         
 		/*bus manager*/
 		BusManager busManagerPane = new BusManager();
+		JTextField textFieldSearchBusManager = busManagerPane.getSearchBusManagerPanelField();
 		JButton btnBackBusManager= busManagerPane.getBackBusManagerPanelButton();
 		JButton btnRemoveBusManager = busManagerPane.getRemoveBusManagerPanelButton();
 		JButton btnSearchBusManager = busManagerPane.getSearchBusManagerPanelButton();
@@ -252,6 +253,7 @@ public class Main extends JFrame {
                 textFieldPlateNumber.setText("");
                 textFieldSeats.setText("");
                 textFieldFuelCapacity.setText("");
+                textFieldSearchBus.setText("");
         		
         		
         		
@@ -289,6 +291,7 @@ public class Main extends JFrame {
     			textFieldDriverName.setText("");
     			textFieldTelNumber.setText("");
     			textFieldShift.setText("");
+    			textFieldSearchDriver.setText("");
         		
         		//connect to DB
                 DBConnection dbConn = new DBConnection();
@@ -332,6 +335,7 @@ public class Main extends JFrame {
     			textFieldSchedule.setText("");
     			textFieldDescription.setText("");
     			textFieldAddBusStop.setText("");
+    			textFieldSearchRoute.setText("");
         		
         		//connect to DB
                 DBConnection dbConn = new DBConnection();
@@ -390,6 +394,9 @@ public class Main extends JFrame {
         btnAssign.addActionListener(new ActionListener() {
         	@Override
         	public void actionPerformed(ActionEvent e) {
+        		
+        		//empty text fields
+        		textFieldSearchBusManager.setText("");
         		
         		//refresh
         		comboBoxRoutesAssign.removeAllItems();
@@ -1086,6 +1093,38 @@ public class Main extends JFrame {
 	                	System.out.println(ex);
 	                }
         		}
+        	}
+        });
+        
+        //on clicking search button 
+        btnSearchBusManager.addActionListener(new ActionListener() {
+        	@Override
+        	public void actionPerformed(ActionEvent e) {
+                //searched bus
+                String searchedBusManager = textFieldSearchBusManager.getText();
+                
+                //does not sort
+                if (searchedBusManager.length() == 0) {
+                    //unfilter
+                    sorterBusManager.setRowFilter(null);
+                	
+                }
+                else {
+                    try {
+                    	//list of filters
+                    	List<RowFilter<Object, Object>> filters = new ArrayList<RowFilter<Object, Object>>(1);
+                    	filters.add(RowFilter.regexFilter(searchedBusManager, 0));
+                    	//add all into 1 or filter
+                    	RowFilter<Object, Object> rf = RowFilter.orFilter(filters);
+                    	
+                        //filter by any column
+                        sorterBusManager.setRowFilter(rf);
+                    }
+                    catch(PatternSyntaxException pse) {
+                        System.out.println(pse);
+                    }
+                }
+                
         	}
         });
 	}

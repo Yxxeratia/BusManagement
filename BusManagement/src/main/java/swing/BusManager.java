@@ -29,7 +29,11 @@ public class BusManager extends JPanel {
 	private JComboBox<Object> comboBoxRoutes;
 	private JComboBox<Object> comboBoxBuses;
 	private JComboBox<Object> comboBoxDrivers;
-
+	
+	public JTextField getSearchBusManagerPanelField() {
+		return textFieldSearchBusManagerPanel;
+	}
+	
 	public JButton getBackBusManagerPanelButton() {
 		return btnBackBusManagerPanel;
 	}
