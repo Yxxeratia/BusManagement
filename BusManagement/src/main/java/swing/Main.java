@@ -573,8 +573,8 @@ public class Main extends JFrame {
                     try {
                     	//list of filters
                     	List<RowFilter<Object, Object>> filters = new ArrayList<RowFilter<Object, Object>>(2);
-                    	filters.add(RowFilter.regexFilter(searchedBus, 0));
-                    	filters.add(RowFilter.regexFilter("(?i)" + searchedBus, 4));
+                    	filters.add(RowFilter.regexFilter(searchedBus, 1));
+                    	filters.add(RowFilter.regexFilter("(?i)" + searchedBus, 5));
                     	//add all into 1 or filter
                     	RowFilter<Object, Object> rf = RowFilter.orFilter(filters);
                     	
